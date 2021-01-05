@@ -106,7 +106,7 @@ See example below on how to retrieve a token and use it in authenticated request
 Fields that are not mapped to a struct field can be accessed from the `*AdditionalProperties` field of type `map[string]interface{}` 
 
 For example, the weapons values from the loadout request can be found under `Payload.Data.LoadoutResponseDataAdditionalProperties["weapons"]`
-Refer to the example in [example_unmapped.go](examples/unmapped_fields_loadout/example_unmapped.go) for an example on how to get the field values
+Refer to the sample code in [example_unmapped.go](examples/unmapped_fields_loadout/example_unmapped.go) on how to get these field values
 
 ## More sample codes
 
