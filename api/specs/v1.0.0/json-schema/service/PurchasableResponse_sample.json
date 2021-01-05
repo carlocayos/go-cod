@@ -1,0 +1,45 @@
+{
+  "status": "success",
+  "data": {
+    "store": {},
+    "lootStream": {
+      "tierSkips": {
+        "single": {
+          "name": "battle_pass_tier_skip",
+          "label": "Tier Skip",
+          "costs": {
+            "CODPoints": 150
+          },
+          "description": "Battle Pass Tier Skip",
+          "backgroundImage": null,
+          "logoImage": null,
+          "items": null
+        }
+      },
+      "loot_season_6": {
+        "battle_pass_upgrade_bundle_6": {
+          "name": "battle_pass_upgrade_bundle_6",
+          "label": "Battle Pass Bundle",
+          "costs": {
+            "CODPoints": 2400
+          },
+          "description": "Battle Pass + 20 tiers",
+          "backgroundImage": null,
+          "logoImage": null,
+          "items": null
+        },
+        "battle_pass_upgrade_6": {
+          "name": "battle_pass_upgrade_6",
+          "label": "Battle Pass",
+          "costs": {
+            "CODPoints": 1000
+          },
+          "description": null,
+          "backgroundImage": null,
+          "logoImage": null,
+          "items": null
+        }
+      }
+    }
+  }
+}

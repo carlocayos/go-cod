@@ -1,0 +1,449 @@
+{
+  "status": "success",
+  "data": {
+    "allPlayers": [
+      {
+        "utcStartSeconds": 1604890993,
+        "utcEndSeconds": 1604892605,
+        "map": "mp_don3",
+        "mode": "br_brquads",
+        "matchID": "4568842382991718691",
+        "duration": 1612000,
+        "playlistName": null,
+        "version": 1,
+        "gameType": "wz",
+        "playerCount": 154,
+        "playerStats": {
+          "kills": 3.0,
+          "medalXp": 40.0,
+          "objectiveLastStandKill": 2.0,
+          "matchXp": 5979.0,
+          "scoreXp": 5920.0,
+          "wallBangs": 0.0,
+          "score": 5000.0,
+          "totalXp": 12047.0,
+          "headshots": 0.0,
+          "assists": 0.0,
+          "challengeXp": 0.0,
+          "rank": 54.0,
+          "scorePerMinute": 403.2258064516129,
+          "distanceTraveled": 285884.66,
+          "teamSurvivalTime": 661728.0,
+          "deaths": 2.0,
+          "kdRatio": 1.5,
+          "objectiveBrDownEnemyCircle1": 2.0,
+          "objectiveBrMissionPickupTablet": 1.0,
+          "bonusXp": 0.0,
+          "objectiveBrKioskBuy": 6.0,
+          "gulagDeaths": 0.0,
+          "timePlayed": 744.0,
+          "executions": 0.0,
+          "gulagKills": 1.0,
+          "nearmisses": 0.0,
+          "objectiveBrCacheOpen": 1.0,
+          "percentTimeMoving": 92.22561,
+          "miscXp": 0.0,
+          "longestStreak": 2.0,
+          "teamPlacement": 22.0,
+          "damageDone": 692.0,
+          "damageTaken": 392.0
+        },
+        "player": {
+          "team": "team_thirteen",
+          "rank": 54.0,
+          "awards": {},
+          "username": "Djinn",
+          "uno": "17594778330301288521",
+          "clantag": "Dark",
+          "brMissionStats": {
+            "missionsComplete": 0,
+            "totalMissionXpEarned": 0.0,
+            "totalMissionWeaponXpEarned": 0.0,
+            "missionStatsByType": {}
+          },
+          "loadout": [
+            {
+              "primaryWeapon": {
+                "name": "iw8_sn_alpha50",
+                "label": null,
+                "imageLoot": null,
+                "imageIcon": null,
+                "variant": "-1",
+                "attachments": [
+                  {
+                    "name": "scope",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "stockl",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  }
+                ]
+              },
+              "secondaryWeapon": {
+                "name": "iw8_pi_papa320",
+                "label": null,
+                "imageLoot": null,
+                "imageIcon": null,
+                "variant": "-1",
+                "attachments": [
+                  {
+                    "name": "barlong",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "xmags",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "silencer",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  }
+                ]
+              },
+              "perks": [
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                }
+              ],
+              "extraPerks": [
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                }
+              ],
+              "killstreaks": [
+                {
+                  "name": "none",
+                  "label": null
+                },
+                {
+                  "name": "none",
+                  "label": null
+                },
+                {
+                  "name": "none",
+                  "label": null
+                }
+              ],
+              "tactical": {
+                "name": "equip_concussion",
+                "label": null,
+                "image": null,
+                "imageLarge": null,
+                "progressionImage": null
+              },
+              "lethal": {
+                "name": "equip_claymore",
+                "label": null,
+                "image": null,
+                "imageLarge": null,
+                "progressionImage": null
+              }
+            }
+          ]
+        },
+        "teamCount": 40,
+        "rankedTeams": null,
+        "draw": false,
+        "privateMatch": false
+      },
+      {
+        "utcStartSeconds": 1604890993,
+        "utcEndSeconds": 1604892605,
+        "map": "mp_don3",
+        "mode": "br_brquads",
+        "matchID": "4568842382991718691",
+        "duration": 1612000,
+        "playlistName": null,
+        "version": 1,
+        "gameType": "wz",
+        "playerCount": 154,
+        "playerStats": {
+          "kills": 4.0,
+          "medalXp": 45.0,
+          "objectiveLastStandKill": 4.0,
+          "matchXp": 2846.0,
+          "scoreXp": 2750.0,
+          "wallBangs": 0.0,
+          "score": 2650.0,
+          "totalXp": 5641.0,
+          "headshots": 1.0,
+          "assists": 0.0,
+          "challengeXp": 0.0,
+          "rank": 54.0,
+          "scorePerMinute": 341.20171673819743,
+          "distanceTraveled": 345406.66,
+          "teamSurvivalTime": 592464.0,
+          "deaths": 2.0,
+          "kdRatio": 2.0,
+          "objectiveBrDownEnemyCircle1": 5.0,
+          "objectiveBrMissionPickupTablet": 1.0,
+          "bonusXp": 0.0,
+          "objectiveBrKioskBuy": 1.0,
+          "gulagDeaths": 1.0,
+          "timePlayed": 466.0,
+          "executions": 0.0,
+          "gulagKills": 0.0,
+          "nearmisses": 0.0,
+          "objectiveBrCacheOpen": 3.0,
+          "percentTimeMoving": 91.14583,
+          "miscXp": 0.0,
+          "longestStreak": 4.0,
+          "teamPlacement": 26.0,
+          "damageDone": 1485.0,
+          "damageTaken": 294.0
+        },
+        "player": {
+          "team": "team_twenty_three",
+          "rank": 54.0,
+          "awards": {},
+          "username": "buckweet07",
+          "uno": "4813316826239819299",
+          "clantag": "^3oWBZo^7",
+          "brMissionStats": {
+            "missionsComplete": 0,
+            "totalMissionXpEarned": 0.0,
+            "totalMissionWeaponXpEarned": 0.0,
+            "missionStatsByType": {}
+          },
+          "loadout": [
+            {
+              "primaryWeapon": {
+                "name": "iw8_ar_asierra12",
+                "label": null,
+                "imageLoot": null,
+                "imageIcon": null,
+                "variant": "-1",
+                "attachments": [
+                  {
+                    "name": "vzscope",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "silencer2",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "gripang",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  }
+                ]
+              },
+              "secondaryWeapon": {
+                "name": "iw8_pi_papa320",
+                "label": null,
+                "imageLoot": null,
+                "imageIcon": null,
+                "variant": "-1",
+                "attachments": [
+                  {
+                    "name": "barlong",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "xmags",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  },
+                  {
+                    "name": "none",
+                    "label": null,
+                    "image": null,
+                    "category": null
+                  }
+                ]
+              },
+              "perks": [
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "specialty_null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                }
+              ],
+              "extraPerks": [
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                },
+                {
+                  "name": "null",
+                  "label": null,
+                  "image": null,
+                  "imageMainUi": null,
+                  "imageProgression": null
+                }
+              ],
+              "killstreaks": [
+                {
+                  "name": "none",
+                  "label": null
+                },
+                {
+                  "name": "none",
+                  "label": null
+                },
+                {
+                  "name": "none",
+                  "label": null
+                }
+              ],
+              "tactical": {
+                "name": "equip_flash",
+                "label": null,
+                "image": null,
+                "imageLarge": null,
+                "progressionImage": null
+              },
+              "lethal": {
+                "name": "equip_semtex",
+                "label": null,
+                "image": null,
+                "imageLarge": null,
+                "progressionImage": null
+              }
+            }
+          ]
+        },
+        "teamCount": 40,
+        "rankedTeams": null,
+        "draw": false,
+        "privateMatch": false
+      }
+    ]
+  }
+}

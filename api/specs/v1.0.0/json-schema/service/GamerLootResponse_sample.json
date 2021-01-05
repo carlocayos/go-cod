@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "data": {
+    "streams": {
+      "loot_season_1": {
+        "name": "loot_season_1",
+        "categoryNameLabel": "Season 1",
+        "categoryTitleLabel": "Season 1",
+        "tier": 0,
+        "streamType": "season",
+        "rarity": null,
+        "lootType": null,
+        "seasonInfoUrlKey": "season-1",
+        "itemsObtained": null,
+        "premiumTokenOwnedNotRedeemed": false,
+        "tierSkipTokensUnredeemed": null,
+        "premium": false
+      },
+      "loot_season_0": {
+        "name": "loot_season_0",
+        "categoryNameLabel": "Season 0",
+        "categoryTitleLabel": "Season 0",
+        "tier": 0,
+        "streamType": "season",
+        "rarity": null,
+        "lootType": null,
+        "seasonInfoUrlKey": "season-0",
+        "itemsObtained": null,
+        "premiumTokenOwnedNotRedeemed": false,
+        "tierSkipTokensUnredeemed": null,
+        "premium": false
+      }
+    }
+  }
+}

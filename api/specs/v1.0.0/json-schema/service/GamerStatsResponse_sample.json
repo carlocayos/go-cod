@@ -1,0 +1,36 @@
+{
+  "status": "success",
+  "data": {
+    "title": null,
+    "platform": null,
+    "username": "ondaraks#5619391",
+    "type": "mp",
+    "level": 0.0,
+    "maxLevel": 0.0,
+    "levelXpRemainder": 0.0,
+    "levelXpGained": 0.0,
+    "prestige": 0.0,
+    "prestigeId": 0.0,
+    "maxPrestige": 0.0,
+    "totalXp": 0.0,
+    "paragonRank": 0.0,
+    "paragonId": 0.0,
+    "s": 0.0,
+    "p": 0.0,
+    "lifetime": {
+      "all": {
+        "properties": null
+      },
+      "mode": {},
+      "map": {}
+    },
+    "weekly": {
+      "all": {
+        "properties": null
+      },
+      "mode": {},
+      "map": {}
+    },
+    "engagement": null
+  }
+}

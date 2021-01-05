@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "exceptionMessageList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "object"
+    },
+    "exceptionMessageCode": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "authHeader": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "authHeader"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

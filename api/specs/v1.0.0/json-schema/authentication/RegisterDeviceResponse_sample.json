@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "exceptionMessageList": [
+    "this is a string"
+  ],
+  "errors": {},
+  "exceptionMessageCode": "this is a string",
+  "data": {
+    "authHeader": "this is a string"
+  }
+}

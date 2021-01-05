@@ -1,0 +1,352 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "mp_cave_am": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_farms2_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_spear": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_stadium": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_showers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_promenade_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_riverside_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_runner": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_spear_pm": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_vacant": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_hackney_am": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_rust": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_shipment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_cornfield": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_hackney_yard": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_pine": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_train": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_hideout": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_wallco2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_layover_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_quarry2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_overwinter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_cave": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_village2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_speed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_boneyard_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_malyshev": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_petrograd": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_raid": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_harbor": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_broadcast2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_speedball": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_garden": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_king": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_aniyah_tac": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_cargo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_euphrates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_downtown_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_backlot2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_scrapyard": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_deadzone": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_overunder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_oilrig": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_piccadilly": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_trench": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_emporium": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_cage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_runner_pm": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_hill": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_m_fork": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_port2_gw": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_aniyah": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_crash2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mp_hardhat": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

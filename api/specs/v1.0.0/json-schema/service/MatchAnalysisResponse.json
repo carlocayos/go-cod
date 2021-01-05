@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "payLoad": {
+            "type": "object",
+            "properties": {
+              "team1Score": {
+                "type": "string"
+              },
+              "winningTeam": {
+                "type": "string"
+              },
+              "matchXp": {
+                "type": "string"
+              },
+              "scoreXp": {
+                "type": "string"
+              },
+              "accuracy": {
+                "type": "string"
+              },
+              "arena": {
+                "type": "string"
+              },
+              "shotsLanded": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "isPresentAtEnd": {
+                "type": "string"
+              },
+              "score": {
+                "type": "string"
+              },
+              "totalXp": {
+                "type": "string"
+              },
+              "game_name": {
+                "type": "string"
+              },
+              "gameBattle": {
+                "type": "string"
+              },
+              "rank": {
+                "type": "string"
+              },
+              "deaths": {
+                "type": "string"
+              },
+              "objectiveDestroyedEquipment": {
+                "type": "string"
+              },
+              "privateMatch": {
+                "type": "string"
+              },
+              "kdRatio": {
+                "type": "string"
+              },
+              "shotsMissed": {
+                "type": "string"
+              },
+              "utcStartSeconds": {
+                "type": "string"
+              },
+              "map_name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "team2Score": {
+                "type": "string"
+              },
+              "allPlayers": {
+                "type": "string"
+              },
+              "timePlayed": {
+                "type": "string"
+              },
+              "suicides": {
+                "type": "string"
+              },
+              "nearmisses": {
+                "type": "string"
+              },
+              "percentTimeMoving": {
+                "type": "string"
+              },
+              "damageDone": {
+                "type": "string"
+              },
+              "shotsFired": {
+                "type": "string"
+              },
+              "matchID": {
+                "type": "string"
+              },
+              "kills": {
+                "type": "string"
+              },
+              "medalXp": {
+                "type": "string"
+              },
+              "gameType": {
+                "type": "string"
+              },
+              "averageSpeedDuringMatch": {
+                "type": "string"
+              },
+              "utcEndSeconds": {
+                "type": "string"
+              },
+              "game_type": {
+                "type": "string",
+                "x-go-name": "gameTypeLong"
+              },
+              "wallBangs": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              },
+              "headshots": {
+                "type": "string"
+              },
+              "assists": {
+                "type": "string"
+              },
+              "scorePerMinute": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
+              "mode_name": {
+                "type": "string"
+              },
+              "distanceTraveled": {
+                "type": "string"
+              },
+              "map": {
+                "type": "string"
+              },
+              "player": {
+                "type": "string"
+              },
+              "weaponStats": {
+                "type": "string"
+              },
+              "playlistName": {
+                "type": "string"
+              },
+              "executions": {
+                "type": "string"
+              },
+              "seasonRank": {
+                "type": "string"
+              },
+              "miscXp": {
+                "type": "string"
+              },
+              "longestStreak": {
+                "type": "string"
+              },
+              "damageTaken": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          },
+          "wsResponse": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  },
+                  "errors": {
+                    "type": "null"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

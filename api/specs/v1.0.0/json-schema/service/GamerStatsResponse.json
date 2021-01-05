@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "title": {
+          "type": "null"
+        },
+        "platform": {
+          "type": "null"
+        },
+        "username": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "level": {
+          "type": "number"
+        },
+        "maxLevel": {
+          "type": "number"
+        },
+        "levelXpRemainder": {
+          "type": "number"
+        },
+        "levelXpGained": {
+          "type": "number"
+        },
+        "prestige": {
+          "type": "number"
+        },
+        "prestigeId": {
+          "type": "number"
+        },
+        "maxPrestige": {
+          "type": "number"
+        },
+        "totalXp": {
+          "type": "number"
+        },
+        "paragonRank": {
+          "type": "number"
+        },
+        "paragonId": {
+          "type": "number"
+        },
+        "s": {
+          "type": "number"
+        },
+        "p": {
+          "type": "number"
+        },
+        "lifetime": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "null"
+                }
+              },
+              "additionalProperties": true
+            },
+            "mode": {
+              "type": "object"
+            },
+            "map": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": true
+        },
+        "weekly": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "null"
+                }
+              },
+              "additionalProperties": true
+            },
+            "mode": {
+              "type": "object"
+            },
+            "map": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": true
+        },
+        "engagement": {
+          "type": "null"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

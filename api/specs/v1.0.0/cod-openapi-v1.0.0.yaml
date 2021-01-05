@@ -1,0 +1,552 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: Call of Duty API
+  description: Call of Duty API OpenAPI 2.0 specification
+  contact:
+    name: Carlo Cayos
+    url: https://carlocayos.dev
+  license:
+    name: MIT
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /cod/mapp/login:
+    post:
+      operationId: login
+      summary: Login
+      description: Login using credentials and registered device id
+      tags:
+        - authentication
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: Security token from authHeader field in the Register Device response
+          type: string
+        - name: x_cod_device_id
+          in: header
+          required: true
+          description: Device ID
+          type: string
+        - name: Login Request
+          in: body
+          description: Login Request Body
+          required: true
+          schema:
+            $ref: json-schema/authentication/LoginRequest.json
+      responses:
+        200:
+          description: Register Device response
+          schema:
+            $ref: json-schema/authentication/LoginResponse.json
+  /cod/mapp/registerDevice:
+    post:
+      operationId: registerDevice
+      summary: Register Device
+      description: Register Device before logging in
+      tags:
+        - authentication
+      parameters:
+        - name: Register Device Request
+          in: body
+          description: Body should contain the unique device id
+          required: true
+          schema:
+            $ref: json-schema/authentication/RegisterDeviceRequest.json
+      responses:
+        200:
+          description: Register Device Response
+          schema:
+            $ref: json-schema/authentication/RegisterDeviceResponse.json
+  /leaderboards/v2/title/{title}/platform/{platform}/time/alltime/type/core/mode/career/page/{page}:
+    get:
+      operationId: leaderBoard
+      summary: Get Leader Board
+      description: Returns the leader board
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: page
+          required: true
+          type: integer
+          description: Leaderboard page number
+      responses:
+        200:
+          description: Leader Board Response
+          schema:
+            $ref: json-schema/service/LeaderBoardResponse.json
+  /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details:
+    get:
+      operationId: matchDetails
+      summary: Get Gamer Match Details
+      description: Returns the Gamer match details (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+        - in: path
+          name: start
+          required: true
+          type: integer
+          format: int64
+          description: Match start unix timestamp in milliseconds ex. 1602815242000
+        - in: path
+          name: end
+          required: true
+          type: integer
+          format: int64
+          description: Match end unix timestamp in milliseconds ex. 1608407321000
+        - in: query
+          name: limit
+          type: integer
+          format: int32
+          description: The numbers of items to return
+      responses:
+        200:
+          description: Match Details Response
+          schema:
+            $ref: json-schema/service/GamerMatchDetailsResponse.json
+  /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}:
+    get:
+      operationId: matchList
+      summary: Get Gamer Match List
+      description: Returns the gamer list of matches (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+        - in: path
+          name: start
+          required: true
+          type: integer
+          format: int64
+          description: Match start unix timestamp in milliseconds ex. 1602815242000
+        - in: path
+          name: end
+          required: true
+          type: integer
+          format: int64
+          description: Match end unix timestamp in milliseconds ex. 1608407321000
+        - in: query
+          name: limit
+          type: integer
+          format: int32
+          description: The numbers of items to return
+      responses:
+        200:
+          description: Match List Response
+          schema:
+            $ref: json-schema/service/GamerAllMatchListResponse.json
+  /stats/cod/v1/title/{title}/platform/{platform}/{lookupType}/{gamertag}/profile/type/{gameType}:
+    get:
+      operationId: gamerStats
+      summary: Get Gamer Stats
+      description: Returns the gamer stats profile (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+      responses:
+        200:
+          description: Gamer Stats Profile Response
+          schema:
+            $ref: json-schema/service/GamerStatsResponse.json
+  /stats/cod/v1/title/{title}/platform/{platform}/{lookupType}/{gamertag}/profile/friends/type/{gameType}:
+    get:
+      operationId: friendStats
+      summary: Get Friend Stats
+      description: Returns Friend stats (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+      responses:
+        200:
+          description: Friend Stats Response
+          schema:
+            $ref: json-schema/service/FriendStatsResponse.json
+  /loot/title/{title}/platform/{platform}/{lookupType}/{gamertag}/status/en:
+    get:
+      operationId: gamerLoot
+      summary: Get Gamer Loot
+      description: Returns Gamer Loot information (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+      responses:
+        200:
+          description: Get Gamer Loot Response
+          schema:
+            $ref: json-schema/service/GamerLootResponse.json
+  /ce/v2/title/{title}/platform/{platform}/gametype/all/{lookupType}/{gamertag}/summary/match_analysis/contentType/full/end/{end}/matchAnalysis/mobile/en:
+    get:
+      operationId: matchAnalysis
+      summary: Match Analysis
+      description: Returns match analysis (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+        - in: path
+          name: end
+          required: true
+          type: integer
+          format: int64
+          description: Match end unix timestamp in milliseconds ex. 1608407321000
+      responses:
+        200:
+          description: Match Analysis Response
+          schema:
+            $ref: json-schema/service/MatchAnalysisResponse.json
+  /ce/v1/title/{title}/platform/{platform}/gameType/{gameType}/communityMapData/availability:
+    get:
+      operationId: mapList
+      summary: Map List
+      description: Returns all map information
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+      responses:
+        200:
+          description: Map List Response
+          schema:
+            $ref: json-schema/service/MapListResponse.json
+  /crm/cod/v2/title/{title}/platform/{platform}/fullMatch/{gameType}/{matchId}/en:
+    get:
+      operationId: fullMatchInfo
+      summary: Full Match Info
+      description: Returns the full match information
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+        - in: path
+          name: matchId
+          required: true
+          type: string
+          description: Match ID
+      responses:
+        200:
+          description: Full Match Info Response
+          schema:
+            $ref: json-schema/service/FullMatchInfoResponse.json
+  /inventory/v1/title/{title}/platform/{platform}/{lookupType}/{gamertag}/currency:
+    get:
+      operationId: codPoints
+      summary: Get Call of Duty Points
+      description: Returns Call of Duty points (Authentication required)
+      tags:
+        - service
+      parameters:
+        - name: Cookie
+          in: header
+          required: true
+          description: ACT_SSO_COOKIE required for authenticated requests. Set with the value returned in login
+          type: string
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: lookupType
+          required: true
+          type: string
+          description: Lookup Type
+        - in: path
+          name: gamertag
+          required: true
+          type: string
+          description: Gamer tag
+      responses:
+        200:
+          description: Call of Duty Points Response
+          schema:
+            $ref: json-schema/service/CodPointsResponse.json
+  /loot/title/{title}/platform/{platform}/list/loot_season_{season}/en:
+    get:
+      operationId: battlePassLoot
+      summary: Battle Pass Loot
+      description: Returns the Battle Pass season loot information
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+        - in: path
+          name: season
+          required: true
+          type: integer
+          description: Game Type
+      responses:
+        200:
+          description: Battle Pass Loot Response
+          schema:
+            $ref: json-schema/service/BattlePassLootResponse.json
+  /inventory/v1/title/{title}/platform/{platform}/purchasable:
+    get:
+      operationId: purchasable
+      summary: Purchasable
+      description: Returns purchasable items
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: platform
+          required: true
+          type: string
+          description: Game platform
+      responses:
+        200:
+          description: Purchasable Response
+          schema:
+            $ref: json-schema/service/PurchasableResponse.json
+  /loadouts/v4/title/{title}/items/mode/{gameType}/en:
+    get:
+      operationId: loadout
+      summary: Get Loadout Info
+      description: Returns loadout information
+      tags:
+        - service
+      parameters:
+        - in: path
+          name: title
+          required: true
+          type: string
+          description: Game title
+        - in: path
+          name: gameType
+          required: true
+          type: string
+          description: Game Type
+      responses:
+        200:
+          description: Lodout Response
+          schema:
+            $ref: json-schema/service/LoadoutResponse.json

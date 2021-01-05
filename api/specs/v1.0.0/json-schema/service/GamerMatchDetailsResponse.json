@@ -1,0 +1,607 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "object",
+              "properties": {
+                "kills": {
+                  "type": "number"
+                },
+                "ekiadRatio": {
+                  "type": "number"
+                },
+                "accuracy": {
+                  "type": "number"
+                },
+                "losses": {
+                  "type": "number"
+                },
+                "avgLifeTime": {
+                  "type": "number"
+                },
+                "shotsLanded": {
+                  "type": "number"
+                },
+                "highestMultikill": {
+                  "type": "number"
+                },
+                "ekia": {
+                  "type": "number"
+                },
+                "score": {
+                  "type": "number"
+                },
+                "headshots": {
+                  "type": "number"
+                },
+                "assists": {
+                  "type": "number"
+                },
+                "ekiaPerGame": {
+                  "type": "number"
+                },
+                "draws": {
+                  "type": "number"
+                },
+                "scorePerMinute": {
+                  "type": "number"
+                },
+                "deaths": {
+                  "type": "number"
+                },
+                "damageDealt": {
+                  "type": "number"
+                },
+                "wins": {
+                  "type": "number"
+                },
+                "kdRatio": {
+                  "type": "number"
+                },
+                "shotsMissed": {
+                  "type": "number"
+                },
+                "multikills": {
+                  "type": "number"
+                },
+                "highestStreak": {
+                  "type": "number"
+                },
+                "scorePerGame": {
+                  "type": "number"
+                },
+                "hits": {
+                  "type": "number"
+                },
+                "timePlayed": {
+                  "type": "number"
+                },
+                "headshotPercentage": {
+                  "type": "number"
+                },
+                "matchesPlayed": {
+                  "type": "number"
+                },
+                "suicides": {
+                  "type": "number"
+                },
+                "wlRatio": {
+                  "type": "number"
+                },
+                "timePlayedAlive": {
+                  "type": "number"
+                },
+                "objectives": {
+                  "type": "number"
+                },
+                "shots": {
+                  "type": "number"
+                },
+                "shotsFired": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": true
+            },
+            "dom": {
+              "type": "object",
+              "properties": {
+                "kills": {
+                  "type": "number"
+                },
+                "ekiadRatio": {
+                  "type": "number"
+                },
+                "accuracy": {
+                  "type": "number"
+                },
+                "losses": {
+                  "type": "number"
+                },
+                "avgLifeTime": {
+                  "type": "number"
+                },
+                "shotsLanded": {
+                  "type": "number"
+                },
+                "highestMultikill": {
+                  "type": "number"
+                },
+                "ekia": {
+                  "type": "number"
+                },
+                "score": {
+                  "type": "number"
+                },
+                "headshots": {
+                  "type": "number"
+                },
+                "assists": {
+                  "type": "number"
+                },
+                "ekiaPerGame": {
+                  "type": "number"
+                },
+                "draws": {
+                  "type": "number"
+                },
+                "scorePerMinute": {
+                  "type": "number"
+                },
+                "deaths": {
+                  "type": "number"
+                },
+                "damageDealt": {
+                  "type": "number"
+                },
+                "wins": {
+                  "type": "number"
+                },
+                "kdRatio": {
+                  "type": "number"
+                },
+                "shotsMissed": {
+                  "type": "number"
+                },
+                "multikills": {
+                  "type": "number"
+                },
+                "highestStreak": {
+                  "type": "number"
+                },
+                "scorePerGame": {
+                  "type": "number"
+                },
+                "hits": {
+                  "type": "number"
+                },
+                "timePlayed": {
+                  "type": "number"
+                },
+                "headshotPercentage": {
+                  "type": "number"
+                },
+                "matchesPlayed": {
+                  "type": "number"
+                },
+                "suicides": {
+                  "type": "number"
+                },
+                "wlRatio": {
+                  "type": "number"
+                },
+                "timePlayedAlive": {
+                  "type": "number"
+                },
+                "objectives": {
+                  "type": "number"
+                },
+                "shots": {
+                  "type": "number"
+                },
+                "shotsFired": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": true
+            },
+            "conf": {
+              "type": "object",
+              "properties": {
+                "kills": {
+                  "type": "number"
+                },
+                "ekiadRatio": {
+                  "type": "number"
+                },
+                "accuracy": {
+                  "type": "number"
+                },
+                "losses": {
+                  "type": "number"
+                },
+                "avgLifeTime": {
+                  "type": "number"
+                },
+                "shotsLanded": {
+                  "type": "number"
+                },
+                "highestMultikill": {
+                  "type": "number"
+                },
+                "ekia": {
+                  "type": "number"
+                },
+                "score": {
+                  "type": "number"
+                },
+                "headshots": {
+                  "type": "number"
+                },
+                "assists": {
+                  "type": "number"
+                },
+                "ekiaPerGame": {
+                  "type": "number"
+                },
+                "draws": {
+                  "type": "number"
+                },
+                "scorePerMinute": {
+                  "type": "number"
+                },
+                "deaths": {
+                  "type": "number"
+                },
+                "damageDealt": {
+                  "type": "number"
+                },
+                "wins": {
+                  "type": "number"
+                },
+                "kdRatio": {
+                  "type": "number"
+                },
+                "shotsMissed": {
+                  "type": "number"
+                },
+                "multikills": {
+                  "type": "number"
+                },
+                "highestStreak": {
+                  "type": "number"
+                },
+                "scorePerGame": {
+                  "type": "number"
+                },
+                "hits": {
+                  "type": "number"
+                },
+                "timePlayed": {
+                  "type": "number"
+                },
+                "headshotPercentage": {
+                  "type": "number"
+                },
+                "matchesPlayed": {
+                  "type": "number"
+                },
+                "suicides": {
+                  "type": "number"
+                },
+                "wlRatio": {
+                  "type": "number"
+                },
+                "timePlayedAlive": {
+                  "type": "number"
+                },
+                "objectives": {
+                  "type": "number"
+                },
+                "shots": {
+                  "type": "number"
+                },
+                "shotsFired": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": true
+            },
+            "tdm": {
+              "type": "object",
+              "properties": {
+                "kills": {
+                  "type": "number"
+                },
+                "ekiadRatio": {
+                  "type": "number"
+                },
+                "accuracy": {
+                  "type": "number"
+                },
+                "losses": {
+                  "type": "number"
+                },
+                "avgLifeTime": {
+                  "type": "number"
+                },
+                "shotsLanded": {
+                  "type": "number"
+                },
+                "highestMultikill": {
+                  "type": "number"
+                },
+                "ekia": {
+                  "type": "number"
+                },
+                "score": {
+                  "type": "number"
+                },
+                "headshots": {
+                  "type": "number"
+                },
+                "assists": {
+                  "type": "number"
+                },
+                "ekiaPerGame": {
+                  "type": "number"
+                },
+                "draws": {
+                  "type": "number"
+                },
+                "scorePerMinute": {
+                  "type": "number"
+                },
+                "deaths": {
+                  "type": "number"
+                },
+                "damageDealt": {
+                  "type": "number"
+                },
+                "wins": {
+                  "type": "number"
+                },
+                "kdRatio": {
+                  "type": "number"
+                },
+                "shotsMissed": {
+                  "type": "number"
+                },
+                "multikills": {
+                  "type": "number"
+                },
+                "highestStreak": {
+                  "type": "number"
+                },
+                "scorePerGame": {
+                  "type": "number"
+                },
+                "hits": {
+                  "type": "number"
+                },
+                "timePlayed": {
+                  "type": "number"
+                },
+                "headshotPercentage": {
+                  "type": "number"
+                },
+                "matchesPlayed": {
+                  "type": "number"
+                },
+                "suicides": {
+                  "type": "number"
+                },
+                "wlRatio": {
+                  "type": "number"
+                },
+                "timePlayedAlive": {
+                  "type": "number"
+                },
+                "objectives": {
+                  "type": "number"
+                },
+                "shots": {
+                  "type": "number"
+                },
+                "shotsFired": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "utcStartSeconds": {
+                "type": "integer"
+              },
+              "utcEndSeconds": {
+                "type": "integer"
+              },
+              "map": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "matchID": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "integer"
+              },
+              "playlistName": {
+                "type": "null"
+              },
+              "version": {
+                "type": "integer"
+              },
+              "gameType": {
+                "type": "string"
+              },
+              "result": {
+                "type": "string"
+              },
+              "winningTeam": {
+                "type": "null"
+              },
+              "gameBattle": {
+                "type": "boolean"
+              },
+              "team1Score": {
+                "type": "integer"
+              },
+              "team2Score": {
+                "type": "integer"
+              },
+              "isPresentAtEnd": {
+                "type": "boolean"
+              },
+              "player": {
+                "type": "object",
+                "properties": {
+                  "awards": {
+                    "type": "object"
+                  },
+                  "nemesis": {
+                    "type": "string"
+                  },
+                  "mostKilled": {
+                    "type": "string"
+                  },
+                  "platform": {
+                    "type": "string"
+                  },
+                  "loadout": {
+                    "type": "array"
+                  },
+                  "team": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "playerStats": {
+                "type": "object",
+                "properties": {
+                  "kills": {
+                    "type": "number"
+                  },
+                  "kdRatio": {
+                    "type": "number"
+                  },
+                  "multikills": {
+                    "type": "number"
+                  },
+                  "xpAtEnd": {
+                    "type": "number"
+                  },
+                  "ekiadRatio": {
+                    "type": "number"
+                  },
+                  "rankAtEnd": {
+                    "type": "number"
+                  },
+                  "highestStreak": {
+                    "type": "number"
+                  },
+                  "highestMultikill": {
+                    "type": "number"
+                  },
+                  "hits": {
+                    "type": "number"
+                  },
+                  "ekia": {
+                    "type": "number"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "timePlayed": {
+                    "type": "number"
+                  },
+                  "headshots": {
+                    "type": "number"
+                  },
+                  "suicides": {
+                    "type": "number"
+                  },
+                  "assists": {
+                    "type": "number"
+                  },
+                  "timePlayedAlive": {
+                    "type": "number"
+                  },
+                  "objectives": {
+                    "type": "number"
+                  },
+                  "scorePerMinute": {
+                    "type": "number"
+                  },
+                  "shots": {
+                    "type": "number"
+                  },
+                  "deaths": {
+                    "type": "number"
+                  },
+                  "damageDealt": {
+                    "type": "number"
+                  },
+                  "accuracy": {
+                    "type": "number"
+                  },
+                  "shotsLanded": {
+                    "type": "number"
+                  },
+                  "shotsMissed": {
+                    "type": "number"
+                  },
+                  "shotsFired": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": true
+              },
+              "weaponStats": {
+                "type": "object"
+              },
+              "allPlayers": {
+                "type": "null"
+              },
+              "arena": {
+                "type": "boolean"
+              },
+              "privateMatch": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

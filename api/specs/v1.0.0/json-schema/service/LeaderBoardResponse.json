@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "leaderboardType": {
+          "type": "string"
+        },
+        "gameMode": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "resultsRequested": {
+          "type": "integer"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "null"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rank": {
+                "type": "number"
+              },
+              "username": {
+                "type": "string"
+              },
+              "updateTime": {
+                "type": "number"
+              },
+              "rating": {
+                "type": "number"
+              },
+              "values": {
+                "type": "object",
+                "properties": {
+                  "wins": {
+                    "type": "number"
+                  },
+                  "kills": {
+                    "type": "number"
+                  },
+                  "kdRatio": {
+                    "type": "number"
+                  },
+                  "killstreak": {
+                    "type": "number"
+                  },
+                  "level": {
+                    "type": "number"
+                  },
+                  "accuracy": {
+                    "type": "number"
+                  },
+                  "losses": {
+                    "type": "number"
+                  },
+                  "prestige": {
+                    "type": "number"
+                  },
+                  "hits": {
+                    "type": "number"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "timePlayed": {
+                    "type": "number"
+                  },
+                  "headshots": {
+                    "type": "number"
+                  },
+                  "averageTime": {
+                    "type": "number"
+                  },
+                  "gamesPlayed": {
+                    "type": "number"
+                  },
+                  "assists": {
+                    "type": "number"
+                  },
+                  "misses": {
+                    "type": "number"
+                  },
+                  "xp": {
+                    "type": "number"
+                  },
+                  "scorePerMinute": {
+                    "type": "number"
+                  },
+                  "shots": {
+                    "type": "number"
+                  },
+                  "deaths": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

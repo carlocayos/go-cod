@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "rtkn": {
+      "type": "string"
+    },
+    "ACT_SSO_COOKIE": {
+      "type": "string"
+    },
+    "ACT_SSO_COOKIE_EXPIRY": {
+      "type": "integer"
+    },
+    "gameAccountLinked": {
+      "type": "boolean"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "ACT_AUTH_TOKEN": {
+      "type": "string"
+    },
+    "s_ACT_SSO_COOKIE": {
+      "type": "string"
+    },
+    "atkn": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "status": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": true
+}
