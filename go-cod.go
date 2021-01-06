@@ -8,11 +8,32 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
+type GameTitle string
+type GameType string
+type Platform string
+type LookupType string
+
 const (
-	DefaultServiceHost            string = "my.callofduty.com"
-	DefaultServiceBasePath        string = "/api/papi-client"
-	DefaultAuthenticationHost     string = "profile.callofduty.com"
-	DefaultAuthenticationBasePath string = "/"
+	// API request
+	DefaultServiceHost            = "my.callofduty.com"
+	DefaultServiceBasePath        = "/api/papi-client"
+	DefaultAuthenticationHost     = "profile.callofduty.com"
+	DefaultAuthenticationBasePath = "/"
+	ActSSOCookie                  = "ACT_SSO_COOKIE"
+
+	// game title
+	ColdWar       GameTitle = "cw"
+	ModernWarfare GameTitle = "mw"
+
+	// game types
+	Multiplayer GameType = "mp"
+	Warzone     GameType = "wz"
+
+	// platforms
+	Battlenet Platform = "battle"
+
+	// Lookup type
+	BattlenetLookup LookupType = "gamer"
 )
 
 var DefaultSchemes = []string{"https"}
@@ -29,12 +50,18 @@ type ServiceClient struct {
 	Transport  runtime.ClientTransport
 }
 
+// Stores the Authentication for all authenticated requests
+type AuthToken struct {
+	ActSSOCookie string
+}
+
 // Go COD Client contains both an Authentication and Service Client
 //   1. Authentication client is usedfor authentication
 //   2. Service client is for common api requests
 type Client struct {
 	AuthenticationClient *AuthenticationClient
 	ServiceClient        *ServiceClient
+	AuthToken            *AuthToken
 }
 
 // Creates a default COD Client
@@ -49,6 +76,7 @@ func NewClient(formats strfmt.Registry) *Client {
 	c := &Client{
 		AuthenticationClient: authClient,
 		ServiceClient:        serviceClient,
+		AuthToken:            &AuthToken{},
 	}
 	return c
 }

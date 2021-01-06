@@ -91,7 +91,7 @@ paths:
             $ref: json-schema/service/LeaderBoardResponse.json
   /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details:
     get:
-      operationId: matchDetails
+      operationId: gamerMatchDetails
       summary: Get Gamer Match Details
       description: Returns the Gamer match details (Authentication required)
       tags:
@@ -151,7 +151,7 @@ paths:
             $ref: json-schema/service/GamerMatchDetailsResponse.json
   /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}:
     get:
-      operationId: matchList
+      operationId: gamerMatchList
       summary: Get Gamer Match List
       description: Returns the gamer list of matches (Authentication required)
       tags:
@@ -208,7 +208,7 @@ paths:
         200:
           description: Match List Response
           schema:
-            $ref: json-schema/service/GamerAllMatchListResponse.json
+            $ref: json-schema/service/GamerMatchListResponse.json
   /stats/cod/v1/title/{title}/platform/{platform}/{lookupType}/{gamertag}/profile/type/{gameType}:
     get:
       operationId: gamerStats
@@ -547,6 +547,6 @@ paths:
           description: Game Type
       responses:
         200:
-          description: Lodout Response
+          description: Loadout Response
           schema:
             $ref: json-schema/service/LoadoutResponse.json

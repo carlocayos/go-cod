@@ -37,6 +37,10 @@ type ClientService interface {
 
 	GamerLoot(params *GamerLootParams) (*GamerLootOK, error)
 
+	GamerMatchDetails(params *GamerMatchDetailsParams) (*GamerMatchDetailsOK, error)
+
+	GamerMatchList(params *GamerMatchListParams) (*GamerMatchListOK, error)
+
 	GamerStats(params *GamerStatsParams) (*GamerStatsOK, error)
 
 	LeaderBoard(params *LeaderBoardParams) (*LeaderBoardOK, error)
@@ -46,10 +50,6 @@ type ClientService interface {
 	MapList(params *MapListParams) (*MapListOK, error)
 
 	MatchAnalysis(params *MatchAnalysisParams) (*MatchAnalysisOK, error)
-
-	MatchDetails(params *MatchDetailsParams) (*MatchDetailsOK, error)
-
-	MatchList(params *MatchListParams) (*MatchListOK, error)
 
 	Purchasable(params *PurchasableParams) (*PurchasableOK, error)
 
@@ -237,6 +237,78 @@ func (a *Client) GamerLoot(params *GamerLootParams) (*GamerLootOK, error) {
 }
 
 /*
+  GamerMatchDetails gets gamer match details
+
+  Returns the Gamer match details (Authentication required)
+*/
+func (a *Client) GamerMatchDetails(params *GamerMatchDetailsParams) (*GamerMatchDetailsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGamerMatchDetailsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "gamerMatchDetails",
+		Method:             "GET",
+		PathPattern:        "/crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GamerMatchDetailsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GamerMatchDetailsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for gamerMatchDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  GamerMatchList gets gamer match list
+
+  Returns the gamer list of matches (Authentication required)
+*/
+func (a *Client) GamerMatchList(params *GamerMatchListParams) (*GamerMatchListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGamerMatchListParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "gamerMatchList",
+		Method:             "GET",
+		PathPattern:        "/crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GamerMatchListReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GamerMatchListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for gamerMatchList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
   GamerStats gets gamer stats
 
   Returns the gamer stats profile (Authentication required)
@@ -413,78 +485,6 @@ func (a *Client) MatchAnalysis(params *MatchAnalysisParams) (*MatchAnalysisOK, e
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for matchAnalysis: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  MatchDetails gets gamer match details
-
-  Returns the Gamer match details (Authentication required)
-*/
-func (a *Client) MatchDetails(params *MatchDetailsParams) (*MatchDetailsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewMatchDetailsParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "matchDetails",
-		Method:             "GET",
-		PathPattern:        "/crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &MatchDetailsReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*MatchDetailsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for matchDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  MatchList gets gamer match list
-
-  Returns the gamer list of matches (Authentication required)
-*/
-func (a *Client) MatchList(params *MatchListParams) (*MatchListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewMatchListParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "matchList",
-		Method:             "GET",
-		PathPattern:        "/crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &MatchListReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*MatchListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for matchList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

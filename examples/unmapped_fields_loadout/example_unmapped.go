@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	gocod "github.com/carlocayos/go-cod"
-	"github.com/carlocayos/go-cod/api/client/service"
 	"log"
 )
 
@@ -14,57 +13,57 @@ func main() {
 	//	  https://my.callofduty.com/api/papi-client
 	// =======================================================
 	c := gocod.NewClient(nil)
-	serviceOperations := c.ServiceClient.Operations
 
 	// =======================================================
 	// 2) Loadout request
 	// =======================================================
-	loadoutParams := service.LoadoutParams{
-		GameType: "wz",
-		Title:    "mw",
-		Context:  context.Background(),
-	}
-
-	loadoutResponse, err := serviceOperations.Loadout(&loadoutParams)
+	loadoutResp, err := c.Loadout(context.Background(), gocod.ModernWarfare, gocod.Warzone)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("\nLoadout Status = %v\n", loadoutResp.Status)
 
-	//	{
-	//	  "status": "success",
-	//	  "data": {
-	//	    "weapons": {
-	//	  	   "iw8_knife_variant_119": {
-	//			 	"dwid": "892",
-	//				"name": "iw8_knife_variant_119",
-	//				"variantId": 119,
-	//				"rootName": "iw8_knife",
-	//				"category": "weapon_melee2",
-	//				"imageLoot": "ui_loot_weapon_me_hatchet",
-	//				"imageIcon": "icon_weapon_me_soscar_knife",
-	//				"attachmentsEquipped": "",
-	//				"attachments": "",
-	//				"perk": "",
-	//				"stringKey": "WEAPON/KNIFE_V72",
-	//				"label": "<WEAPON/KNIFE_V120>",
-	//				"rarity": "common"
-	//		},
+	// Example Loadout Response Payload
+	// {
+	//  "status": "success",
+	//  "data": {
+	//    "weapons": {
+	//      "iw8_sn_romeo700_variant_0": {
+	//        "dwid": "985",
+	//        "name": "iw8_sn_romeo700_variant_0",
+	//        "variantId": 0,
+	//        "rootName": "iw8_sn_romeo700",
+	//        "category": "weapon_dmr",
+	//        "imageLoot": "ui_loot_weapon_sn_mike14",
+	//        "imageIcon": "icon_weapon_sn_romeo700",
+	//        "attachmentsEquipped": "",
+	//        "attachments": "",
+	//        "perk": "",
+	//        "stringKey": "WEAPON/SN_ROMEO700",
+	//        "label": "SP-R 208",
+	//        "rarity": "base"
+	//      },
 	//		...
-	//  }
+	//	}
+	// }
 
-	fmt.Printf("Status = %v\n", loadoutResponse.Payload.Status)
-
-	// get the weapons of type map[string]string
-	weapons := loadoutResponse.Payload.Data.LoadoutResponseDataAdditionalProperties["weapons"].(map[string]interface{})
-
-	// iterate through the weapons
-	for k, v := range weapons {
-		fmt.Printf("Key = %v\n", k)
-
-		// print all the fields
-		for k2, v2 := range v.(map[string]interface{}) {
-			fmt.Printf("\t%v = %v\n", k2, v2)
-		}
-		fmt.Printf("\n\n")
-	}
+	// This is an example how to retrieve unmapped fields using *additionalProperties
+	// TODO: Review swagger spec and change the object definitions. Weapons must be of type map[string]SomeStruct
+	// 	See https://github.com/carlocayos/go-cod/issues/3 for a similar issue
+	weapons := loadoutResp.Data.LoadoutResponseDataAdditionalProperties["weapons"].(map[string]interface{})
+	romeo := weapons["iw8_sn_romeo700_variant_0"].(map[string]interface{})
+	fmt.Printf("iw8_sn_romeo700_variant_0\n")
+	fmt.Printf("\tdwid = %v\n", romeo["dwid"])
+	fmt.Printf("\tname = %v\n", romeo["name"])
+	fmt.Printf("\tvariantId = %v\n", romeo["variantId"])
+	fmt.Printf("\trootName = %v\n", romeo["rootName"])
+	fmt.Printf("\tcategory = %v\n", romeo["category"])
+	fmt.Printf("\timageLoot = %v\n", romeo["imageLoot"])
+	fmt.Printf("\timageIcon = %v\n", romeo["imageIcon"])
+	fmt.Printf("\tattachmentsEquipped = %v\n", romeo["attachmentsEquipped"])
+	fmt.Printf("\tattachments = %v\n", romeo["attachments"])
+	fmt.Printf("\tperk = %v\n", romeo["perk"])
+	fmt.Printf("\tstringKey = %v\n", romeo["stringKey"])
+	fmt.Printf("\tlabel = %v\n", romeo["label"])
+	fmt.Printf("\trarity = %v\n", romeo["rarity"])
 }

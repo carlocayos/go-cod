@@ -15,16 +15,16 @@ import (
 	"github.com/carlocayos/go-cod/api/models"
 )
 
-// MatchDetailsReader is a Reader for the MatchDetails structure.
-type MatchDetailsReader struct {
+// GamerMatchDetailsReader is a Reader for the GamerMatchDetails structure.
+type GamerMatchDetailsReader struct {
 	formats strfmt.Registry
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *MatchDetailsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GamerMatchDetailsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
-		result := NewMatchDetailsOK()
+		result := NewGamerMatchDetailsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -35,28 +35,28 @@ func (o *MatchDetailsReader) ReadResponse(response runtime.ClientResponse, consu
 	}
 }
 
-// NewMatchDetailsOK creates a MatchDetailsOK with default headers values
-func NewMatchDetailsOK() *MatchDetailsOK {
-	return &MatchDetailsOK{}
+// NewGamerMatchDetailsOK creates a GamerMatchDetailsOK with default headers values
+func NewGamerMatchDetailsOK() *GamerMatchDetailsOK {
+	return &GamerMatchDetailsOK{}
 }
 
-/*MatchDetailsOK handles this case with default header values.
+/*GamerMatchDetailsOK handles this case with default header values.
 
 Match Details Response
 */
-type MatchDetailsOK struct {
+type GamerMatchDetailsOK struct {
 	Payload *models.GamerMatchDetailsResponse
 }
 
-func (o *MatchDetailsOK) Error() string {
-	return fmt.Sprintf("[GET /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details][%d] matchDetailsOK  %+v", 200, o.Payload)
+func (o *GamerMatchDetailsOK) Error() string {
+	return fmt.Sprintf("[GET /crm/cod/v2/title/{title}/platform/{platform}/{lookupType}/{gamertag}/matches/{gameType}/start/{start}/end/{end}/details][%d] gamerMatchDetailsOK  %+v", 200, o.Payload)
 }
 
-func (o *MatchDetailsOK) GetPayload() *models.GamerMatchDetailsResponse {
+func (o *GamerMatchDetailsOK) GetPayload() *models.GamerMatchDetailsResponse {
 	return o.Payload
 }
 
-func (o *MatchDetailsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GamerMatchDetailsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.GamerMatchDetailsResponse)
 
