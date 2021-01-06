@@ -10,12 +10,13 @@ import "github.com/carlocayos/go-cod"
 Create a new go-cod client then use the services to access the COD APIs.
 
 A short example:
-```
+```go
 // create the client
 c := go_cod.NewClient(nil)
 
 // get leader board list
-leaderBoardResp, _ := c.LeaderBoard(context.Background(), go_cod.ModernWarfare, go_cod.Battlenet, 3)
+leaderBoardResp, _ := c.LeaderBoard(context.Background(), 
+    go_cod.ModernWarfare, go_cod.Battlenet, 3)
 fmt.Println(leaderBoardResp.Status)
 fmt.Println(leaderBoardResp.Data.Title)
 ```
@@ -26,16 +27,16 @@ The cod client is composed of an authentication client and service client.
 
 Authentication client is for getting a security token that will be used for most of the API requests.
 
-See example below on how to retrieve a token and use it in authenticated requests.
+See example on how to login and send authenticated requests.
 
-```
+```go
 // =======================================================
 // 1) First, is creating a client and sending a register device request
 // =======================================================
 c := go_cod.NewClient(nil)
 
 // send a register device request with a unique device id
-//  ksuid is used here to generate a unique id, but any uid generator would be fine
+// ksuid is used here to generate a unique id, but any uid generator would be fine
 deviceId := ksuid.New().String()
 registerDeviceRes, _ := c.RegisterDevice(context.Background(), deviceId)
 
@@ -45,13 +46,15 @@ registerDeviceRes, _ := c.RegisterDevice(context.Background(), deviceId)
 // =======================================================
 email := "<< CHANGE ME >>"
 password := "<< CHANGE ME >>"
-loginRes, _ := c.Login(context.Background(), deviceId, email, password, *registerDeviceRes.Data.AuthHeader)
+loginRes, _ := c.Login(context.Background(), deviceId, email, 
+    password, *registerDeviceRes.Data.AuthHeader)
 fmt.Println(loginRes.ACTSSOCOOKIE)
 
 // =======================================================
 // 3) Final step is to send a Get Gamer Match List.
 //    You need to call Login() before using this authenticated request.
-//	  The token is stored in the client and will be implicitly sent along each Authenticated request.
+//	  The token is stored in the client and will be implicitly sent along 
+//    each Authenticated request.
 // =======================================================
 // create Gamer struct - MUST CHANGE this to your own account
 gamer := &go_cod.Gamer{
@@ -60,8 +63,8 @@ gamer := &go_cod.Gamer{
     GamerTag:   "MrExcitement#6438",
 }
 
-gamerMatchListResp, _ := c.GamerMatchList(context.Background(), go_cod.ModernWarfare, gamer,
-    go_cod.Multiplayer, 0, 0, 3)
+gamerMatchListResp, _ := c.GamerMatchList(context.Background(), 
+    go_cod.ModernWarfare, gamer, go_cod.Multiplayer, 0, 0, 3)
 
 fmt.Println(gamerMatchListResp.Status)
 for _, v := range gamerMatchListResp.Data {
@@ -80,6 +83,8 @@ Fields that are not mapped to a struct field can be accessed from the `*Addition
 
 For example, the weapons values from the loadout request can be found under `Data.LoadoutResponseDataAdditionalProperties["weapons"]`
 Refer to the sample code in [example_unmapped.go](examples/unmapped_fields_loadout/example_unmapped.go) on how to get these field values
+
+NOTE: These is an open [issue#3](https://github.com/carlocayos/go-cod/issues/3) on how to map these fields.
 
 ## More sample codes
 
@@ -120,12 +125,12 @@ Then open http://localhost:9000 to see the list of APIs.
 - [ ] Context handling
 - [ ] Other missing APIs
 
-## Contribution and Support
+## Contribution
 Code improvements, suggestions, and updates are most welcome. Please feel free to raise an issue or create a pull
-request for your changes.
+request for your changes. 🙂
 
 There is no official COD API and documentation released by Activision. If there is a breaking change on the COD API 
-then let me know, so I can update this project. :)
+then let me know, so I can update this project. 
 
 ## Credits
 
