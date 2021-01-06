@@ -10,12 +10,6 @@
       "items": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
           "payLoad": {
             "type": "object",
             "properties": {

@@ -42,7 +42,7 @@ func NewLoadoutOK() *LoadoutOK {
 
 /*LoadoutOK handles this case with default header values.
 
-Lodout Response
+Loadout Response
 */
 type LoadoutOK struct {
 	Payload *models.LoadoutResponse

@@ -13,6 +13,9 @@
         },
         "message": {
           "type": "string"
+        },
+        "codPoints": {
+          "type": "integer"
         }
       },
       "additionalProperties": true

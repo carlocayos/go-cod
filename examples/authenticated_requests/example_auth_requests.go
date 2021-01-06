@@ -4,23 +4,24 @@ import (
 	"context"
 	"fmt"
 	gocod "github.com/carlocayos/go-cod"
-	"github.com/carlocayos/go-cod/api/client/authentication"
-	"github.com/carlocayos/go-cod/api/client/service"
-	"github.com/carlocayos/go-cod/api/models"
 	"github.com/segmentio/ksuid"
 	"log"
-	"net/http"
 )
 
-// NOTE: You must change these values before running this code
+// ==================  IMPORTANT!!!!  ====================
+// You MUST change these values before running this code
+// This is configured to run on my account
+//
+// =======================================================
 var (
-	email      = "<< CHANGE ME >>"
-	password   = "<< CHANGE ME >>"
-	gameType   = "mp"
-	gamerTag   = "MrExcitement#6438"
-	lookupType = "gamer"
-	platform   = "battle"
-	title      = "cw"
+	myEmail      = "<< CHANGE ME >>"
+	myPassword   = "<< CHANGE ME >>"
+	myGamerTag   = "MrExcitement#6438"
+	myGameType   = gocod.Multiplayer
+	myLookupType = gocod.BattlenetLookup
+	myPlatform   = gocod.Battlenet
+	myTitleCw    = gocod.ColdWar
+	myTitleMw    = gocod.ModernWarfare
 )
 
 func main() {
@@ -34,134 +35,152 @@ func main() {
 
 	// send a register device request
 	deviceId := ksuid.New().String()
-
-	param := authentication.RegisterDeviceParams{
-		RegisterDeviceRequest: &models.RegisterDeviceRequest{DeviceID: &deviceId},
-		Context:               context.Background(),
-	}
-	fmt.Printf("\nDevice ID = %v\n", deviceId)
-
-	resp, err := c.AuthenticationClient.Operations.RegisterDevice(&param)
+	registerDeviceRes, err := c.RegisterDevice(context.Background(), deviceId)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("\nStatus = %v\n", resp.Payload.Status)
-	fmt.Printf("AuthHeader = %v\n\n", *resp.Payload.Data.AuthHeader)
+
+	fmt.Printf("\nStatus = %v\n", registerDeviceRes.Status)
+	fmt.Printf("AuthHeader = %v\n\n", *registerDeviceRes.Data.AuthHeader)
 
 	// =======================================================
 	// 2) Next is sending a Login request. Change to your email and password
 	// =======================================================
-	loginParams := authentication.LoginParams{
-		Authorization: "Bearer " + *resp.Payload.Data.AuthHeader,
-		XCodDeviceID:  deviceId,
-		LoginRequest: &models.LoginRequest{
-			Email:    &email,
-			Password: &password,
-		},
-		Context: context.Background(),
-	}
-
-	ok, err := c.AuthenticationClient.Operations.Login(&loginParams)
+	loginRes, err := c.Login(context.Background(), deviceId, myEmail, myPassword, *registerDeviceRes.Data.AuthHeader)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if ok.Payload.Status == http.StatusUnauthorized {
-		log.Fatal(ok.Payload.LoginResponseAdditionalProperties["message"])
-	}
 
-	fmt.Println(ok)
+	fmt.Println(loginRes)
 
 	// =======================================================
-	// 3) Example request which requires authentication.
-	//    Get Match Details
+	// 3) Get Gamer Match Details
+	//    Example request which requires authentication.
 	// =======================================================
-	limit := int32(10)
-
-	// send a match detail request
-	matchDetailsParams := service.MatchDetailsParams{
-		Start:      1602815242000,
-		End:        1608407321000,
-		GameType:   gameType,
-		Gamertag:   gamerTag,
-		LookupType: lookupType,
-		Platform:   platform,
-		Title:      title,
-		Context:    context.Background(),
-		Limit:      &limit,
-		Cookie:     "ACT_SSO_COOKIE=" + ok.Payload.ACTSSOCOOKIE,
+	// create Gamer struct
+	// NOTE: Change this to your own account
+	gamer := &gocod.Gamer{
+		Platform:   myPlatform,
+		LookupType: myLookupType,
+		GamerTag:   myGamerTag,
 	}
 
-	matchDetailsResponse, err := c.ServiceClient.Operations.MatchDetails(&matchDetailsParams)
+	gamerMatchDetailsResp, err := c.GamerMatchDetails(context.Background(), myTitleCw, gamer, myGameType,
+		int64(1602815242000), int64(1608407321000), 3)
 	if err != nil {
 		log.Fatal(err)
 	}
-	matchDetailsStatus := matchDetailsResponse.Payload.Status
-	fmt.Printf("\nStatus = %v\n\n", matchDetailsStatus)
-	data := matchDetailsResponse.Payload.Data
 
-	if matchDetailsStatus == "error" {
-		log.Fatalf("error in match details request. %v : %v", data.Type, data.Message)
-	}
-	for k, v := range data.Matches {
-		fmt.Printf("%v = %v\n", k, v)
-	}
-
-	// =======================================================
-	// 4) Another example request which requires authentication.
-	//    Get Gamer Match List
-	// =======================================================
-	// send a gamer match list request
-	matchListParams := service.MatchListParams{
-		Start:      0,
-		End:        0,
-		Cookie:     "ACT_SSO_COOKIE=" + ok.Payload.ACTSSOCOOKIE,
-		GameType:   gameType,
-		Gamertag:   gamerTag,
-		Limit:      &limit,
-		LookupType: lookupType,
-		Platform:   platform,
-		Title:      title,
-		Context:    context.Background(),
-	}
-
-	matchListResponse, err := c.ServiceClient.Operations.MatchList(&matchListParams)
-	if err != nil {
-		log.Fatal(err)
-	}
-	matchListStatus := matchListResponse.Payload.Status
-	fmt.Printf("\nStatus = %v\n\n", matchListStatus)
-
-	if matchListStatus == "error" {
-		// data field is an object type for error cases
-		//
-		//	"data": {
-		//    "type": "com.activision.mt.common.stdtools.exceptions.NoStackTraceException",
-		//    "message": "Not permitted: not authenticated"
-		//  }
-		additionalProps := matchListResponse.Payload.GamerAllMatchListResponseAdditionalProperties
-		log.Fatalf("error in match details request. %v : %v", additionalProps["type"], additionalProps["message"])
-	}
-
-	// Match list response contains a "data" field array type
-	//
-	//     "data": [
-	//        {
-	//            "platform": "battle",
-	//            "title": "mw",
-	//            "timestamp": 1594381028000,
-	//            "type": "war",
-	//            "matchId": "15402031512165119432",
-	//            "map": "mp_runner"
-	//        },
-	//       ...
-	d := matchListResponse.Payload.Data
-
-	for _, v := range d {
+	fmt.Printf("\nGamerMatchDetails Status = %v\n", gamerMatchDetailsResp.Status)
+	for _, v := range gamerMatchDetailsResp.Data.Matches {
+		fmt.Printf("MatchId = %v\n", v.MatchID)
 		fmt.Printf("Map = %v\n", v.Map)
-		fmt.Printf("MatchID = %v\n", v.MatchID)
-		fmt.Printf("Platform = %v\n", v.Platform)
-		fmt.Printf("Timestamp = %v\n", v.Timestamp)
-		fmt.Printf("Title = %v\n", v.Title)
-		fmt.Printf("Type = %v\n", v.Type)
+		fmt.Printf("Mode = %v\n\n", v.Mode)
 	}
+
+	// =======================================================
+	// 4) Gamer Match List
+	// =======================================================
+	gamerMatchListResp, err := c.GamerMatchList(context.Background(), myTitleMw, gamer, myGameType, 1592845714000, 1594381028000, 5)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nGamerMatchList Status = %v\n", gamerMatchListResp.Status)
+
+	for _, v := range gamerMatchListResp.Data {
+		fmt.Printf("\tMap = %v\n", v.Map)
+		fmt.Printf("\tMatchID = %v\n", v.MatchID)
+		fmt.Printf("\tPlatform = %v\n", v.Platform)
+		fmt.Printf("\tTimestamp = %v\n", v.Timestamp)
+		fmt.Printf("\tTitle = %v\n", v.Title)
+		fmt.Printf("\tType = %v\n\n", v.Type)
+	}
+
+	// =======================================================
+	// 5) Gamer Stats Profile
+	// =======================================================
+	gamerStatsResp, err := c.GamerStats(context.Background(), myTitleMw, gamer, myGameType)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nGamerStats Status = %v\n", gamerStatsResp.Status)
+	fmt.Printf("Username = %v\n", gamerStatsResp.Data.Username)
+	fmt.Printf("Platform = %v\n", gamerStatsResp.Data.Platform)
+	fmt.Printf("Title = %v\n", gamerStatsResp.Data.Title)
+	fmt.Printf("Message = %v\n", gamerStatsResp.Data.Message)
+	fmt.Printf("Level = %v\n", gamerStatsResp.Data.Level)
+	fmt.Printf("Prestige = %v\n", gamerStatsResp.Data.Prestige)
+	fmt.Printf("PrestigeID = %v\n", gamerStatsResp.Data.PrestigeID)
+	fmt.Printf("ParagonID = %v\n", gamerStatsResp.Data.ParagonID)
+	fmt.Printf("ParagonRank = %v\n", gamerStatsResp.Data.ParagonRank)
+	fmt.Printf("LevelXpGained = %v\n", gamerStatsResp.Data.LevelXpGained)
+	fmt.Printf("LevelXpRemainder = %v\n", gamerStatsResp.Data.LevelXpRemainder)
+
+	// =======================================================
+	// 6) Friend Stats
+	// =======================================================
+	friendStatsResp, err := c.FriendsStats(context.Background(), myTitleMw, gamer, myGameType)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nFriendsStats Status = %v\n", friendStatsResp.Status)
+
+	for _, v := range friendStatsResp.Data {
+		fmt.Printf("Friend Username: = %v\n", v.Username)
+		fmt.Printf("\t Level : = %v\n", v.Level)
+		fmt.Printf("\t TotalXp : = %v\n", v.TotalXp)
+		fmt.Printf("\t Platform : = %v\n", v.Platform)
+		fmt.Printf("\t Title : = %v\n", v.Title)
+
+		fmt.Printf("\t ALL Properties:\n")
+		props := v.Lifetime.All.Properties
+		fmt.Printf("\t\t KdRatio : = %v\n", props.KdRatio)
+		fmt.Printf("\t\t RecordKillsInAMatch : = %v\n", props.RecordKillsInAMatch)
+		fmt.Printf("\t\t RecordLongestWinStreak : = %v\n", props.RecordLongestWinStreak)
+		fmt.Printf("\t\t WinLossRatio : = %v\n", props.WinLossRatio)
+		fmt.Printf("\t\t Deaths : = %v\n", props.Deaths)
+		fmt.Printf("\t\t BestAssists : = %v\n", props.BestAssists)
+		fmt.Printf("\t\t RecordDeathsInAMatch : = %v\n", props.RecordDeathsInAMatch)
+	}
+
+	// =======================================================
+	// 6) Gamer Loot
+	// =======================================================
+	gamerLootResp, err := c.GamerLoot(context.Background(), myTitleMw, gamer)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nGamerLoot Status = %v\n", gamerLootResp.Status)
+	// TODO: Review swagger spec and change the object definitions. Streams must be type map[string]SomeStruct
+	// 	See https://github.com/carlocayos/go-cod/issues/3
+	fmt.Printf("Loot Season 0 Name = %v\n", gamerLootResp.Data.Streams.LootSeason0.Name)
+	fmt.Printf("\tRarity = %v\n", gamerLootResp.Data.Streams.LootSeason0.Rarity)
+
+	// =======================================================
+	// 7) Match Analysis
+	// =======================================================
+	matchAnalysisResp, err := c.MatchAnalysis(context.Background(), myTitleMw, gamer, 1594381028000)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nMatchAnalysis Status = %v\n", matchAnalysisResp.Status)
+
+	for _, v := range matchAnalysisResp.Data {
+		fmt.Printf("Match ID = %v\n", v.PayLoad.MatchID)
+		fmt.Printf("\tTeam1Score = %v\n", v.PayLoad.Team1Score)
+		fmt.Printf("\tMode = %v\n", v.PayLoad.Mode)
+		fmt.Printf("\tKdRatio = %v\n", v.PayLoad.KdRatio)
+		fmt.Printf("\tWinningTeam = %v\n", v.PayLoad.WinningTeam)
+		fmt.Printf("\tPlayer = %v\n", v.PayLoad.Player)
+	}
+
+	// =======================================================
+	// 7) COD Points
+	// =======================================================
+	codPointsResp, err := c.CODPoints(context.Background(), myTitleMw, gamer)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("\nCODPoints Status = %v\n", codPointsResp.Status)
+	fmt.Printf("COD Points = %v\n", codPointsResp.Data.CodPoints)
 }

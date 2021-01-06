@@ -166,6 +166,9 @@ func (m *CodPointsResponse) UnmarshalBinary(b []byte) error {
 // swagger:model CodPointsResponseData
 type CodPointsResponseData struct {
 
+	// cod points
+	CodPoints int64 `json:"codPoints,omitempty"`
+
 	// message
 	Message string `json:"message,omitempty"`
 
@@ -181,6 +184,9 @@ func (m *CodPointsResponseData) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
+		// cod points
+		CodPoints int64 `json:"codPoints,omitempty"`
+
 		// message
 		Message string `json:"message,omitempty"`
 
@@ -192,6 +198,7 @@ func (m *CodPointsResponseData) UnmarshalJSON(data []byte) error {
 	}
 	var rcv CodPointsResponseData
 
+	rcv.CodPoints = stage1.CodPoints
 	rcv.Message = stage1.Message
 	rcv.Type = stage1.Type
 	*m = rcv
@@ -202,6 +209,7 @@ func (m *CodPointsResponseData) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	delete(stage2, "codPoints")
 	delete(stage2, "message")
 	delete(stage2, "type")
 	// stage 3, add additional properties values
@@ -224,6 +232,9 @@ func (m *CodPointsResponseData) UnmarshalJSON(data []byte) error {
 func (m CodPointsResponseData) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
+		// cod points
+		CodPoints int64 `json:"codPoints,omitempty"`
+
 		// message
 		Message string `json:"message,omitempty"`
 
@@ -231,6 +242,7 @@ func (m CodPointsResponseData) MarshalJSON() ([]byte, error) {
 		Type string `json:"type,omitempty"`
 	}
 
+	stage1.CodPoints = m.CodPoints
 	stage1.Message = m.Message
 	stage1.Type = m.Type
 

@@ -11,18 +11,13 @@ Create a new go-cod client then use the services to access the COD APIs.
 
 A short example:
 ```
-client := go_cod.NewClient(nil)
-
-// enter values to the request params - this may include header, path and query params, or a json payload
-leaderBoardParams := service.LeaderBoardParams{
-    Page:     1,
-    Platform: "battle",
-    Title:    "mw",
-    Context:  context.Background(),
-}
+// create the client
+c := go_cod.NewClient(nil)
 
 // get leader board list
-leaderBoardResponse, err := c.ServiceClient.Operations.LeaderBoard(&leaderBoardParams)
+leaderBoardResp, _ := c.LeaderBoard(context.Background(), go_cod.ModernWarfare, go_cod.Battlenet, 3)
+fmt.Println(leaderBoardResp.Status)
+fmt.Println(leaderBoardResp.Data.Title)
 ```
 
 The cod client is composed of an authentication client and service client.
@@ -34,78 +29,56 @@ Authentication client is for getting a security token that will be used for most
 See example below on how to retrieve a token and use it in authenticated requests.
 
 ```
-	// =======================================================
-	// 1) First, is creating a client and sending a register device request
-	// =======================================================
-	c := gocod.NewClient(nil)
+// =======================================================
+// 1) First, is creating a client and sending a register device request
+// =======================================================
+c := go_cod.NewClient(nil)
 
-	// send a register device request with a unique device id
-	//  ksuid is used here to generate a unique id, but any uid generator would be fine
-	deviceId := ksuid.New().String()
+// send a register device request with a unique device id
+//  ksuid is used here to generate a unique id, but any uid generator would be fine
+deviceId := ksuid.New().String()
+registerDeviceRes, _ := c.RegisterDevice(context.Background(), deviceId)
 
-	param := authentication.RegisterDeviceParams{
-		RegisterDeviceRequest: &models.RegisterDeviceRequest{DeviceID: &deviceId},
-		Context:               context.Background(),
-	}
-	// send register device request
-	registerDeviceResponse, _ := c.AuthenticationClient.Operations.RegisterDevice(&param)
+// =======================================================
+// 2) Next is the Login request. Replace it with your email and password
+//      and pass the returned AuthHeader and Device ID
+// =======================================================
+email := "<< CHANGE ME >>"
+password := "<< CHANGE ME >>"
+loginRes, _ := c.Login(context.Background(), deviceId, email, password, *registerDeviceRes.Data.AuthHeader)
+fmt.Println(loginRes.ACTSSOCOOKIE)
 
-	// =======================================================
-	// 2) Next is the Login request. Replace it with your email and password
-	//      and pass the returned AuthHeader and Device ID
-	// =======================================================
-	email := "<< CHANGE ME >>"
-	password := "<< CHANGE ME >>"
+// =======================================================
+// 3) Final step is to send a Get Gamer Match List.
+//    You need to call Login() before using this authenticated request.
+//	  The token is stored in the client and will be implicitly sent along each Authenticated request.
+// =======================================================
+// create Gamer struct - MUST CHANGE this to your own account
+gamer := &go_cod.Gamer{
+    Platform:   go_cod.Battlenet,
+    LookupType: go_cod.BattlenetLookup,
+    GamerTag:   "MrExcitement#6438",
+}
 
-	loginParams := authentication.LoginParams{
-		Authorization: "Bearer " + *registerDeviceResponse.Payload.Data.AuthHeader,
-		XCodDeviceID:  deviceId,
-		LoginRequest: &models.LoginRequest{
-			Email:    &email,
-			Password: &password,
-		},
-		Context: context.Background(),
-	}
-	loginResponse, _ := c.AuthenticationClient.Operations.Login(&loginParams)
+gamerMatchListResp, _ := c.GamerMatchList(context.Background(), go_cod.ModernWarfare, gamer,
+    go_cod.Multiplayer, 0, 0, 3)
 
-	// =======================================================
-	// 3) Final step is to use the token to send a Get Gamer Match List
-	//    This request requires a token for authentication. Get the ACT_SSO_COOKIE from the Login 
-	//    response and append it to the Cookie request as "ACT_SSO_COOKIE=YOUR_TOKEN
-	// =======================================================
-	// send a gamer match list request
-	limit := int32(10)
-
-	matchListParams := service.MatchListParams{
-		Start:      0,
-		End:        0,
-		Cookie:     "ACT_SSO_COOKIE=" + loginResponse.Payload.ACTSSOCOOKIE,
-		GameType:   "mp",
-		Gamertag:   "MrExcitement#6438", // change this to your gamer tag
-		Limit:      &limit,
-		LookupType: "gamer",
-		Platform:   "battle",
-		Title:      "cw",
-		Context:    context.Background(),
-	}
-
-	// send the Match List request
-	matchListResponse, _ := c.ServiceClient.Operations.MatchList(&matchListParams)
-	for _, v := range matchListResponse.Payload.Data {
-		fmt.Printf("Map = %v\n", v.Map)
-		fmt.Printf("MatchID = %v\n", v.MatchID)
-		fmt.Printf("Platform = %v\n", v.Platform)
-		fmt.Printf("Timestamp = %v\n", v.Timestamp)
-		fmt.Printf("Title = %v\n", v.Title)
-		fmt.Printf("Type = %v\n", v.Type)
-	}
+fmt.Println(gamerMatchListResp.Status)
+for _, v := range gamerMatchListResp.Data {
+    fmt.Printf("\tMap = %v\n", v.Map)
+    fmt.Printf("\tMatchID = %v\n", v.MatchID)
+    fmt.Printf("\tPlatform = %v\n", v.Platform)
+    fmt.Printf("\tTimestamp = %v\n", v.Timestamp)
+    fmt.Printf("\tTitle = %v\n", v.Title)
+    fmt.Printf("\tType = %v\n\n", v.Type)
+}
 ```
 
 ### Unmapped fields
 
 Fields that are not mapped to a struct field can be accessed from the `*AdditionalProperties` field of type `map[string]interface{}` 
 
-For example, the weapons values from the loadout request can be found under `Payload.Data.LoadoutResponseDataAdditionalProperties["weapons"]`
+For example, the weapons values from the loadout request can be found under `Data.LoadoutResponseDataAdditionalProperties["weapons"]`
 Refer to the sample code in [example_unmapped.go](examples/unmapped_fields_loadout/example_unmapped.go) on how to get these field values
 
 ## More sample codes
@@ -139,9 +112,11 @@ Then open http://localhost:9000 to see the list of APIs.
 
 ## 🚧 Work in Progress 🚧
 
-- [ ] Add more helper functions
-- [ ] Populate response fields for Friend Stats Profile
-- [ ] Populate response fields for COD Points
+- [X] Populate response fields for Friend Stats Profile
+- [X] Populate response fields for COD Points
+- [X] Added facade to simplify API call process
+- [ ] Add more example codes and helper functions (e.g. Get Uno ID...)
+- [ ] Some fields can be mapped better. See [issue#3](https://github.com/carlocayos/go-cod/issues/3)
 - [ ] Context handling
 - [ ] Other missing APIs
 

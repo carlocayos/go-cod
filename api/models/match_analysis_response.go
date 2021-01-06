@@ -174,14 +174,8 @@ func (m *MatchAnalysisResponse) UnmarshalBinary(b []byte) error {
 // swagger:model MatchAnalysisResponseDataItems0
 type MatchAnalysisResponseDataItems0 struct {
 
-	// message
-	Message string `json:"message,omitempty"`
-
 	// pay load
 	PayLoad *MatchAnalysisResponseDataItems0PayLoad `json:"payLoad,omitempty"`
-
-	// type
-	Type string `json:"type,omitempty"`
 
 	// ws response
 	WsResponse *MatchAnalysisResponseDataItems0WsResponse `json:"wsResponse,omitempty"`
@@ -195,14 +189,8 @@ func (m *MatchAnalysisResponseDataItems0) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
-		// message
-		Message string `json:"message,omitempty"`
-
 		// pay load
 		PayLoad *MatchAnalysisResponseDataItems0PayLoad `json:"payLoad,omitempty"`
-
-		// type
-		Type string `json:"type,omitempty"`
 
 		// ws response
 		WsResponse *MatchAnalysisResponseDataItems0WsResponse `json:"wsResponse,omitempty"`
@@ -212,9 +200,7 @@ func (m *MatchAnalysisResponseDataItems0) UnmarshalJSON(data []byte) error {
 	}
 	var rcv MatchAnalysisResponseDataItems0
 
-	rcv.Message = stage1.Message
 	rcv.PayLoad = stage1.PayLoad
-	rcv.Type = stage1.Type
 	rcv.WsResponse = stage1.WsResponse
 	*m = rcv
 
@@ -224,9 +210,7 @@ func (m *MatchAnalysisResponseDataItems0) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	delete(stage2, "message")
 	delete(stage2, "payLoad")
-	delete(stage2, "type")
 	delete(stage2, "wsResponse")
 	// stage 3, add additional properties values
 	if len(stage2) > 0 {
@@ -248,22 +232,14 @@ func (m *MatchAnalysisResponseDataItems0) UnmarshalJSON(data []byte) error {
 func (m MatchAnalysisResponseDataItems0) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
-		// message
-		Message string `json:"message,omitempty"`
-
 		// pay load
 		PayLoad *MatchAnalysisResponseDataItems0PayLoad `json:"payLoad,omitempty"`
-
-		// type
-		Type string `json:"type,omitempty"`
 
 		// ws response
 		WsResponse *MatchAnalysisResponseDataItems0WsResponse `json:"wsResponse,omitempty"`
 	}
 
-	stage1.Message = m.Message
 	stage1.PayLoad = m.PayLoad
-	stage1.Type = m.Type
 	stage1.WsResponse = m.WsResponse
 
 	// make JSON object for known properties

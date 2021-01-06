@@ -14,28 +14,28 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GamerAllMatchListResponse gamer all match list response
+// GamerMatchListResponse gamer match list response
 //
-// swagger:model gamerAllMatchListResponse
-type GamerAllMatchListResponse struct {
+// swagger:model gamerMatchListResponse
+type GamerMatchListResponse struct {
 
 	// data
-	Data []*GamerAllMatchListResponseDataItems0 `json:"data"`
+	Data []*GamerMatchListResponseDataItems0 `json:"data"`
 
 	// status
 	Status string `json:"status,omitempty"`
 
-	// gamer all match list response additional properties
-	GamerAllMatchListResponseAdditionalProperties map[string]interface{} `json:"-"`
+	// gamer match list response additional properties
+	GamerMatchListResponseAdditionalProperties map[string]interface{} `json:"-"`
 }
 
 // UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *GamerAllMatchListResponse) UnmarshalJSON(data []byte) error {
+func (m *GamerMatchListResponse) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
 		// data
-		Data []*GamerAllMatchListResponseDataItems0 `json:"data"`
+		Data []*GamerMatchListResponseDataItems0 `json:"data"`
 
 		// status
 		Status string `json:"status,omitempty"`
@@ -43,7 +43,7 @@ func (m *GamerAllMatchListResponse) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
 	}
-	var rcv GamerAllMatchListResponse
+	var rcv GamerMatchListResponse
 
 	rcv.Data = stage1.Data
 	rcv.Status = stage1.Status
@@ -67,18 +67,18 @@ func (m *GamerAllMatchListResponse) UnmarshalJSON(data []byte) error {
 			}
 			result[k] = toadd
 		}
-		m.GamerAllMatchListResponseAdditionalProperties = result
+		m.GamerMatchListResponseAdditionalProperties = result
 	}
 
 	return nil
 }
 
 // MarshalJSON marshals this object with additional properties into a JSON object
-func (m GamerAllMatchListResponse) MarshalJSON() ([]byte, error) {
+func (m GamerMatchListResponse) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// data
-		Data []*GamerAllMatchListResponseDataItems0 `json:"data"`
+		Data []*GamerMatchListResponseDataItems0 `json:"data"`
 
 		// status
 		Status string `json:"status,omitempty"`
@@ -93,12 +93,12 @@ func (m GamerAllMatchListResponse) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
-	if len(m.GamerAllMatchListResponseAdditionalProperties) == 0 {
+	if len(m.GamerMatchListResponseAdditionalProperties) == 0 {
 		return props, nil
 	}
 
 	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.GamerAllMatchListResponseAdditionalProperties)
+	additional, err := json.Marshal(m.GamerMatchListResponseAdditionalProperties)
 	if err != nil {
 		return nil, err
 	}
@@ -112,8 +112,8 @@ func (m GamerAllMatchListResponse) MarshalJSON() ([]byte, error) {
 	return append(props, additional[1:]...), nil
 }
 
-// Validate validates this gamer all match list response
-func (m *GamerAllMatchListResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this gamer match list response
+func (m *GamerMatchListResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -126,7 +126,7 @@ func (m *GamerAllMatchListResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *GamerAllMatchListResponse) validateData(formats strfmt.Registry) error {
+func (m *GamerMatchListResponse) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -152,7 +152,7 @@ func (m *GamerAllMatchListResponse) validateData(formats strfmt.Registry) error 
 }
 
 // MarshalBinary interface implementation
-func (m *GamerAllMatchListResponse) MarshalBinary() ([]byte, error) {
+func (m *GamerMatchListResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -160,8 +160,8 @@ func (m *GamerAllMatchListResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *GamerAllMatchListResponse) UnmarshalBinary(b []byte) error {
-	var res GamerAllMatchListResponse
+func (m *GamerMatchListResponse) UnmarshalBinary(b []byte) error {
+	var res GamerMatchListResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -169,10 +169,10 @@ func (m *GamerAllMatchListResponse) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// GamerAllMatchListResponseDataItems0 gamer all match list response data items0
+// GamerMatchListResponseDataItems0 gamer match list response data items0
 //
-// swagger:model GamerAllMatchListResponseDataItems0
-type GamerAllMatchListResponseDataItems0 struct {
+// swagger:model GamerMatchListResponseDataItems0
+type GamerMatchListResponseDataItems0 struct {
 
 	// map
 	Map string `json:"map,omitempty"`
@@ -192,12 +192,12 @@ type GamerAllMatchListResponseDataItems0 struct {
 	// type
 	Type string `json:"type,omitempty"`
 
-	// gamer all match list response data items0 additional properties
-	GamerAllMatchListResponseDataItems0AdditionalProperties map[string]interface{} `json:"-"`
+	// gamer match list response data items0 additional properties
+	GamerMatchListResponseDataItems0AdditionalProperties map[string]interface{} `json:"-"`
 }
 
 // UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *GamerAllMatchListResponseDataItems0) UnmarshalJSON(data []byte) error {
+func (m *GamerMatchListResponseDataItems0) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
@@ -222,7 +222,7 @@ func (m *GamerAllMatchListResponseDataItems0) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
 	}
-	var rcv GamerAllMatchListResponseDataItems0
+	var rcv GamerMatchListResponseDataItems0
 
 	rcv.Map = stage1.Map
 	rcv.MatchID = stage1.MatchID
@@ -254,14 +254,14 @@ func (m *GamerAllMatchListResponseDataItems0) UnmarshalJSON(data []byte) error {
 			}
 			result[k] = toadd
 		}
-		m.GamerAllMatchListResponseDataItems0AdditionalProperties = result
+		m.GamerMatchListResponseDataItems0AdditionalProperties = result
 	}
 
 	return nil
 }
 
 // MarshalJSON marshals this object with additional properties into a JSON object
-func (m GamerAllMatchListResponseDataItems0) MarshalJSON() ([]byte, error) {
+func (m GamerMatchListResponseDataItems0) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// map
@@ -296,12 +296,12 @@ func (m GamerAllMatchListResponseDataItems0) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
-	if len(m.GamerAllMatchListResponseDataItems0AdditionalProperties) == 0 {
+	if len(m.GamerMatchListResponseDataItems0AdditionalProperties) == 0 {
 		return props, nil
 	}
 
 	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.GamerAllMatchListResponseDataItems0AdditionalProperties)
+	additional, err := json.Marshal(m.GamerMatchListResponseDataItems0AdditionalProperties)
 	if err != nil {
 		return nil, err
 	}
@@ -315,13 +315,13 @@ func (m GamerAllMatchListResponseDataItems0) MarshalJSON() ([]byte, error) {
 	return append(props, additional[1:]...), nil
 }
 
-// Validate validates this gamer all match list response data items0
-func (m *GamerAllMatchListResponseDataItems0) Validate(formats strfmt.Registry) error {
+// Validate validates this gamer match list response data items0
+func (m *GamerMatchListResponseDataItems0) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *GamerAllMatchListResponseDataItems0) MarshalBinary() ([]byte, error) {
+func (m *GamerMatchListResponseDataItems0) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -329,8 +329,8 @@ func (m *GamerAllMatchListResponseDataItems0) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *GamerAllMatchListResponseDataItems0) UnmarshalBinary(b []byte) error {
-	var res GamerAllMatchListResponseDataItems0
+func (m *GamerMatchListResponseDataItems0) UnmarshalBinary(b []byte) error {
+	var res GamerMatchListResponseDataItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
