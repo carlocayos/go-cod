@@ -2,6 +2,19 @@
 
 go-cod is the _unofficial_ Go SDK of the Call of Duty API used in the callofduty.com site
 
+- [Getting Started](#getting-started)
+    * [Authentication](#authentication)
+    * [Unmapped fields](#unmapped-fields)
+- [Sample codes and Payload](#sample-codes-and-payload)
+- [Generate Models and Client from Swagger Spec](#generate-models-and-client-from-swagger-spec)
+    * [Generating client and models](#generating-client-and-models)
+    * [API Documentation](#api-documentation)
+- [Roadmap](#roadmap)
+- [Request for missing APIs and fields](#request-for-missing-apis-and-fields)
+- [Contribution](#contribution)
+- [Credits](#credits)
+- [Developer](#developer)
+
 ## Getting Started
 ```
 import "github.com/carlocayos/go-cod"
@@ -137,7 +150,7 @@ Then open http://localhost:9000 to see the list of APIs.
 - [ ] Add more example codes and helper functions (e.g. Get Uno ID...)
 - [ ] Context handling
 
-## Missing APIs and Fields
+## Request for missing APIs and fields
 
 Report new or missing COD APIs and fields [here](https://github.com/carlocayos/go-cod/issues/new?assignees=&labels=enhancement&template=add-api-or-field.md&title=Reques+to+add+a+new+field+or+API)
 
@@ -159,5 +172,5 @@ Thanks to [Lierrmm](https://github.com/Lierrmm) for his work on the [NodeJS Call
 <a href="https://www.buymeacoffee.com/ccayos" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 **BTC address:** 32zunH725N7PjBYj2TfbVoC3jVCyhqyn5h
-**ETH address:** 0x2A17e4031FFeF64C638Dd9B190e05a150b2B8FBc
 
+**ETH address:** 0x2A17e4031FFeF64C638Dd9B190e05a150b2B8FBc
