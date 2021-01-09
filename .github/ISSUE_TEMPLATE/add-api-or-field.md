@@ -1,7 +1,7 @@
 ---
 name: Add API or Field
 about: Request for a new or missing API/field to be added
-title: Reques to add a new field or API
+title: Request to add a new field or API
 labels: enhancement
 assignees: ''
 
