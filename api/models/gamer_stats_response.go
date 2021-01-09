@@ -200,7 +200,7 @@ type GamerStatsResponseData struct {
 	ParagonRank float64 `json:"paragonRank,omitempty"`
 
 	// platform
-	Platform interface{} `json:"platform,omitempty"`
+	Platform string `json:"platform,omitempty"`
 
 	// prestige
 	Prestige float64 `json:"prestige,omitempty"`
@@ -212,7 +212,7 @@ type GamerStatsResponseData struct {
 	S float64 `json:"s,omitempty"`
 
 	// title
-	Title interface{} `json:"title,omitempty"`
+	Title string `json:"title,omitempty"`
 
 	// total xp
 	TotalXp float64 `json:"totalXp,omitempty"`
@@ -269,7 +269,7 @@ func (m *GamerStatsResponseData) UnmarshalJSON(data []byte) error {
 		ParagonRank float64 `json:"paragonRank,omitempty"`
 
 		// platform
-		Platform interface{} `json:"platform,omitempty"`
+		Platform string `json:"platform,omitempty"`
 
 		// prestige
 		Prestige float64 `json:"prestige,omitempty"`
@@ -281,7 +281,7 @@ func (m *GamerStatsResponseData) UnmarshalJSON(data []byte) error {
 		S float64 `json:"s,omitempty"`
 
 		// title
-		Title interface{} `json:"title,omitempty"`
+		Title string `json:"title,omitempty"`
 
 		// total xp
 		TotalXp float64 `json:"totalXp,omitempty"`
@@ -402,7 +402,7 @@ func (m GamerStatsResponseData) MarshalJSON() ([]byte, error) {
 		ParagonRank float64 `json:"paragonRank,omitempty"`
 
 		// platform
-		Platform interface{} `json:"platform,omitempty"`
+		Platform string `json:"platform,omitempty"`
 
 		// prestige
 		Prestige float64 `json:"prestige,omitempty"`
@@ -414,7 +414,7 @@ func (m GamerStatsResponseData) MarshalJSON() ([]byte, error) {
 		S float64 `json:"s,omitempty"`
 
 		// title
-		Title interface{} `json:"title,omitempty"`
+		Title string `json:"title,omitempty"`
 
 		// total xp
 		TotalXp float64 `json:"totalXp,omitempty"`
@@ -552,14 +552,23 @@ func (m *GamerStatsResponseData) UnmarshalBinary(b []byte) error {
 // swagger:model GamerStatsResponseDataLifetime
 type GamerStatsResponseDataLifetime struct {
 
+	// accolade data
+	AccoladeData *GamerStatsResponseDataLifetimeAccoladeData `json:"accoladeData,omitempty"`
+
 	// all
 	All *GamerStatsResponseDataLifetimeAll `json:"all,omitempty"`
+
+	// item data
+	ItemData map[string]map[string]GamerStatsResponseDataLifetimeItemDataAnon `json:"itemData,omitempty"`
 
 	// map
 	Map interface{} `json:"map,omitempty"`
 
 	// mode
-	Mode interface{} `json:"mode,omitempty"`
+	Mode map[string]GamerStatsResponseDataLifetimeModeAnon `json:"mode,omitempty"`
+
+	// scorestreak data
+	ScorestreakData *GamerStatsResponseDataLifetimeScorestreakData `json:"scorestreakData,omitempty"`
 
 	// gamer stats response data lifetime additional properties
 	GamerStatsResponseDataLifetimeAdditionalProperties map[string]interface{} `json:"-"`
@@ -570,23 +579,35 @@ func (m *GamerStatsResponseDataLifetime) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
+		// accolade data
+		AccoladeData *GamerStatsResponseDataLifetimeAccoladeData `json:"accoladeData,omitempty"`
+
 		// all
 		All *GamerStatsResponseDataLifetimeAll `json:"all,omitempty"`
+
+		// item data
+		ItemData map[string]map[string]GamerStatsResponseDataLifetimeItemDataAnon `json:"itemData,omitempty"`
 
 		// map
 		Map interface{} `json:"map,omitempty"`
 
 		// mode
-		Mode interface{} `json:"mode,omitempty"`
+		Mode map[string]GamerStatsResponseDataLifetimeModeAnon `json:"mode,omitempty"`
+
+		// scorestreak data
+		ScorestreakData *GamerStatsResponseDataLifetimeScorestreakData `json:"scorestreakData,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
 	}
 	var rcv GamerStatsResponseDataLifetime
 
+	rcv.AccoladeData = stage1.AccoladeData
 	rcv.All = stage1.All
+	rcv.ItemData = stage1.ItemData
 	rcv.Map = stage1.Map
 	rcv.Mode = stage1.Mode
+	rcv.ScorestreakData = stage1.ScorestreakData
 	*m = rcv
 
 	// stage 2, remove properties and add to map
@@ -595,9 +616,12 @@ func (m *GamerStatsResponseDataLifetime) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	delete(stage2, "accoladeData")
 	delete(stage2, "all")
+	delete(stage2, "itemData")
 	delete(stage2, "map")
 	delete(stage2, "mode")
+	delete(stage2, "scorestreakData")
 	// stage 3, add additional properties values
 	if len(stage2) > 0 {
 		result := make(map[string]interface{})
@@ -618,19 +642,31 @@ func (m *GamerStatsResponseDataLifetime) UnmarshalJSON(data []byte) error {
 func (m GamerStatsResponseDataLifetime) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
+		// accolade data
+		AccoladeData *GamerStatsResponseDataLifetimeAccoladeData `json:"accoladeData,omitempty"`
+
 		// all
 		All *GamerStatsResponseDataLifetimeAll `json:"all,omitempty"`
+
+		// item data
+		ItemData map[string]map[string]GamerStatsResponseDataLifetimeItemDataAnon `json:"itemData,omitempty"`
 
 		// map
 		Map interface{} `json:"map,omitempty"`
 
 		// mode
-		Mode interface{} `json:"mode,omitempty"`
+		Mode map[string]GamerStatsResponseDataLifetimeModeAnon `json:"mode,omitempty"`
+
+		// scorestreak data
+		ScorestreakData *GamerStatsResponseDataLifetimeScorestreakData `json:"scorestreakData,omitempty"`
 	}
 
+	stage1.AccoladeData = m.AccoladeData
 	stage1.All = m.All
+	stage1.ItemData = m.ItemData
 	stage1.Map = m.Map
 	stage1.Mode = m.Mode
+	stage1.ScorestreakData = m.ScorestreakData
 
 	// make JSON object for known properties
 	props, err := json.Marshal(stage1)
@@ -661,13 +697,47 @@ func (m GamerStatsResponseDataLifetime) MarshalJSON() ([]byte, error) {
 func (m *GamerStatsResponseDataLifetime) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccoladeData(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAll(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateItemData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScorestreakData(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetime) validateAccoladeData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccoladeData) { // not required
+		return nil
+	}
+
+	if m.AccoladeData != nil {
+		if err := m.AccoladeData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("data" + "." + "lifetime" + "." + "accoladeData")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -681,6 +751,72 @@ func (m *GamerStatsResponseDataLifetime) validateAll(formats strfmt.Registry) er
 		if err := m.All.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data" + "." + "lifetime" + "." + "all")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetime) validateItemData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ItemData) { // not required
+		return nil
+	}
+
+	for k := range m.ItemData {
+
+		for kk := range m.ItemData[k] {
+
+			if swag.IsZero(m.ItemData[k][kk]) { // not required
+				continue
+			}
+			if val, ok := m.ItemData[k][kk]; ok {
+				if err := val.Validate(formats); err != nil {
+					return err
+				}
+			}
+
+		}
+
+	}
+
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetime) validateMode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Mode) { // not required
+		return nil
+	}
+
+	for k := range m.Mode {
+
+		if swag.IsZero(m.Mode[k]) { // not required
+			continue
+		}
+		if val, ok := m.Mode[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetime) validateScorestreakData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ScorestreakData) { // not required
+		return nil
+	}
+
+	if m.ScorestreakData != nil {
+		if err := m.ScorestreakData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("data" + "." + "lifetime" + "." + "scorestreakData")
 			}
 			return err
 		}
@@ -707,13 +843,2058 @@ func (m *GamerStatsResponseDataLifetime) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
+// GamerStatsResponseDataLifetimeAccoladeData gamer stats response data lifetime accolade data
+//
+// swagger:model GamerStatsResponseDataLifetimeAccoladeData
+type GamerStatsResponseDataLifetimeAccoladeData struct {
+
+	// properties
+	Properties *GamerStatsResponseDataLifetimeAccoladeDataProperties `json:"properties,omitempty"`
+
+	// gamer stats response data lifetime accolade data additional properties
+	GamerStatsResponseDataLifetimeAccoladeDataAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeAccoladeData) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// properties
+		Properties *GamerStatsResponseDataLifetimeAccoladeDataProperties `json:"properties,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeAccoladeData
+
+	rcv.Properties = stage1.Properties
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "properties")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeAccoladeDataAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeAccoladeData) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// properties
+		Properties *GamerStatsResponseDataLifetimeAccoladeDataProperties `json:"properties,omitempty"`
+	}
+
+	stage1.Properties = m.Properties
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeAccoladeDataAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeAccoladeDataAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime accolade data
+func (m *GamerStatsResponseDataLifetimeAccoladeData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetimeAccoladeData) validateProperties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Properties) { // not required
+		return nil
+	}
+
+	if m.Properties != nil {
+		if err := m.Properties.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("data" + "." + "lifetime" + "." + "accoladeData" + "." + "properties")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAccoladeData) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAccoladeData) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeAccoladeData
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeAccoladeDataProperties gamer stats response data lifetime accolade data properties
+//
+// swagger:model GamerStatsResponseDataLifetimeAccoladeDataProperties
+type GamerStatsResponseDataLifetimeAccoladeDataProperties struct {
+
+	// ads kills
+	AdsKills float64 `json:"adsKills,omitempty"`
+
+	// ammo box used
+	AmmoBoxUsed float64 `json:"ammoBoxUsed,omitempty"`
+
+	// ar deaths
+	ArDeaths float64 `json:"arDeaths,omitempty"`
+
+	// ar headshots
+	ArHeadshots float64 `json:"arHeadshots,omitempty"`
+
+	// ar kills
+	ArKills float64 `json:"arKills,omitempty"`
+
+	// assaults
+	Assaults float64 `json:"assaults,omitempty"`
+
+	// avenger kills
+	AvengerKills float64 `json:"avengerKills,omitempty"`
+
+	// bomb defused
+	BombDefused float64 `json:"bombDefused,omitempty"`
+
+	// bomb detonated
+	BombDetonated float64 `json:"bombDetonated,omitempty"`
+
+	// bomb planted
+	BombPlanted float64 `json:"bombPlanted,omitempty"`
+
+	// c4 kills
+	C4Kills float64 `json:"c4Kills,omitempty"`
+
+	// captures
+	Captures float64 `json:"captures,omitempty"`
+
+	// carepackages captured
+	CarepackagesCaptured float64 `json:"carepackagesCaptured,omitempty"`
+
+	// carrier kills
+	CarrierKills float64 `json:"carrierKills,omitempty"`
+
+	// class changes
+	ClassChanges float64 `json:"classChanges,omitempty"`
+
+	// claymore kills
+	ClaymoreKills float64 `json:"claymoreKills,omitempty"`
+
+	// clutch
+	Clutch float64 `json:"clutch,omitempty"`
+
+	// clutch revives
+	ClutchRevives float64 `json:"clutchRevives,omitempty"`
+
+	// comeback kills
+	ComebackKills float64 `json:"comebackKills,omitempty"`
+
+	// dead silence kills
+	DeadSilenceKills float64 `json:"deadSilenceKills,omitempty"`
+
+	// deaths from behind
+	DeathsFromBehind float64 `json:"deathsFromBehind,omitempty"`
+
+	// decoy hits
+	DecoyHits float64 `json:"decoyHits,omitempty"`
+
+	// defender kills
+	DefenderKills float64 `json:"defenderKills,omitempty"`
+
+	// defends
+	Defends float64 `json:"defends,omitempty"`
+
+	// deployable cover used
+	DeployableCoverUsed float64 `json:"deployableCoverUsed,omitempty"`
+
+	// destroyed killstreaks
+	DestroyedKillstreaks float64 `json:"destroyedKillstreaks,omitempty"`
+
+	// distance traveled in vehicle
+	DistanceTraveledInVehicle float64 `json:"distanceTraveledInVehicle,omitempty"`
+
+	// distance travelled
+	DistanceTravelled float64 `json:"distanceTravelled,omitempty"`
+
+	// emp drone hits
+	EmpDroneHits float64 `json:"empDroneHits,omitempty"`
+
+	// execution kills
+	ExecutionKills float64 `json:"executionKills,omitempty"`
+
+	// explosions survived
+	ExplosionsSurvived float64 `json:"explosionsSurvived,omitempty"`
+
+	// first infected
+	FirstInfected float64 `json:"firstInfected,omitempty"`
+
+	// flashbang hits
+	FlashbangHits float64 `json:"flashbangHits,omitempty"`
+
+	// frag kills
+	FragKills float64 `json:"fragKills,omitempty"`
+
+	// gas hits
+	GasHits float64 `json:"gasHits,omitempty"`
+
+	// headshots
+	Headshots float64 `json:"headshots,omitempty"`
+
+	// higher ranked kills
+	HigherRankedKills float64 `json:"higherRankedKills,omitempty"`
+
+	// highest avg altitude
+	HighestAvgAltitude float64 `json:"highestAvgAltitude,omitempty"`
+
+	// highest multikill
+	HighestMultikill float64 `json:"highestMultikill,omitempty"`
+
+	// highest ranked kills
+	HighestRankedKills float64 `json:"highestRankedKills,omitempty"`
+
+	// hipfire kills
+	HipfireKills float64 `json:"hipfireKills,omitempty"`
+
+	// infected kills
+	InfectedKills float64 `json:"infectedKills,omitempty"`
+
+	// kill enemy team
+	KillEnemyTeam float64 `json:"killEnemyTeam,omitempty"`
+
+	// kills10 no deaths
+	Kills10NoDeaths float64 `json:"kills10NoDeaths,omitempty"`
+
+	// kills from behind
+	KillsFromBehind float64 `json:"killsFromBehind,omitempty"`
+
+	// killstreak a u a v assists
+	KillstreakAUAVAssists float64 `json:"killstreakAUAVAssists,omitempty"`
+
+	// killstreak air kills
+	KillstreakAirKills float64 `json:"killstreakAirKills,omitempty"`
+
+	// killstreak airstrike kills
+	KillstreakAirstrikeKills float64 `json:"killstreakAirstrikeKills,omitempty"`
+
+	// killstreak c u a v assists
+	KillstreakCUAVAssists float64 `json:"killstreakCUAVAssists,omitempty"`
+
+	// killstreak care package used
+	KillstreakCarePackageUsed float64 `json:"killstreakCarePackageUsed,omitempty"`
+
+	// killstreak chopper gunner kills
+	KillstreakChopperGunnerKills float64 `json:"killstreakChopperGunnerKills,omitempty"`
+
+	// killstreak chopper support kills
+	KillstreakChopperSupportKills float64 `json:"killstreakChopperSupportKills,omitempty"`
+
+	// killstreak cluser strike kills
+	KillstreakCluserStrikeKills float64 `json:"killstreakCluserStrikeKills,omitempty"`
+
+	// killstreak cruise missile kills
+	KillstreakCruiseMissileKills float64 `json:"killstreakCruiseMissileKills,omitempty"`
+
+	// killstreak emergency airdrop used
+	KillstreakEmergencyAirdropUsed float64 `json:"killstreakEmergencyAirdropUsed,omitempty"`
+
+	// killstreak ground kills
+	KillstreakGroundKills float64 `json:"killstreakGroundKills,omitempty"`
+
+	// killstreak gunship kills
+	KillstreakGunshipKills float64 `json:"killstreakGunshipKills,omitempty"`
+
+	// killstreak juggernaut kills
+	KillstreakJuggernautKills float64 `json:"killstreakJuggernautKills,omitempty"`
+
+	// killstreak kills
+	KillstreakKills float64 `json:"killstreakKills,omitempty"`
+
+	// killstreak personal u a v kills
+	KillstreakPersonalUAVKills float64 `json:"killstreakPersonalUAVKills,omitempty"`
+
+	// killstreak sentry gun kills
+	KillstreakSentryGunKills float64 `json:"killstreakSentryGunKills,omitempty"`
+
+	// killstreak shield turret kills
+	KillstreakShieldTurretKills float64 `json:"killstreakShieldTurretKills,omitempty"`
+
+	// killstreak tank kills
+	KillstreakTankKills float64 `json:"killstreakTankKills,omitempty"`
+
+	// killstreak u a v assists
+	KillstreakUAVAssists float64 `json:"killstreakUAVAssists,omitempty"`
+
+	// killstreak v t o l jet kills
+	KillstreakVTOLJetKills float64 `json:"killstreakVTOLJetKills,omitempty"`
+
+	// killstreak wheelson kills
+	KillstreakWheelsonKills float64 `json:"killstreakWheelsonKills,omitempty"`
+
+	// killstreak white phosphorous kills assists
+	KillstreakWhitePhosphorousKillsAssists float64 `json:"killstreakWhitePhosphorousKillsAssists,omitempty"`
+
+	// last survivor
+	LastSurvivor float64 `json:"lastSurvivor,omitempty"`
+
+	// launcher deaths
+	LauncherDeaths float64 `json:"launcherDeaths,omitempty"`
+
+	// launcher headshots
+	LauncherHeadshots float64 `json:"launcherHeadshots,omitempty"`
+
+	// launcher kills
+	LauncherKills float64 `json:"launcherKills,omitempty"`
+
+	// least assists
+	LeastAssists float64 `json:"leastAssists,omitempty"`
+
+	// least deaths
+	LeastDeaths float64 `json:"leastDeaths,omitempty"`
+
+	// least kills
+	LeastKills float64 `json:"leastKills,omitempty"`
+
+	// lmg deaths
+	LmgDeaths float64 `json:"lmgDeaths,omitempty"`
+
+	// lmg headshots
+	LmgHeadshots float64 `json:"lmgHeadshots,omitempty"`
+
+	// lmg kills
+	LmgKills float64 `json:"lmgKills,omitempty"`
+
+	// longest life
+	LongestLife float64 `json:"longestLife,omitempty"`
+
+	// longest streak
+	LongestStreak float64 `json:"longestStreak,omitempty"`
+
+	// longest time spent on weapon
+	LongestTimeSpentOnWeapon float64 `json:"longestTimeSpentOnWeapon,omitempty"`
+
+	// longshot kills
+	LongshotKills float64 `json:"longshotKills,omitempty"`
+
+	// lower ranked kills
+	LowerRankedKills float64 `json:"lowerRankedKills,omitempty"`
+
+	// lowest avg altitude
+	LowestAvgAltitude float64 `json:"lowestAvgAltitude,omitempty"`
+
+	// melee deaths
+	MeleeDeaths float64 `json:"meleeDeaths,omitempty"`
+
+	// melee kills
+	MeleeKills float64 `json:"meleeKills,omitempty"`
+
+	// molotov kills
+	MolotovKills float64 `json:"molotovKills,omitempty"`
+
+	// most assists
+	MostAssists float64 `json:"mostAssists,omitempty"`
+
+	// most deaths
+	MostDeaths float64 `json:"mostDeaths,omitempty"`
+
+	// most kills
+	MostKills float64 `json:"mostKills,omitempty"`
+
+	// most kills least deaths
+	MostKillsLeastDeaths float64 `json:"mostKillsLeastDeaths,omitempty"`
+
+	// most kills longest streak
+	MostKillsLongestStreak float64 `json:"mostKillsLongestStreak,omitempty"`
+
+	// most kills most headshots
+	MostKillsMostHeadshots float64 `json:"mostKillsMostHeadshots,omitempty"`
+
+	// most multikills
+	MostMultikills float64 `json:"mostMultikills,omitempty"`
+
+	// no deaths from behind
+	NoDeathsFromBehind float64 `json:"noDeathsFromBehind,omitempty"`
+
+	// no kill10 deaths
+	NoKill10Deaths float64 `json:"noKill10Deaths,omitempty"`
+
+	// no kill no death
+	NoKillNoDeath float64 `json:"noKillNoDeath,omitempty"`
+
+	// no kills with death
+	NoKillsWithDeath float64 `json:"noKillsWithDeath,omitempty"`
+
+	// one shot one kills
+	OneShotOneKills float64 `json:"oneShotOneKills,omitempty"`
+
+	// penetration kills
+	PenetrationKills float64 `json:"penetrationKills,omitempty"`
+
+	// pickups
+	Pickups float64 `json:"pickups,omitempty"`
+
+	// pistol headshots
+	PistolHeadshots float64 `json:"pistolHeadshots,omitempty"`
+
+	// pistol kills
+	PistolKills float64 `json:"pistolKills,omitempty"`
+
+	// pistol peaths
+	PistolPeaths float64 `json:"pistolPeaths,omitempty"`
+
+	// point blank kills
+	PointBlankKills float64 `json:"pointBlankKills,omitempty"`
+
+	// proximity mine kills
+	ProximityMineKills float64 `json:"proximityMineKills,omitempty"`
+
+	// recon drone marks
+	ReconDroneMarks float64 `json:"reconDroneMarks,omitempty"`
+
+	// reloads
+	Reloads float64 `json:"reloads,omitempty"`
+
+	// returns
+	Returns float64 `json:"returns,omitempty"`
+
+	// revenge kills
+	RevengeKills float64 `json:"revengeKills,omitempty"`
+
+	// riot shield damage absorbed
+	RiotShieldDamageAbsorbed float64 `json:"riotShieldDamageAbsorbed,omitempty"`
+
+	// semtex kills
+	SemtexKills float64 `json:"semtexKills,omitempty"`
+
+	// setbacks
+	Setbacks float64 `json:"setbacks,omitempty"`
+
+	// shortest life
+	ShortestLife float64 `json:"shortestLife,omitempty"`
+
+	// shotgun deaths
+	ShotgunDeaths float64 `json:"shotgunDeaths,omitempty"`
+
+	// shotgun headshots
+	ShotgunHeadshots float64 `json:"shotgunHeadshots,omitempty"`
+
+	// shotgun kills
+	ShotgunKills float64 `json:"shotgunKills,omitempty"`
+
+	// shots fired
+	ShotsFired float64 `json:"shotsFired,omitempty"`
+
+	// skipped killcams
+	SkippedKillcams float64 `json:"skippedKillcams,omitempty"`
+
+	// smg deaths
+	SmgDeaths float64 `json:"smgDeaths,omitempty"`
+
+	// smg headshots
+	SmgHeadshots float64 `json:"smgHeadshots,omitempty"`
+
+	// smg kills
+	SmgKills float64 `json:"smgKills,omitempty"`
+
+	// smokes used
+	SmokesUsed float64 `json:"smokesUsed,omitempty"`
+
+	// snapshot hits
+	SnapshotHits float64 `json:"snapshotHits,omitempty"`
+
+	// sniper deaths
+	SniperDeaths float64 `json:"sniperDeaths,omitempty"`
+
+	// sniper headshots
+	SniperHeadshots float64 `json:"sniperHeadshots,omitempty"`
+
+	// sniper kills
+	SniperKills float64 `json:"sniperKills,omitempty"`
+
+	// spawn select base
+	SpawnSelectBase float64 `json:"spawnSelectBase,omitempty"`
+
+	// spawn select flag
+	SpawnSelectFlag float64 `json:"spawnSelectFlag,omitempty"`
+
+	// spawn select squad
+	SpawnSelectSquad float64 `json:"spawnSelectSquad,omitempty"`
+
+	// spawn select vehicle
+	SpawnSelectVehicle float64 `json:"spawnSelectVehicle,omitempty"`
+
+	// stim damage healed
+	StimDamageHealed float64 `json:"stimDamageHealed,omitempty"`
+
+	// stopping power kills
+	StoppingPowerKills float64 `json:"stoppingPowerKills,omitempty"`
+
+	// stun hits
+	StunHits float64 `json:"stunHits,omitempty"`
+
+	// suicides
+	Suicides float64 `json:"suicides,omitempty"`
+
+	// survivor kills
+	SurvivorKills float64 `json:"survivorKills,omitempty"`
+
+	// tactical insertion spawns
+	TacticalInsertionSpawns float64 `json:"tacticalInsertionSpawns,omitempty"`
+
+	// tags captured
+	TagsCaptured float64 `json:"tagsCaptured,omitempty"`
+
+	// tags denied
+	TagsDenied float64 `json:"tagsDenied,omitempty"`
+
+	// tags largest bank
+	TagsLargestBank float64 `json:"tagsLargestBank,omitempty"`
+
+	// tags mega banked
+	TagsMegaBanked float64 `json:"tagsMegaBanked,omitempty"`
+
+	// thermite kills
+	ThermiteKills float64 `json:"thermiteKills,omitempty"`
+
+	// throwing knife kills
+	ThrowingKnifeKills float64 `json:"throwingKnifeKills,omitempty"`
+
+	// time crouched
+	TimeCrouched float64 `json:"timeCrouched,omitempty"`
+
+	// time on point
+	TimeOnPoint float64 `json:"timeOnPoint,omitempty"`
+
+	// time prone
+	TimeProne float64 `json:"timeProne,omitempty"`
+
+	// time spent as driver
+	TimeSpentAsDriver float64 `json:"timeSpentAsDriver,omitempty"`
+
+	// time spent as passenger
+	TimeSpentAsPassenger float64 `json:"timeSpentAsPassenger,omitempty"`
+
+	// time watching killcams
+	TimeWatchingKillcams float64 `json:"timeWatchingKillcams,omitempty"`
+
+	// times selected as squad leader
+	TimesSelectedAsSquadLeader float64 `json:"timesSelectedAsSquadLeader,omitempty"`
+
+	// trophy system hits
+	TrophySystemHits float64 `json:"trophySystemHits,omitempty"`
+
+	// weapon pickups
+	WeaponPickups float64 `json:"weaponPickups,omitempty"`
+
+	// gamer stats response data lifetime accolade data properties additional properties
+	GamerStatsResponseDataLifetimeAccoladeDataPropertiesAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeAccoladeDataProperties) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// ads kills
+		AdsKills float64 `json:"adsKills,omitempty"`
+
+		// ammo box used
+		AmmoBoxUsed float64 `json:"ammoBoxUsed,omitempty"`
+
+		// ar deaths
+		ArDeaths float64 `json:"arDeaths,omitempty"`
+
+		// ar headshots
+		ArHeadshots float64 `json:"arHeadshots,omitempty"`
+
+		// ar kills
+		ArKills float64 `json:"arKills,omitempty"`
+
+		// assaults
+		Assaults float64 `json:"assaults,omitempty"`
+
+		// avenger kills
+		AvengerKills float64 `json:"avengerKills,omitempty"`
+
+		// bomb defused
+		BombDefused float64 `json:"bombDefused,omitempty"`
+
+		// bomb detonated
+		BombDetonated float64 `json:"bombDetonated,omitempty"`
+
+		// bomb planted
+		BombPlanted float64 `json:"bombPlanted,omitempty"`
+
+		// c4 kills
+		C4Kills float64 `json:"c4Kills,omitempty"`
+
+		// captures
+		Captures float64 `json:"captures,omitempty"`
+
+		// carepackages captured
+		CarepackagesCaptured float64 `json:"carepackagesCaptured,omitempty"`
+
+		// carrier kills
+		CarrierKills float64 `json:"carrierKills,omitempty"`
+
+		// class changes
+		ClassChanges float64 `json:"classChanges,omitempty"`
+
+		// claymore kills
+		ClaymoreKills float64 `json:"claymoreKills,omitempty"`
+
+		// clutch
+		Clutch float64 `json:"clutch,omitempty"`
+
+		// clutch revives
+		ClutchRevives float64 `json:"clutchRevives,omitempty"`
+
+		// comeback kills
+		ComebackKills float64 `json:"comebackKills,omitempty"`
+
+		// dead silence kills
+		DeadSilenceKills float64 `json:"deadSilenceKills,omitempty"`
+
+		// deaths from behind
+		DeathsFromBehind float64 `json:"deathsFromBehind,omitempty"`
+
+		// decoy hits
+		DecoyHits float64 `json:"decoyHits,omitempty"`
+
+		// defender kills
+		DefenderKills float64 `json:"defenderKills,omitempty"`
+
+		// defends
+		Defends float64 `json:"defends,omitempty"`
+
+		// deployable cover used
+		DeployableCoverUsed float64 `json:"deployableCoverUsed,omitempty"`
+
+		// destroyed killstreaks
+		DestroyedKillstreaks float64 `json:"destroyedKillstreaks,omitempty"`
+
+		// distance traveled in vehicle
+		DistanceTraveledInVehicle float64 `json:"distanceTraveledInVehicle,omitempty"`
+
+		// distance travelled
+		DistanceTravelled float64 `json:"distanceTravelled,omitempty"`
+
+		// emp drone hits
+		EmpDroneHits float64 `json:"empDroneHits,omitempty"`
+
+		// execution kills
+		ExecutionKills float64 `json:"executionKills,omitempty"`
+
+		// explosions survived
+		ExplosionsSurvived float64 `json:"explosionsSurvived,omitempty"`
+
+		// first infected
+		FirstInfected float64 `json:"firstInfected,omitempty"`
+
+		// flashbang hits
+		FlashbangHits float64 `json:"flashbangHits,omitempty"`
+
+		// frag kills
+		FragKills float64 `json:"fragKills,omitempty"`
+
+		// gas hits
+		GasHits float64 `json:"gasHits,omitempty"`
+
+		// headshots
+		Headshots float64 `json:"headshots,omitempty"`
+
+		// higher ranked kills
+		HigherRankedKills float64 `json:"higherRankedKills,omitempty"`
+
+		// highest avg altitude
+		HighestAvgAltitude float64 `json:"highestAvgAltitude,omitempty"`
+
+		// highest multikill
+		HighestMultikill float64 `json:"highestMultikill,omitempty"`
+
+		// highest ranked kills
+		HighestRankedKills float64 `json:"highestRankedKills,omitempty"`
+
+		// hipfire kills
+		HipfireKills float64 `json:"hipfireKills,omitempty"`
+
+		// infected kills
+		InfectedKills float64 `json:"infectedKills,omitempty"`
+
+		// kill enemy team
+		KillEnemyTeam float64 `json:"killEnemyTeam,omitempty"`
+
+		// kills10 no deaths
+		Kills10NoDeaths float64 `json:"kills10NoDeaths,omitempty"`
+
+		// kills from behind
+		KillsFromBehind float64 `json:"killsFromBehind,omitempty"`
+
+		// killstreak a u a v assists
+		KillstreakAUAVAssists float64 `json:"killstreakAUAVAssists,omitempty"`
+
+		// killstreak air kills
+		KillstreakAirKills float64 `json:"killstreakAirKills,omitempty"`
+
+		// killstreak airstrike kills
+		KillstreakAirstrikeKills float64 `json:"killstreakAirstrikeKills,omitempty"`
+
+		// killstreak c u a v assists
+		KillstreakCUAVAssists float64 `json:"killstreakCUAVAssists,omitempty"`
+
+		// killstreak care package used
+		KillstreakCarePackageUsed float64 `json:"killstreakCarePackageUsed,omitempty"`
+
+		// killstreak chopper gunner kills
+		KillstreakChopperGunnerKills float64 `json:"killstreakChopperGunnerKills,omitempty"`
+
+		// killstreak chopper support kills
+		KillstreakChopperSupportKills float64 `json:"killstreakChopperSupportKills,omitempty"`
+
+		// killstreak cluser strike kills
+		KillstreakCluserStrikeKills float64 `json:"killstreakCluserStrikeKills,omitempty"`
+
+		// killstreak cruise missile kills
+		KillstreakCruiseMissileKills float64 `json:"killstreakCruiseMissileKills,omitempty"`
+
+		// killstreak emergency airdrop used
+		KillstreakEmergencyAirdropUsed float64 `json:"killstreakEmergencyAirdropUsed,omitempty"`
+
+		// killstreak ground kills
+		KillstreakGroundKills float64 `json:"killstreakGroundKills,omitempty"`
+
+		// killstreak gunship kills
+		KillstreakGunshipKills float64 `json:"killstreakGunshipKills,omitempty"`
+
+		// killstreak juggernaut kills
+		KillstreakJuggernautKills float64 `json:"killstreakJuggernautKills,omitempty"`
+
+		// killstreak kills
+		KillstreakKills float64 `json:"killstreakKills,omitempty"`
+
+		// killstreak personal u a v kills
+		KillstreakPersonalUAVKills float64 `json:"killstreakPersonalUAVKills,omitempty"`
+
+		// killstreak sentry gun kills
+		KillstreakSentryGunKills float64 `json:"killstreakSentryGunKills,omitempty"`
+
+		// killstreak shield turret kills
+		KillstreakShieldTurretKills float64 `json:"killstreakShieldTurretKills,omitempty"`
+
+		// killstreak tank kills
+		KillstreakTankKills float64 `json:"killstreakTankKills,omitempty"`
+
+		// killstreak u a v assists
+		KillstreakUAVAssists float64 `json:"killstreakUAVAssists,omitempty"`
+
+		// killstreak v t o l jet kills
+		KillstreakVTOLJetKills float64 `json:"killstreakVTOLJetKills,omitempty"`
+
+		// killstreak wheelson kills
+		KillstreakWheelsonKills float64 `json:"killstreakWheelsonKills,omitempty"`
+
+		// killstreak white phosphorous kills assists
+		KillstreakWhitePhosphorousKillsAssists float64 `json:"killstreakWhitePhosphorousKillsAssists,omitempty"`
+
+		// last survivor
+		LastSurvivor float64 `json:"lastSurvivor,omitempty"`
+
+		// launcher deaths
+		LauncherDeaths float64 `json:"launcherDeaths,omitempty"`
+
+		// launcher headshots
+		LauncherHeadshots float64 `json:"launcherHeadshots,omitempty"`
+
+		// launcher kills
+		LauncherKills float64 `json:"launcherKills,omitempty"`
+
+		// least assists
+		LeastAssists float64 `json:"leastAssists,omitempty"`
+
+		// least deaths
+		LeastDeaths float64 `json:"leastDeaths,omitempty"`
+
+		// least kills
+		LeastKills float64 `json:"leastKills,omitempty"`
+
+		// lmg deaths
+		LmgDeaths float64 `json:"lmgDeaths,omitempty"`
+
+		// lmg headshots
+		LmgHeadshots float64 `json:"lmgHeadshots,omitempty"`
+
+		// lmg kills
+		LmgKills float64 `json:"lmgKills,omitempty"`
+
+		// longest life
+		LongestLife float64 `json:"longestLife,omitempty"`
+
+		// longest streak
+		LongestStreak float64 `json:"longestStreak,omitempty"`
+
+		// longest time spent on weapon
+		LongestTimeSpentOnWeapon float64 `json:"longestTimeSpentOnWeapon,omitempty"`
+
+		// longshot kills
+		LongshotKills float64 `json:"longshotKills,omitempty"`
+
+		// lower ranked kills
+		LowerRankedKills float64 `json:"lowerRankedKills,omitempty"`
+
+		// lowest avg altitude
+		LowestAvgAltitude float64 `json:"lowestAvgAltitude,omitempty"`
+
+		// melee deaths
+		MeleeDeaths float64 `json:"meleeDeaths,omitempty"`
+
+		// melee kills
+		MeleeKills float64 `json:"meleeKills,omitempty"`
+
+		// molotov kills
+		MolotovKills float64 `json:"molotovKills,omitempty"`
+
+		// most assists
+		MostAssists float64 `json:"mostAssists,omitempty"`
+
+		// most deaths
+		MostDeaths float64 `json:"mostDeaths,omitempty"`
+
+		// most kills
+		MostKills float64 `json:"mostKills,omitempty"`
+
+		// most kills least deaths
+		MostKillsLeastDeaths float64 `json:"mostKillsLeastDeaths,omitempty"`
+
+		// most kills longest streak
+		MostKillsLongestStreak float64 `json:"mostKillsLongestStreak,omitempty"`
+
+		// most kills most headshots
+		MostKillsMostHeadshots float64 `json:"mostKillsMostHeadshots,omitempty"`
+
+		// most multikills
+		MostMultikills float64 `json:"mostMultikills,omitempty"`
+
+		// no deaths from behind
+		NoDeathsFromBehind float64 `json:"noDeathsFromBehind,omitempty"`
+
+		// no kill10 deaths
+		NoKill10Deaths float64 `json:"noKill10Deaths,omitempty"`
+
+		// no kill no death
+		NoKillNoDeath float64 `json:"noKillNoDeath,omitempty"`
+
+		// no kills with death
+		NoKillsWithDeath float64 `json:"noKillsWithDeath,omitempty"`
+
+		// one shot one kills
+		OneShotOneKills float64 `json:"oneShotOneKills,omitempty"`
+
+		// penetration kills
+		PenetrationKills float64 `json:"penetrationKills,omitempty"`
+
+		// pickups
+		Pickups float64 `json:"pickups,omitempty"`
+
+		// pistol headshots
+		PistolHeadshots float64 `json:"pistolHeadshots,omitempty"`
+
+		// pistol kills
+		PistolKills float64 `json:"pistolKills,omitempty"`
+
+		// pistol peaths
+		PistolPeaths float64 `json:"pistolPeaths,omitempty"`
+
+		// point blank kills
+		PointBlankKills float64 `json:"pointBlankKills,omitempty"`
+
+		// proximity mine kills
+		ProximityMineKills float64 `json:"proximityMineKills,omitempty"`
+
+		// recon drone marks
+		ReconDroneMarks float64 `json:"reconDroneMarks,omitempty"`
+
+		// reloads
+		Reloads float64 `json:"reloads,omitempty"`
+
+		// returns
+		Returns float64 `json:"returns,omitempty"`
+
+		// revenge kills
+		RevengeKills float64 `json:"revengeKills,omitempty"`
+
+		// riot shield damage absorbed
+		RiotShieldDamageAbsorbed float64 `json:"riotShieldDamageAbsorbed,omitempty"`
+
+		// semtex kills
+		SemtexKills float64 `json:"semtexKills,omitempty"`
+
+		// setbacks
+		Setbacks float64 `json:"setbacks,omitempty"`
+
+		// shortest life
+		ShortestLife float64 `json:"shortestLife,omitempty"`
+
+		// shotgun deaths
+		ShotgunDeaths float64 `json:"shotgunDeaths,omitempty"`
+
+		// shotgun headshots
+		ShotgunHeadshots float64 `json:"shotgunHeadshots,omitempty"`
+
+		// shotgun kills
+		ShotgunKills float64 `json:"shotgunKills,omitempty"`
+
+		// shots fired
+		ShotsFired float64 `json:"shotsFired,omitempty"`
+
+		// skipped killcams
+		SkippedKillcams float64 `json:"skippedKillcams,omitempty"`
+
+		// smg deaths
+		SmgDeaths float64 `json:"smgDeaths,omitempty"`
+
+		// smg headshots
+		SmgHeadshots float64 `json:"smgHeadshots,omitempty"`
+
+		// smg kills
+		SmgKills float64 `json:"smgKills,omitempty"`
+
+		// smokes used
+		SmokesUsed float64 `json:"smokesUsed,omitempty"`
+
+		// snapshot hits
+		SnapshotHits float64 `json:"snapshotHits,omitempty"`
+
+		// sniper deaths
+		SniperDeaths float64 `json:"sniperDeaths,omitempty"`
+
+		// sniper headshots
+		SniperHeadshots float64 `json:"sniperHeadshots,omitempty"`
+
+		// sniper kills
+		SniperKills float64 `json:"sniperKills,omitempty"`
+
+		// spawn select base
+		SpawnSelectBase float64 `json:"spawnSelectBase,omitempty"`
+
+		// spawn select flag
+		SpawnSelectFlag float64 `json:"spawnSelectFlag,omitempty"`
+
+		// spawn select squad
+		SpawnSelectSquad float64 `json:"spawnSelectSquad,omitempty"`
+
+		// spawn select vehicle
+		SpawnSelectVehicle float64 `json:"spawnSelectVehicle,omitempty"`
+
+		// stim damage healed
+		StimDamageHealed float64 `json:"stimDamageHealed,omitempty"`
+
+		// stopping power kills
+		StoppingPowerKills float64 `json:"stoppingPowerKills,omitempty"`
+
+		// stun hits
+		StunHits float64 `json:"stunHits,omitempty"`
+
+		// suicides
+		Suicides float64 `json:"suicides,omitempty"`
+
+		// survivor kills
+		SurvivorKills float64 `json:"survivorKills,omitempty"`
+
+		// tactical insertion spawns
+		TacticalInsertionSpawns float64 `json:"tacticalInsertionSpawns,omitempty"`
+
+		// tags captured
+		TagsCaptured float64 `json:"tagsCaptured,omitempty"`
+
+		// tags denied
+		TagsDenied float64 `json:"tagsDenied,omitempty"`
+
+		// tags largest bank
+		TagsLargestBank float64 `json:"tagsLargestBank,omitempty"`
+
+		// tags mega banked
+		TagsMegaBanked float64 `json:"tagsMegaBanked,omitempty"`
+
+		// thermite kills
+		ThermiteKills float64 `json:"thermiteKills,omitempty"`
+
+		// throwing knife kills
+		ThrowingKnifeKills float64 `json:"throwingKnifeKills,omitempty"`
+
+		// time crouched
+		TimeCrouched float64 `json:"timeCrouched,omitempty"`
+
+		// time on point
+		TimeOnPoint float64 `json:"timeOnPoint,omitempty"`
+
+		// time prone
+		TimeProne float64 `json:"timeProne,omitempty"`
+
+		// time spent as driver
+		TimeSpentAsDriver float64 `json:"timeSpentAsDriver,omitempty"`
+
+		// time spent as passenger
+		TimeSpentAsPassenger float64 `json:"timeSpentAsPassenger,omitempty"`
+
+		// time watching killcams
+		TimeWatchingKillcams float64 `json:"timeWatchingKillcams,omitempty"`
+
+		// times selected as squad leader
+		TimesSelectedAsSquadLeader float64 `json:"timesSelectedAsSquadLeader,omitempty"`
+
+		// trophy system hits
+		TrophySystemHits float64 `json:"trophySystemHits,omitempty"`
+
+		// weapon pickups
+		WeaponPickups float64 `json:"weaponPickups,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeAccoladeDataProperties
+
+	rcv.AdsKills = stage1.AdsKills
+	rcv.AmmoBoxUsed = stage1.AmmoBoxUsed
+	rcv.ArDeaths = stage1.ArDeaths
+	rcv.ArHeadshots = stage1.ArHeadshots
+	rcv.ArKills = stage1.ArKills
+	rcv.Assaults = stage1.Assaults
+	rcv.AvengerKills = stage1.AvengerKills
+	rcv.BombDefused = stage1.BombDefused
+	rcv.BombDetonated = stage1.BombDetonated
+	rcv.BombPlanted = stage1.BombPlanted
+	rcv.C4Kills = stage1.C4Kills
+	rcv.Captures = stage1.Captures
+	rcv.CarepackagesCaptured = stage1.CarepackagesCaptured
+	rcv.CarrierKills = stage1.CarrierKills
+	rcv.ClassChanges = stage1.ClassChanges
+	rcv.ClaymoreKills = stage1.ClaymoreKills
+	rcv.Clutch = stage1.Clutch
+	rcv.ClutchRevives = stage1.ClutchRevives
+	rcv.ComebackKills = stage1.ComebackKills
+	rcv.DeadSilenceKills = stage1.DeadSilenceKills
+	rcv.DeathsFromBehind = stage1.DeathsFromBehind
+	rcv.DecoyHits = stage1.DecoyHits
+	rcv.DefenderKills = stage1.DefenderKills
+	rcv.Defends = stage1.Defends
+	rcv.DeployableCoverUsed = stage1.DeployableCoverUsed
+	rcv.DestroyedKillstreaks = stage1.DestroyedKillstreaks
+	rcv.DistanceTraveledInVehicle = stage1.DistanceTraveledInVehicle
+	rcv.DistanceTravelled = stage1.DistanceTravelled
+	rcv.EmpDroneHits = stage1.EmpDroneHits
+	rcv.ExecutionKills = stage1.ExecutionKills
+	rcv.ExplosionsSurvived = stage1.ExplosionsSurvived
+	rcv.FirstInfected = stage1.FirstInfected
+	rcv.FlashbangHits = stage1.FlashbangHits
+	rcv.FragKills = stage1.FragKills
+	rcv.GasHits = stage1.GasHits
+	rcv.Headshots = stage1.Headshots
+	rcv.HigherRankedKills = stage1.HigherRankedKills
+	rcv.HighestAvgAltitude = stage1.HighestAvgAltitude
+	rcv.HighestMultikill = stage1.HighestMultikill
+	rcv.HighestRankedKills = stage1.HighestRankedKills
+	rcv.HipfireKills = stage1.HipfireKills
+	rcv.InfectedKills = stage1.InfectedKills
+	rcv.KillEnemyTeam = stage1.KillEnemyTeam
+	rcv.Kills10NoDeaths = stage1.Kills10NoDeaths
+	rcv.KillsFromBehind = stage1.KillsFromBehind
+	rcv.KillstreakAUAVAssists = stage1.KillstreakAUAVAssists
+	rcv.KillstreakAirKills = stage1.KillstreakAirKills
+	rcv.KillstreakAirstrikeKills = stage1.KillstreakAirstrikeKills
+	rcv.KillstreakCUAVAssists = stage1.KillstreakCUAVAssists
+	rcv.KillstreakCarePackageUsed = stage1.KillstreakCarePackageUsed
+	rcv.KillstreakChopperGunnerKills = stage1.KillstreakChopperGunnerKills
+	rcv.KillstreakChopperSupportKills = stage1.KillstreakChopperSupportKills
+	rcv.KillstreakCluserStrikeKills = stage1.KillstreakCluserStrikeKills
+	rcv.KillstreakCruiseMissileKills = stage1.KillstreakCruiseMissileKills
+	rcv.KillstreakEmergencyAirdropUsed = stage1.KillstreakEmergencyAirdropUsed
+	rcv.KillstreakGroundKills = stage1.KillstreakGroundKills
+	rcv.KillstreakGunshipKills = stage1.KillstreakGunshipKills
+	rcv.KillstreakJuggernautKills = stage1.KillstreakJuggernautKills
+	rcv.KillstreakKills = stage1.KillstreakKills
+	rcv.KillstreakPersonalUAVKills = stage1.KillstreakPersonalUAVKills
+	rcv.KillstreakSentryGunKills = stage1.KillstreakSentryGunKills
+	rcv.KillstreakShieldTurretKills = stage1.KillstreakShieldTurretKills
+	rcv.KillstreakTankKills = stage1.KillstreakTankKills
+	rcv.KillstreakUAVAssists = stage1.KillstreakUAVAssists
+	rcv.KillstreakVTOLJetKills = stage1.KillstreakVTOLJetKills
+	rcv.KillstreakWheelsonKills = stage1.KillstreakWheelsonKills
+	rcv.KillstreakWhitePhosphorousKillsAssists = stage1.KillstreakWhitePhosphorousKillsAssists
+	rcv.LastSurvivor = stage1.LastSurvivor
+	rcv.LauncherDeaths = stage1.LauncherDeaths
+	rcv.LauncherHeadshots = stage1.LauncherHeadshots
+	rcv.LauncherKills = stage1.LauncherKills
+	rcv.LeastAssists = stage1.LeastAssists
+	rcv.LeastDeaths = stage1.LeastDeaths
+	rcv.LeastKills = stage1.LeastKills
+	rcv.LmgDeaths = stage1.LmgDeaths
+	rcv.LmgHeadshots = stage1.LmgHeadshots
+	rcv.LmgKills = stage1.LmgKills
+	rcv.LongestLife = stage1.LongestLife
+	rcv.LongestStreak = stage1.LongestStreak
+	rcv.LongestTimeSpentOnWeapon = stage1.LongestTimeSpentOnWeapon
+	rcv.LongshotKills = stage1.LongshotKills
+	rcv.LowerRankedKills = stage1.LowerRankedKills
+	rcv.LowestAvgAltitude = stage1.LowestAvgAltitude
+	rcv.MeleeDeaths = stage1.MeleeDeaths
+	rcv.MeleeKills = stage1.MeleeKills
+	rcv.MolotovKills = stage1.MolotovKills
+	rcv.MostAssists = stage1.MostAssists
+	rcv.MostDeaths = stage1.MostDeaths
+	rcv.MostKills = stage1.MostKills
+	rcv.MostKillsLeastDeaths = stage1.MostKillsLeastDeaths
+	rcv.MostKillsLongestStreak = stage1.MostKillsLongestStreak
+	rcv.MostKillsMostHeadshots = stage1.MostKillsMostHeadshots
+	rcv.MostMultikills = stage1.MostMultikills
+	rcv.NoDeathsFromBehind = stage1.NoDeathsFromBehind
+	rcv.NoKill10Deaths = stage1.NoKill10Deaths
+	rcv.NoKillNoDeath = stage1.NoKillNoDeath
+	rcv.NoKillsWithDeath = stage1.NoKillsWithDeath
+	rcv.OneShotOneKills = stage1.OneShotOneKills
+	rcv.PenetrationKills = stage1.PenetrationKills
+	rcv.Pickups = stage1.Pickups
+	rcv.PistolHeadshots = stage1.PistolHeadshots
+	rcv.PistolKills = stage1.PistolKills
+	rcv.PistolPeaths = stage1.PistolPeaths
+	rcv.PointBlankKills = stage1.PointBlankKills
+	rcv.ProximityMineKills = stage1.ProximityMineKills
+	rcv.ReconDroneMarks = stage1.ReconDroneMarks
+	rcv.Reloads = stage1.Reloads
+	rcv.Returns = stage1.Returns
+	rcv.RevengeKills = stage1.RevengeKills
+	rcv.RiotShieldDamageAbsorbed = stage1.RiotShieldDamageAbsorbed
+	rcv.SemtexKills = stage1.SemtexKills
+	rcv.Setbacks = stage1.Setbacks
+	rcv.ShortestLife = stage1.ShortestLife
+	rcv.ShotgunDeaths = stage1.ShotgunDeaths
+	rcv.ShotgunHeadshots = stage1.ShotgunHeadshots
+	rcv.ShotgunKills = stage1.ShotgunKills
+	rcv.ShotsFired = stage1.ShotsFired
+	rcv.SkippedKillcams = stage1.SkippedKillcams
+	rcv.SmgDeaths = stage1.SmgDeaths
+	rcv.SmgHeadshots = stage1.SmgHeadshots
+	rcv.SmgKills = stage1.SmgKills
+	rcv.SmokesUsed = stage1.SmokesUsed
+	rcv.SnapshotHits = stage1.SnapshotHits
+	rcv.SniperDeaths = stage1.SniperDeaths
+	rcv.SniperHeadshots = stage1.SniperHeadshots
+	rcv.SniperKills = stage1.SniperKills
+	rcv.SpawnSelectBase = stage1.SpawnSelectBase
+	rcv.SpawnSelectFlag = stage1.SpawnSelectFlag
+	rcv.SpawnSelectSquad = stage1.SpawnSelectSquad
+	rcv.SpawnSelectVehicle = stage1.SpawnSelectVehicle
+	rcv.StimDamageHealed = stage1.StimDamageHealed
+	rcv.StoppingPowerKills = stage1.StoppingPowerKills
+	rcv.StunHits = stage1.StunHits
+	rcv.Suicides = stage1.Suicides
+	rcv.SurvivorKills = stage1.SurvivorKills
+	rcv.TacticalInsertionSpawns = stage1.TacticalInsertionSpawns
+	rcv.TagsCaptured = stage1.TagsCaptured
+	rcv.TagsDenied = stage1.TagsDenied
+	rcv.TagsLargestBank = stage1.TagsLargestBank
+	rcv.TagsMegaBanked = stage1.TagsMegaBanked
+	rcv.ThermiteKills = stage1.ThermiteKills
+	rcv.ThrowingKnifeKills = stage1.ThrowingKnifeKills
+	rcv.TimeCrouched = stage1.TimeCrouched
+	rcv.TimeOnPoint = stage1.TimeOnPoint
+	rcv.TimeProne = stage1.TimeProne
+	rcv.TimeSpentAsDriver = stage1.TimeSpentAsDriver
+	rcv.TimeSpentAsPassenger = stage1.TimeSpentAsPassenger
+	rcv.TimeWatchingKillcams = stage1.TimeWatchingKillcams
+	rcv.TimesSelectedAsSquadLeader = stage1.TimesSelectedAsSquadLeader
+	rcv.TrophySystemHits = stage1.TrophySystemHits
+	rcv.WeaponPickups = stage1.WeaponPickups
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "adsKills")
+	delete(stage2, "ammoBoxUsed")
+	delete(stage2, "arDeaths")
+	delete(stage2, "arHeadshots")
+	delete(stage2, "arKills")
+	delete(stage2, "assaults")
+	delete(stage2, "avengerKills")
+	delete(stage2, "bombDefused")
+	delete(stage2, "bombDetonated")
+	delete(stage2, "bombPlanted")
+	delete(stage2, "c4Kills")
+	delete(stage2, "captures")
+	delete(stage2, "carepackagesCaptured")
+	delete(stage2, "carrierKills")
+	delete(stage2, "classChanges")
+	delete(stage2, "claymoreKills")
+	delete(stage2, "clutch")
+	delete(stage2, "clutchRevives")
+	delete(stage2, "comebackKills")
+	delete(stage2, "deadSilenceKills")
+	delete(stage2, "deathsFromBehind")
+	delete(stage2, "decoyHits")
+	delete(stage2, "defenderKills")
+	delete(stage2, "defends")
+	delete(stage2, "deployableCoverUsed")
+	delete(stage2, "destroyedKillstreaks")
+	delete(stage2, "distanceTraveledInVehicle")
+	delete(stage2, "distanceTravelled")
+	delete(stage2, "empDroneHits")
+	delete(stage2, "executionKills")
+	delete(stage2, "explosionsSurvived")
+	delete(stage2, "firstInfected")
+	delete(stage2, "flashbangHits")
+	delete(stage2, "fragKills")
+	delete(stage2, "gasHits")
+	delete(stage2, "headshots")
+	delete(stage2, "higherRankedKills")
+	delete(stage2, "highestAvgAltitude")
+	delete(stage2, "highestMultikill")
+	delete(stage2, "highestRankedKills")
+	delete(stage2, "hipfireKills")
+	delete(stage2, "infectedKills")
+	delete(stage2, "killEnemyTeam")
+	delete(stage2, "kills10NoDeaths")
+	delete(stage2, "killsFromBehind")
+	delete(stage2, "killstreakAUAVAssists")
+	delete(stage2, "killstreakAirKills")
+	delete(stage2, "killstreakAirstrikeKills")
+	delete(stage2, "killstreakCUAVAssists")
+	delete(stage2, "killstreakCarePackageUsed")
+	delete(stage2, "killstreakChopperGunnerKills")
+	delete(stage2, "killstreakChopperSupportKills")
+	delete(stage2, "killstreakCluserStrikeKills")
+	delete(stage2, "killstreakCruiseMissileKills")
+	delete(stage2, "killstreakEmergencyAirdropUsed")
+	delete(stage2, "killstreakGroundKills")
+	delete(stage2, "killstreakGunshipKills")
+	delete(stage2, "killstreakJuggernautKills")
+	delete(stage2, "killstreakKills")
+	delete(stage2, "killstreakPersonalUAVKills")
+	delete(stage2, "killstreakSentryGunKills")
+	delete(stage2, "killstreakShieldTurretKills")
+	delete(stage2, "killstreakTankKills")
+	delete(stage2, "killstreakUAVAssists")
+	delete(stage2, "killstreakVTOLJetKills")
+	delete(stage2, "killstreakWheelsonKills")
+	delete(stage2, "killstreakWhitePhosphorousKillsAssists")
+	delete(stage2, "lastSurvivor")
+	delete(stage2, "launcherDeaths")
+	delete(stage2, "launcherHeadshots")
+	delete(stage2, "launcherKills")
+	delete(stage2, "leastAssists")
+	delete(stage2, "leastDeaths")
+	delete(stage2, "leastKills")
+	delete(stage2, "lmgDeaths")
+	delete(stage2, "lmgHeadshots")
+	delete(stage2, "lmgKills")
+	delete(stage2, "longestLife")
+	delete(stage2, "longestStreak")
+	delete(stage2, "longestTimeSpentOnWeapon")
+	delete(stage2, "longshotKills")
+	delete(stage2, "lowerRankedKills")
+	delete(stage2, "lowestAvgAltitude")
+	delete(stage2, "meleeDeaths")
+	delete(stage2, "meleeKills")
+	delete(stage2, "molotovKills")
+	delete(stage2, "mostAssists")
+	delete(stage2, "mostDeaths")
+	delete(stage2, "mostKills")
+	delete(stage2, "mostKillsLeastDeaths")
+	delete(stage2, "mostKillsLongestStreak")
+	delete(stage2, "mostKillsMostHeadshots")
+	delete(stage2, "mostMultikills")
+	delete(stage2, "noDeathsFromBehind")
+	delete(stage2, "noKill10Deaths")
+	delete(stage2, "noKillNoDeath")
+	delete(stage2, "noKillsWithDeath")
+	delete(stage2, "oneShotOneKills")
+	delete(stage2, "penetrationKills")
+	delete(stage2, "pickups")
+	delete(stage2, "pistolHeadshots")
+	delete(stage2, "pistolKills")
+	delete(stage2, "pistolPeaths")
+	delete(stage2, "pointBlankKills")
+	delete(stage2, "proximityMineKills")
+	delete(stage2, "reconDroneMarks")
+	delete(stage2, "reloads")
+	delete(stage2, "returns")
+	delete(stage2, "revengeKills")
+	delete(stage2, "riotShieldDamageAbsorbed")
+	delete(stage2, "semtexKills")
+	delete(stage2, "setbacks")
+	delete(stage2, "shortestLife")
+	delete(stage2, "shotgunDeaths")
+	delete(stage2, "shotgunHeadshots")
+	delete(stage2, "shotgunKills")
+	delete(stage2, "shotsFired")
+	delete(stage2, "skippedKillcams")
+	delete(stage2, "smgDeaths")
+	delete(stage2, "smgHeadshots")
+	delete(stage2, "smgKills")
+	delete(stage2, "smokesUsed")
+	delete(stage2, "snapshotHits")
+	delete(stage2, "sniperDeaths")
+	delete(stage2, "sniperHeadshots")
+	delete(stage2, "sniperKills")
+	delete(stage2, "spawnSelectBase")
+	delete(stage2, "spawnSelectFlag")
+	delete(stage2, "spawnSelectSquad")
+	delete(stage2, "spawnSelectVehicle")
+	delete(stage2, "stimDamageHealed")
+	delete(stage2, "stoppingPowerKills")
+	delete(stage2, "stunHits")
+	delete(stage2, "suicides")
+	delete(stage2, "survivorKills")
+	delete(stage2, "tacticalInsertionSpawns")
+	delete(stage2, "tagsCaptured")
+	delete(stage2, "tagsDenied")
+	delete(stage2, "tagsLargestBank")
+	delete(stage2, "tagsMegaBanked")
+	delete(stage2, "thermiteKills")
+	delete(stage2, "throwingKnifeKills")
+	delete(stage2, "timeCrouched")
+	delete(stage2, "timeOnPoint")
+	delete(stage2, "timeProne")
+	delete(stage2, "timeSpentAsDriver")
+	delete(stage2, "timeSpentAsPassenger")
+	delete(stage2, "timeWatchingKillcams")
+	delete(stage2, "timesSelectedAsSquadLeader")
+	delete(stage2, "trophySystemHits")
+	delete(stage2, "weaponPickups")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeAccoladeDataPropertiesAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeAccoladeDataProperties) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// ads kills
+		AdsKills float64 `json:"adsKills,omitempty"`
+
+		// ammo box used
+		AmmoBoxUsed float64 `json:"ammoBoxUsed,omitempty"`
+
+		// ar deaths
+		ArDeaths float64 `json:"arDeaths,omitempty"`
+
+		// ar headshots
+		ArHeadshots float64 `json:"arHeadshots,omitempty"`
+
+		// ar kills
+		ArKills float64 `json:"arKills,omitempty"`
+
+		// assaults
+		Assaults float64 `json:"assaults,omitempty"`
+
+		// avenger kills
+		AvengerKills float64 `json:"avengerKills,omitempty"`
+
+		// bomb defused
+		BombDefused float64 `json:"bombDefused,omitempty"`
+
+		// bomb detonated
+		BombDetonated float64 `json:"bombDetonated,omitempty"`
+
+		// bomb planted
+		BombPlanted float64 `json:"bombPlanted,omitempty"`
+
+		// c4 kills
+		C4Kills float64 `json:"c4Kills,omitempty"`
+
+		// captures
+		Captures float64 `json:"captures,omitempty"`
+
+		// carepackages captured
+		CarepackagesCaptured float64 `json:"carepackagesCaptured,omitempty"`
+
+		// carrier kills
+		CarrierKills float64 `json:"carrierKills,omitempty"`
+
+		// class changes
+		ClassChanges float64 `json:"classChanges,omitempty"`
+
+		// claymore kills
+		ClaymoreKills float64 `json:"claymoreKills,omitempty"`
+
+		// clutch
+		Clutch float64 `json:"clutch,omitempty"`
+
+		// clutch revives
+		ClutchRevives float64 `json:"clutchRevives,omitempty"`
+
+		// comeback kills
+		ComebackKills float64 `json:"comebackKills,omitempty"`
+
+		// dead silence kills
+		DeadSilenceKills float64 `json:"deadSilenceKills,omitempty"`
+
+		// deaths from behind
+		DeathsFromBehind float64 `json:"deathsFromBehind,omitempty"`
+
+		// decoy hits
+		DecoyHits float64 `json:"decoyHits,omitempty"`
+
+		// defender kills
+		DefenderKills float64 `json:"defenderKills,omitempty"`
+
+		// defends
+		Defends float64 `json:"defends,omitempty"`
+
+		// deployable cover used
+		DeployableCoverUsed float64 `json:"deployableCoverUsed,omitempty"`
+
+		// destroyed killstreaks
+		DestroyedKillstreaks float64 `json:"destroyedKillstreaks,omitempty"`
+
+		// distance traveled in vehicle
+		DistanceTraveledInVehicle float64 `json:"distanceTraveledInVehicle,omitempty"`
+
+		// distance travelled
+		DistanceTravelled float64 `json:"distanceTravelled,omitempty"`
+
+		// emp drone hits
+		EmpDroneHits float64 `json:"empDroneHits,omitempty"`
+
+		// execution kills
+		ExecutionKills float64 `json:"executionKills,omitempty"`
+
+		// explosions survived
+		ExplosionsSurvived float64 `json:"explosionsSurvived,omitempty"`
+
+		// first infected
+		FirstInfected float64 `json:"firstInfected,omitempty"`
+
+		// flashbang hits
+		FlashbangHits float64 `json:"flashbangHits,omitempty"`
+
+		// frag kills
+		FragKills float64 `json:"fragKills,omitempty"`
+
+		// gas hits
+		GasHits float64 `json:"gasHits,omitempty"`
+
+		// headshots
+		Headshots float64 `json:"headshots,omitempty"`
+
+		// higher ranked kills
+		HigherRankedKills float64 `json:"higherRankedKills,omitempty"`
+
+		// highest avg altitude
+		HighestAvgAltitude float64 `json:"highestAvgAltitude,omitempty"`
+
+		// highest multikill
+		HighestMultikill float64 `json:"highestMultikill,omitempty"`
+
+		// highest ranked kills
+		HighestRankedKills float64 `json:"highestRankedKills,omitempty"`
+
+		// hipfire kills
+		HipfireKills float64 `json:"hipfireKills,omitempty"`
+
+		// infected kills
+		InfectedKills float64 `json:"infectedKills,omitempty"`
+
+		// kill enemy team
+		KillEnemyTeam float64 `json:"killEnemyTeam,omitempty"`
+
+		// kills10 no deaths
+		Kills10NoDeaths float64 `json:"kills10NoDeaths,omitempty"`
+
+		// kills from behind
+		KillsFromBehind float64 `json:"killsFromBehind,omitempty"`
+
+		// killstreak a u a v assists
+		KillstreakAUAVAssists float64 `json:"killstreakAUAVAssists,omitempty"`
+
+		// killstreak air kills
+		KillstreakAirKills float64 `json:"killstreakAirKills,omitempty"`
+
+		// killstreak airstrike kills
+		KillstreakAirstrikeKills float64 `json:"killstreakAirstrikeKills,omitempty"`
+
+		// killstreak c u a v assists
+		KillstreakCUAVAssists float64 `json:"killstreakCUAVAssists,omitempty"`
+
+		// killstreak care package used
+		KillstreakCarePackageUsed float64 `json:"killstreakCarePackageUsed,omitempty"`
+
+		// killstreak chopper gunner kills
+		KillstreakChopperGunnerKills float64 `json:"killstreakChopperGunnerKills,omitempty"`
+
+		// killstreak chopper support kills
+		KillstreakChopperSupportKills float64 `json:"killstreakChopperSupportKills,omitempty"`
+
+		// killstreak cluser strike kills
+		KillstreakCluserStrikeKills float64 `json:"killstreakCluserStrikeKills,omitempty"`
+
+		// killstreak cruise missile kills
+		KillstreakCruiseMissileKills float64 `json:"killstreakCruiseMissileKills,omitempty"`
+
+		// killstreak emergency airdrop used
+		KillstreakEmergencyAirdropUsed float64 `json:"killstreakEmergencyAirdropUsed,omitempty"`
+
+		// killstreak ground kills
+		KillstreakGroundKills float64 `json:"killstreakGroundKills,omitempty"`
+
+		// killstreak gunship kills
+		KillstreakGunshipKills float64 `json:"killstreakGunshipKills,omitempty"`
+
+		// killstreak juggernaut kills
+		KillstreakJuggernautKills float64 `json:"killstreakJuggernautKills,omitempty"`
+
+		// killstreak kills
+		KillstreakKills float64 `json:"killstreakKills,omitempty"`
+
+		// killstreak personal u a v kills
+		KillstreakPersonalUAVKills float64 `json:"killstreakPersonalUAVKills,omitempty"`
+
+		// killstreak sentry gun kills
+		KillstreakSentryGunKills float64 `json:"killstreakSentryGunKills,omitempty"`
+
+		// killstreak shield turret kills
+		KillstreakShieldTurretKills float64 `json:"killstreakShieldTurretKills,omitempty"`
+
+		// killstreak tank kills
+		KillstreakTankKills float64 `json:"killstreakTankKills,omitempty"`
+
+		// killstreak u a v assists
+		KillstreakUAVAssists float64 `json:"killstreakUAVAssists,omitempty"`
+
+		// killstreak v t o l jet kills
+		KillstreakVTOLJetKills float64 `json:"killstreakVTOLJetKills,omitempty"`
+
+		// killstreak wheelson kills
+		KillstreakWheelsonKills float64 `json:"killstreakWheelsonKills,omitempty"`
+
+		// killstreak white phosphorous kills assists
+		KillstreakWhitePhosphorousKillsAssists float64 `json:"killstreakWhitePhosphorousKillsAssists,omitempty"`
+
+		// last survivor
+		LastSurvivor float64 `json:"lastSurvivor,omitempty"`
+
+		// launcher deaths
+		LauncherDeaths float64 `json:"launcherDeaths,omitempty"`
+
+		// launcher headshots
+		LauncherHeadshots float64 `json:"launcherHeadshots,omitempty"`
+
+		// launcher kills
+		LauncherKills float64 `json:"launcherKills,omitempty"`
+
+		// least assists
+		LeastAssists float64 `json:"leastAssists,omitempty"`
+
+		// least deaths
+		LeastDeaths float64 `json:"leastDeaths,omitempty"`
+
+		// least kills
+		LeastKills float64 `json:"leastKills,omitempty"`
+
+		// lmg deaths
+		LmgDeaths float64 `json:"lmgDeaths,omitempty"`
+
+		// lmg headshots
+		LmgHeadshots float64 `json:"lmgHeadshots,omitempty"`
+
+		// lmg kills
+		LmgKills float64 `json:"lmgKills,omitempty"`
+
+		// longest life
+		LongestLife float64 `json:"longestLife,omitempty"`
+
+		// longest streak
+		LongestStreak float64 `json:"longestStreak,omitempty"`
+
+		// longest time spent on weapon
+		LongestTimeSpentOnWeapon float64 `json:"longestTimeSpentOnWeapon,omitempty"`
+
+		// longshot kills
+		LongshotKills float64 `json:"longshotKills,omitempty"`
+
+		// lower ranked kills
+		LowerRankedKills float64 `json:"lowerRankedKills,omitempty"`
+
+		// lowest avg altitude
+		LowestAvgAltitude float64 `json:"lowestAvgAltitude,omitempty"`
+
+		// melee deaths
+		MeleeDeaths float64 `json:"meleeDeaths,omitempty"`
+
+		// melee kills
+		MeleeKills float64 `json:"meleeKills,omitempty"`
+
+		// molotov kills
+		MolotovKills float64 `json:"molotovKills,omitempty"`
+
+		// most assists
+		MostAssists float64 `json:"mostAssists,omitempty"`
+
+		// most deaths
+		MostDeaths float64 `json:"mostDeaths,omitempty"`
+
+		// most kills
+		MostKills float64 `json:"mostKills,omitempty"`
+
+		// most kills least deaths
+		MostKillsLeastDeaths float64 `json:"mostKillsLeastDeaths,omitempty"`
+
+		// most kills longest streak
+		MostKillsLongestStreak float64 `json:"mostKillsLongestStreak,omitempty"`
+
+		// most kills most headshots
+		MostKillsMostHeadshots float64 `json:"mostKillsMostHeadshots,omitempty"`
+
+		// most multikills
+		MostMultikills float64 `json:"mostMultikills,omitempty"`
+
+		// no deaths from behind
+		NoDeathsFromBehind float64 `json:"noDeathsFromBehind,omitempty"`
+
+		// no kill10 deaths
+		NoKill10Deaths float64 `json:"noKill10Deaths,omitempty"`
+
+		// no kill no death
+		NoKillNoDeath float64 `json:"noKillNoDeath,omitempty"`
+
+		// no kills with death
+		NoKillsWithDeath float64 `json:"noKillsWithDeath,omitempty"`
+
+		// one shot one kills
+		OneShotOneKills float64 `json:"oneShotOneKills,omitempty"`
+
+		// penetration kills
+		PenetrationKills float64 `json:"penetrationKills,omitempty"`
+
+		// pickups
+		Pickups float64 `json:"pickups,omitempty"`
+
+		// pistol headshots
+		PistolHeadshots float64 `json:"pistolHeadshots,omitempty"`
+
+		// pistol kills
+		PistolKills float64 `json:"pistolKills,omitempty"`
+
+		// pistol peaths
+		PistolPeaths float64 `json:"pistolPeaths,omitempty"`
+
+		// point blank kills
+		PointBlankKills float64 `json:"pointBlankKills,omitempty"`
+
+		// proximity mine kills
+		ProximityMineKills float64 `json:"proximityMineKills,omitempty"`
+
+		// recon drone marks
+		ReconDroneMarks float64 `json:"reconDroneMarks,omitempty"`
+
+		// reloads
+		Reloads float64 `json:"reloads,omitempty"`
+
+		// returns
+		Returns float64 `json:"returns,omitempty"`
+
+		// revenge kills
+		RevengeKills float64 `json:"revengeKills,omitempty"`
+
+		// riot shield damage absorbed
+		RiotShieldDamageAbsorbed float64 `json:"riotShieldDamageAbsorbed,omitempty"`
+
+		// semtex kills
+		SemtexKills float64 `json:"semtexKills,omitempty"`
+
+		// setbacks
+		Setbacks float64 `json:"setbacks,omitempty"`
+
+		// shortest life
+		ShortestLife float64 `json:"shortestLife,omitempty"`
+
+		// shotgun deaths
+		ShotgunDeaths float64 `json:"shotgunDeaths,omitempty"`
+
+		// shotgun headshots
+		ShotgunHeadshots float64 `json:"shotgunHeadshots,omitempty"`
+
+		// shotgun kills
+		ShotgunKills float64 `json:"shotgunKills,omitempty"`
+
+		// shots fired
+		ShotsFired float64 `json:"shotsFired,omitempty"`
+
+		// skipped killcams
+		SkippedKillcams float64 `json:"skippedKillcams,omitempty"`
+
+		// smg deaths
+		SmgDeaths float64 `json:"smgDeaths,omitempty"`
+
+		// smg headshots
+		SmgHeadshots float64 `json:"smgHeadshots,omitempty"`
+
+		// smg kills
+		SmgKills float64 `json:"smgKills,omitempty"`
+
+		// smokes used
+		SmokesUsed float64 `json:"smokesUsed,omitempty"`
+
+		// snapshot hits
+		SnapshotHits float64 `json:"snapshotHits,omitempty"`
+
+		// sniper deaths
+		SniperDeaths float64 `json:"sniperDeaths,omitempty"`
+
+		// sniper headshots
+		SniperHeadshots float64 `json:"sniperHeadshots,omitempty"`
+
+		// sniper kills
+		SniperKills float64 `json:"sniperKills,omitempty"`
+
+		// spawn select base
+		SpawnSelectBase float64 `json:"spawnSelectBase,omitempty"`
+
+		// spawn select flag
+		SpawnSelectFlag float64 `json:"spawnSelectFlag,omitempty"`
+
+		// spawn select squad
+		SpawnSelectSquad float64 `json:"spawnSelectSquad,omitempty"`
+
+		// spawn select vehicle
+		SpawnSelectVehicle float64 `json:"spawnSelectVehicle,omitempty"`
+
+		// stim damage healed
+		StimDamageHealed float64 `json:"stimDamageHealed,omitempty"`
+
+		// stopping power kills
+		StoppingPowerKills float64 `json:"stoppingPowerKills,omitempty"`
+
+		// stun hits
+		StunHits float64 `json:"stunHits,omitempty"`
+
+		// suicides
+		Suicides float64 `json:"suicides,omitempty"`
+
+		// survivor kills
+		SurvivorKills float64 `json:"survivorKills,omitempty"`
+
+		// tactical insertion spawns
+		TacticalInsertionSpawns float64 `json:"tacticalInsertionSpawns,omitempty"`
+
+		// tags captured
+		TagsCaptured float64 `json:"tagsCaptured,omitempty"`
+
+		// tags denied
+		TagsDenied float64 `json:"tagsDenied,omitempty"`
+
+		// tags largest bank
+		TagsLargestBank float64 `json:"tagsLargestBank,omitempty"`
+
+		// tags mega banked
+		TagsMegaBanked float64 `json:"tagsMegaBanked,omitempty"`
+
+		// thermite kills
+		ThermiteKills float64 `json:"thermiteKills,omitempty"`
+
+		// throwing knife kills
+		ThrowingKnifeKills float64 `json:"throwingKnifeKills,omitempty"`
+
+		// time crouched
+		TimeCrouched float64 `json:"timeCrouched,omitempty"`
+
+		// time on point
+		TimeOnPoint float64 `json:"timeOnPoint,omitempty"`
+
+		// time prone
+		TimeProne float64 `json:"timeProne,omitempty"`
+
+		// time spent as driver
+		TimeSpentAsDriver float64 `json:"timeSpentAsDriver,omitempty"`
+
+		// time spent as passenger
+		TimeSpentAsPassenger float64 `json:"timeSpentAsPassenger,omitempty"`
+
+		// time watching killcams
+		TimeWatchingKillcams float64 `json:"timeWatchingKillcams,omitempty"`
+
+		// times selected as squad leader
+		TimesSelectedAsSquadLeader float64 `json:"timesSelectedAsSquadLeader,omitempty"`
+
+		// trophy system hits
+		TrophySystemHits float64 `json:"trophySystemHits,omitempty"`
+
+		// weapon pickups
+		WeaponPickups float64 `json:"weaponPickups,omitempty"`
+	}
+
+	stage1.AdsKills = m.AdsKills
+	stage1.AmmoBoxUsed = m.AmmoBoxUsed
+	stage1.ArDeaths = m.ArDeaths
+	stage1.ArHeadshots = m.ArHeadshots
+	stage1.ArKills = m.ArKills
+	stage1.Assaults = m.Assaults
+	stage1.AvengerKills = m.AvengerKills
+	stage1.BombDefused = m.BombDefused
+	stage1.BombDetonated = m.BombDetonated
+	stage1.BombPlanted = m.BombPlanted
+	stage1.C4Kills = m.C4Kills
+	stage1.Captures = m.Captures
+	stage1.CarepackagesCaptured = m.CarepackagesCaptured
+	stage1.CarrierKills = m.CarrierKills
+	stage1.ClassChanges = m.ClassChanges
+	stage1.ClaymoreKills = m.ClaymoreKills
+	stage1.Clutch = m.Clutch
+	stage1.ClutchRevives = m.ClutchRevives
+	stage1.ComebackKills = m.ComebackKills
+	stage1.DeadSilenceKills = m.DeadSilenceKills
+	stage1.DeathsFromBehind = m.DeathsFromBehind
+	stage1.DecoyHits = m.DecoyHits
+	stage1.DefenderKills = m.DefenderKills
+	stage1.Defends = m.Defends
+	stage1.DeployableCoverUsed = m.DeployableCoverUsed
+	stage1.DestroyedKillstreaks = m.DestroyedKillstreaks
+	stage1.DistanceTraveledInVehicle = m.DistanceTraveledInVehicle
+	stage1.DistanceTravelled = m.DistanceTravelled
+	stage1.EmpDroneHits = m.EmpDroneHits
+	stage1.ExecutionKills = m.ExecutionKills
+	stage1.ExplosionsSurvived = m.ExplosionsSurvived
+	stage1.FirstInfected = m.FirstInfected
+	stage1.FlashbangHits = m.FlashbangHits
+	stage1.FragKills = m.FragKills
+	stage1.GasHits = m.GasHits
+	stage1.Headshots = m.Headshots
+	stage1.HigherRankedKills = m.HigherRankedKills
+	stage1.HighestAvgAltitude = m.HighestAvgAltitude
+	stage1.HighestMultikill = m.HighestMultikill
+	stage1.HighestRankedKills = m.HighestRankedKills
+	stage1.HipfireKills = m.HipfireKills
+	stage1.InfectedKills = m.InfectedKills
+	stage1.KillEnemyTeam = m.KillEnemyTeam
+	stage1.Kills10NoDeaths = m.Kills10NoDeaths
+	stage1.KillsFromBehind = m.KillsFromBehind
+	stage1.KillstreakAUAVAssists = m.KillstreakAUAVAssists
+	stage1.KillstreakAirKills = m.KillstreakAirKills
+	stage1.KillstreakAirstrikeKills = m.KillstreakAirstrikeKills
+	stage1.KillstreakCUAVAssists = m.KillstreakCUAVAssists
+	stage1.KillstreakCarePackageUsed = m.KillstreakCarePackageUsed
+	stage1.KillstreakChopperGunnerKills = m.KillstreakChopperGunnerKills
+	stage1.KillstreakChopperSupportKills = m.KillstreakChopperSupportKills
+	stage1.KillstreakCluserStrikeKills = m.KillstreakCluserStrikeKills
+	stage1.KillstreakCruiseMissileKills = m.KillstreakCruiseMissileKills
+	stage1.KillstreakEmergencyAirdropUsed = m.KillstreakEmergencyAirdropUsed
+	stage1.KillstreakGroundKills = m.KillstreakGroundKills
+	stage1.KillstreakGunshipKills = m.KillstreakGunshipKills
+	stage1.KillstreakJuggernautKills = m.KillstreakJuggernautKills
+	stage1.KillstreakKills = m.KillstreakKills
+	stage1.KillstreakPersonalUAVKills = m.KillstreakPersonalUAVKills
+	stage1.KillstreakSentryGunKills = m.KillstreakSentryGunKills
+	stage1.KillstreakShieldTurretKills = m.KillstreakShieldTurretKills
+	stage1.KillstreakTankKills = m.KillstreakTankKills
+	stage1.KillstreakUAVAssists = m.KillstreakUAVAssists
+	stage1.KillstreakVTOLJetKills = m.KillstreakVTOLJetKills
+	stage1.KillstreakWheelsonKills = m.KillstreakWheelsonKills
+	stage1.KillstreakWhitePhosphorousKillsAssists = m.KillstreakWhitePhosphorousKillsAssists
+	stage1.LastSurvivor = m.LastSurvivor
+	stage1.LauncherDeaths = m.LauncherDeaths
+	stage1.LauncherHeadshots = m.LauncherHeadshots
+	stage1.LauncherKills = m.LauncherKills
+	stage1.LeastAssists = m.LeastAssists
+	stage1.LeastDeaths = m.LeastDeaths
+	stage1.LeastKills = m.LeastKills
+	stage1.LmgDeaths = m.LmgDeaths
+	stage1.LmgHeadshots = m.LmgHeadshots
+	stage1.LmgKills = m.LmgKills
+	stage1.LongestLife = m.LongestLife
+	stage1.LongestStreak = m.LongestStreak
+	stage1.LongestTimeSpentOnWeapon = m.LongestTimeSpentOnWeapon
+	stage1.LongshotKills = m.LongshotKills
+	stage1.LowerRankedKills = m.LowerRankedKills
+	stage1.LowestAvgAltitude = m.LowestAvgAltitude
+	stage1.MeleeDeaths = m.MeleeDeaths
+	stage1.MeleeKills = m.MeleeKills
+	stage1.MolotovKills = m.MolotovKills
+	stage1.MostAssists = m.MostAssists
+	stage1.MostDeaths = m.MostDeaths
+	stage1.MostKills = m.MostKills
+	stage1.MostKillsLeastDeaths = m.MostKillsLeastDeaths
+	stage1.MostKillsLongestStreak = m.MostKillsLongestStreak
+	stage1.MostKillsMostHeadshots = m.MostKillsMostHeadshots
+	stage1.MostMultikills = m.MostMultikills
+	stage1.NoDeathsFromBehind = m.NoDeathsFromBehind
+	stage1.NoKill10Deaths = m.NoKill10Deaths
+	stage1.NoKillNoDeath = m.NoKillNoDeath
+	stage1.NoKillsWithDeath = m.NoKillsWithDeath
+	stage1.OneShotOneKills = m.OneShotOneKills
+	stage1.PenetrationKills = m.PenetrationKills
+	stage1.Pickups = m.Pickups
+	stage1.PistolHeadshots = m.PistolHeadshots
+	stage1.PistolKills = m.PistolKills
+	stage1.PistolPeaths = m.PistolPeaths
+	stage1.PointBlankKills = m.PointBlankKills
+	stage1.ProximityMineKills = m.ProximityMineKills
+	stage1.ReconDroneMarks = m.ReconDroneMarks
+	stage1.Reloads = m.Reloads
+	stage1.Returns = m.Returns
+	stage1.RevengeKills = m.RevengeKills
+	stage1.RiotShieldDamageAbsorbed = m.RiotShieldDamageAbsorbed
+	stage1.SemtexKills = m.SemtexKills
+	stage1.Setbacks = m.Setbacks
+	stage1.ShortestLife = m.ShortestLife
+	stage1.ShotgunDeaths = m.ShotgunDeaths
+	stage1.ShotgunHeadshots = m.ShotgunHeadshots
+	stage1.ShotgunKills = m.ShotgunKills
+	stage1.ShotsFired = m.ShotsFired
+	stage1.SkippedKillcams = m.SkippedKillcams
+	stage1.SmgDeaths = m.SmgDeaths
+	stage1.SmgHeadshots = m.SmgHeadshots
+	stage1.SmgKills = m.SmgKills
+	stage1.SmokesUsed = m.SmokesUsed
+	stage1.SnapshotHits = m.SnapshotHits
+	stage1.SniperDeaths = m.SniperDeaths
+	stage1.SniperHeadshots = m.SniperHeadshots
+	stage1.SniperKills = m.SniperKills
+	stage1.SpawnSelectBase = m.SpawnSelectBase
+	stage1.SpawnSelectFlag = m.SpawnSelectFlag
+	stage1.SpawnSelectSquad = m.SpawnSelectSquad
+	stage1.SpawnSelectVehicle = m.SpawnSelectVehicle
+	stage1.StimDamageHealed = m.StimDamageHealed
+	stage1.StoppingPowerKills = m.StoppingPowerKills
+	stage1.StunHits = m.StunHits
+	stage1.Suicides = m.Suicides
+	stage1.SurvivorKills = m.SurvivorKills
+	stage1.TacticalInsertionSpawns = m.TacticalInsertionSpawns
+	stage1.TagsCaptured = m.TagsCaptured
+	stage1.TagsDenied = m.TagsDenied
+	stage1.TagsLargestBank = m.TagsLargestBank
+	stage1.TagsMegaBanked = m.TagsMegaBanked
+	stage1.ThermiteKills = m.ThermiteKills
+	stage1.ThrowingKnifeKills = m.ThrowingKnifeKills
+	stage1.TimeCrouched = m.TimeCrouched
+	stage1.TimeOnPoint = m.TimeOnPoint
+	stage1.TimeProne = m.TimeProne
+	stage1.TimeSpentAsDriver = m.TimeSpentAsDriver
+	stage1.TimeSpentAsPassenger = m.TimeSpentAsPassenger
+	stage1.TimeWatchingKillcams = m.TimeWatchingKillcams
+	stage1.TimesSelectedAsSquadLeader = m.TimesSelectedAsSquadLeader
+	stage1.TrophySystemHits = m.TrophySystemHits
+	stage1.WeaponPickups = m.WeaponPickups
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeAccoladeDataPropertiesAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeAccoladeDataPropertiesAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime accolade data properties
+func (m *GamerStatsResponseDataLifetimeAccoladeDataProperties) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAccoladeDataProperties) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAccoladeDataProperties) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeAccoladeDataProperties
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // GamerStatsResponseDataLifetimeAll gamer stats response data lifetime all
 //
 // swagger:model GamerStatsResponseDataLifetimeAll
 type GamerStatsResponseDataLifetimeAll struct {
 
 	// properties
-	Properties interface{} `json:"properties,omitempty"`
+	Properties *GamerStatsResponseDataLifetimeAllProperties `json:"properties,omitempty"`
 
 	// gamer stats response data lifetime all additional properties
 	GamerStatsResponseDataLifetimeAllAdditionalProperties map[string]interface{} `json:"-"`
@@ -725,7 +2906,7 @@ func (m *GamerStatsResponseDataLifetimeAll) UnmarshalJSON(data []byte) error {
 	var stage1 struct {
 
 		// properties
-		Properties interface{} `json:"properties,omitempty"`
+		Properties *GamerStatsResponseDataLifetimeAllProperties `json:"properties,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
@@ -763,7 +2944,7 @@ func (m GamerStatsResponseDataLifetimeAll) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// properties
-		Properties interface{} `json:"properties,omitempty"`
+		Properties *GamerStatsResponseDataLifetimeAllProperties `json:"properties,omitempty"`
 	}
 
 	stage1.Properties = m.Properties
@@ -795,6 +2976,33 @@ func (m GamerStatsResponseDataLifetimeAll) MarshalJSON() ([]byte, error) {
 
 // Validate validates this gamer stats response data lifetime all
 func (m *GamerStatsResponseDataLifetimeAll) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateProperties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetimeAll) validateProperties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Properties) { // not required
+		return nil
+	}
+
+	if m.Properties != nil {
+		if err := m.Properties.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("data" + "." + "lifetime" + "." + "all" + "." + "properties")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -809,6 +3017,1370 @@ func (m *GamerStatsResponseDataLifetimeAll) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *GamerStatsResponseDataLifetimeAll) UnmarshalBinary(b []byte) error {
 	var res GamerStatsResponseDataLifetimeAll
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeAllProperties gamer stats response data lifetime all properties
+//
+// swagger:model GamerStatsResponseDataLifetimeAllProperties
+type GamerStatsResponseDataLifetimeAllProperties struct {
+
+	// accuracy
+	Accuracy float64 `json:"accuracy,omitempty"`
+
+	// assists
+	Assists float64 `json:"assists,omitempty"`
+
+	// best assists
+	BestAssists float64 `json:"bestAssists,omitempty"`
+
+	// best captures
+	BestCaptures float64 `json:"bestCaptures,omitempty"`
+
+	// best confirmed
+	BestConfirmed float64 `json:"bestConfirmed,omitempty"`
+
+	// best damage
+	BestDamage float64 `json:"bestDamage,omitempty"`
+
+	// best deaths
+	BestDeaths float64 `json:"bestDeaths,omitempty"`
+
+	// best defends
+	BestDefends float64 `json:"bestDefends,omitempty"`
+
+	// best defuses
+	BestDefuses float64 `json:"bestDefuses,omitempty"`
+
+	// best denied
+	BestDenied float64 `json:"bestDenied,omitempty"`
+
+	// best destructions
+	BestDestructions float64 `json:"bestDestructions,omitempty"`
+
+	// best fieldgoals
+	BestFieldgoals float64 `json:"bestFieldgoals,omitempty"`
+
+	// best k d
+	BestKD float64 `json:"bestKD,omitempty"`
+
+	// best kill chains
+	BestKillChains float64 `json:"bestKillChains,omitempty"`
+
+	// best kill streak
+	BestKillStreak float64 `json:"bestKillStreak,omitempty"`
+
+	// best kills
+	BestKills float64 `json:"bestKills,omitempty"`
+
+	// best kills as infected
+	BestKillsAsInfected float64 `json:"bestKillsAsInfected,omitempty"`
+
+	// best kills as survivor
+	BestKillsAsSurvivor float64 `json:"bestKillsAsSurvivor,omitempty"`
+
+	// best match bonus xp
+	BestMatchBonusXp float64 `json:"bestMatchBonusXp,omitempty"`
+
+	// best match xp
+	BestMatchXp float64 `json:"bestMatchXp,omitempty"`
+
+	// best medal xp
+	BestMedalXp float64 `json:"bestMedalXp,omitempty"`
+
+	// best plants
+	BestPlants float64 `json:"bestPlants,omitempty"`
+
+	// best rescues
+	BestRescues float64 `json:"bestRescues,omitempty"`
+
+	// best returns
+	BestReturns float64 `json:"bestReturns,omitempty"`
+
+	// best s p m
+	BestSPM float64 `json:"bestSPM,omitempty"`
+
+	// best score
+	BestScore float64 `json:"bestScore,omitempty"`
+
+	// best score xp
+	BestScoreXp float64 `json:"bestScoreXp,omitempty"`
+
+	// best setbacks
+	BestSetbacks float64 `json:"bestSetbacks,omitempty"`
+
+	// best sguard wave
+	BestSguardWave float64 `json:"bestSguardWave,omitempty"`
+
+	// best sguard weapon level
+	BestSguardWeaponLevel float64 `json:"bestSguardWeaponLevel,omitempty"`
+
+	// best squard crates
+	BestSquardCrates float64 `json:"bestSquardCrates,omitempty"`
+
+	// best squard kills
+	BestSquardKills float64 `json:"bestSquardKills,omitempty"`
+
+	// best squard revives
+	BestSquardRevives float64 `json:"bestSquardRevives,omitempty"`
+
+	// best stabs
+	BestStabs float64 `json:"bestStabs,omitempty"`
+
+	// best touchdowns
+	BestTouchdowns float64 `json:"bestTouchdowns,omitempty"`
+
+	// current win streak
+	CurrentWinStreak float64 `json:"currentWinStreak,omitempty"`
+
+	// deaths
+	Deaths float64 `json:"deaths,omitempty"`
+
+	// games played
+	GamesPlayed float64 `json:"gamesPlayed,omitempty"`
+
+	// headshots
+	Headshots float64 `json:"headshots,omitempty"`
+
+	// hits
+	Hits float64 `json:"hits,omitempty"`
+
+	// kd ratio
+	KdRatio float64 `json:"kdRatio,omitempty"`
+
+	// kills
+	Kills float64 `json:"kills,omitempty"`
+
+	// losses
+	Losses float64 `json:"losses,omitempty"`
+
+	// misses
+	Misses float64 `json:"misses,omitempty"`
+
+	// record deaths in a match
+	RecordDeathsInAMatch float64 `json:"recordDeathsInAMatch,omitempty"`
+
+	// record kill streak
+	RecordKillStreak float64 `json:"recordKillStreak,omitempty"`
+
+	// record kills in a match
+	RecordKillsInAMatch float64 `json:"recordKillsInAMatch,omitempty"`
+
+	// record longest win streak
+	RecordLongestWinStreak float64 `json:"recordLongestWinStreak,omitempty"`
+
+	// record xp in a match
+	RecordXpInAMatch float64 `json:"recordXpInAMatch,omitempty"`
+
+	// score
+	Score float64 `json:"score,omitempty"`
+
+	// score per game
+	ScorePerGame float64 `json:"scorePerGame,omitempty"`
+
+	// score per minute
+	ScorePerMinute float64 `json:"scorePerMinute,omitempty"`
+
+	// suicides
+	Suicides float64 `json:"suicides,omitempty"`
+
+	// ties
+	Ties float64 `json:"ties,omitempty"`
+
+	// time played total
+	TimePlayedTotal float64 `json:"timePlayedTotal,omitempty"`
+
+	// total games played
+	TotalGamesPlayed float64 `json:"totalGamesPlayed,omitempty"`
+
+	// total shots
+	TotalShots float64 `json:"totalShots,omitempty"`
+
+	// win loss ratio
+	WinLossRatio float64 `json:"winLossRatio,omitempty"`
+
+	// wins
+	Wins float64 `json:"wins,omitempty"`
+
+	// wl ratio
+	WlRatio float64 `json:"wlRatio,omitempty"`
+
+	// gamer stats response data lifetime all properties additional properties
+	GamerStatsResponseDataLifetimeAllPropertiesAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeAllProperties) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// accuracy
+		Accuracy float64 `json:"accuracy,omitempty"`
+
+		// assists
+		Assists float64 `json:"assists,omitempty"`
+
+		// best assists
+		BestAssists float64 `json:"bestAssists,omitempty"`
+
+		// best captures
+		BestCaptures float64 `json:"bestCaptures,omitempty"`
+
+		// best confirmed
+		BestConfirmed float64 `json:"bestConfirmed,omitempty"`
+
+		// best damage
+		BestDamage float64 `json:"bestDamage,omitempty"`
+
+		// best deaths
+		BestDeaths float64 `json:"bestDeaths,omitempty"`
+
+		// best defends
+		BestDefends float64 `json:"bestDefends,omitempty"`
+
+		// best defuses
+		BestDefuses float64 `json:"bestDefuses,omitempty"`
+
+		// best denied
+		BestDenied float64 `json:"bestDenied,omitempty"`
+
+		// best destructions
+		BestDestructions float64 `json:"bestDestructions,omitempty"`
+
+		// best fieldgoals
+		BestFieldgoals float64 `json:"bestFieldgoals,omitempty"`
+
+		// best k d
+		BestKD float64 `json:"bestKD,omitempty"`
+
+		// best kill chains
+		BestKillChains float64 `json:"bestKillChains,omitempty"`
+
+		// best kill streak
+		BestKillStreak float64 `json:"bestKillStreak,omitempty"`
+
+		// best kills
+		BestKills float64 `json:"bestKills,omitempty"`
+
+		// best kills as infected
+		BestKillsAsInfected float64 `json:"bestKillsAsInfected,omitempty"`
+
+		// best kills as survivor
+		BestKillsAsSurvivor float64 `json:"bestKillsAsSurvivor,omitempty"`
+
+		// best match bonus xp
+		BestMatchBonusXp float64 `json:"bestMatchBonusXp,omitempty"`
+
+		// best match xp
+		BestMatchXp float64 `json:"bestMatchXp,omitempty"`
+
+		// best medal xp
+		BestMedalXp float64 `json:"bestMedalXp,omitempty"`
+
+		// best plants
+		BestPlants float64 `json:"bestPlants,omitempty"`
+
+		// best rescues
+		BestRescues float64 `json:"bestRescues,omitempty"`
+
+		// best returns
+		BestReturns float64 `json:"bestReturns,omitempty"`
+
+		// best s p m
+		BestSPM float64 `json:"bestSPM,omitempty"`
+
+		// best score
+		BestScore float64 `json:"bestScore,omitempty"`
+
+		// best score xp
+		BestScoreXp float64 `json:"bestScoreXp,omitempty"`
+
+		// best setbacks
+		BestSetbacks float64 `json:"bestSetbacks,omitempty"`
+
+		// best sguard wave
+		BestSguardWave float64 `json:"bestSguardWave,omitempty"`
+
+		// best sguard weapon level
+		BestSguardWeaponLevel float64 `json:"bestSguardWeaponLevel,omitempty"`
+
+		// best squard crates
+		BestSquardCrates float64 `json:"bestSquardCrates,omitempty"`
+
+		// best squard kills
+		BestSquardKills float64 `json:"bestSquardKills,omitempty"`
+
+		// best squard revives
+		BestSquardRevives float64 `json:"bestSquardRevives,omitempty"`
+
+		// best stabs
+		BestStabs float64 `json:"bestStabs,omitempty"`
+
+		// best touchdowns
+		BestTouchdowns float64 `json:"bestTouchdowns,omitempty"`
+
+		// current win streak
+		CurrentWinStreak float64 `json:"currentWinStreak,omitempty"`
+
+		// deaths
+		Deaths float64 `json:"deaths,omitempty"`
+
+		// games played
+		GamesPlayed float64 `json:"gamesPlayed,omitempty"`
+
+		// headshots
+		Headshots float64 `json:"headshots,omitempty"`
+
+		// hits
+		Hits float64 `json:"hits,omitempty"`
+
+		// kd ratio
+		KdRatio float64 `json:"kdRatio,omitempty"`
+
+		// kills
+		Kills float64 `json:"kills,omitempty"`
+
+		// losses
+		Losses float64 `json:"losses,omitempty"`
+
+		// misses
+		Misses float64 `json:"misses,omitempty"`
+
+		// record deaths in a match
+		RecordDeathsInAMatch float64 `json:"recordDeathsInAMatch,omitempty"`
+
+		// record kill streak
+		RecordKillStreak float64 `json:"recordKillStreak,omitempty"`
+
+		// record kills in a match
+		RecordKillsInAMatch float64 `json:"recordKillsInAMatch,omitempty"`
+
+		// record longest win streak
+		RecordLongestWinStreak float64 `json:"recordLongestWinStreak,omitempty"`
+
+		// record xp in a match
+		RecordXpInAMatch float64 `json:"recordXpInAMatch,omitempty"`
+
+		// score
+		Score float64 `json:"score,omitempty"`
+
+		// score per game
+		ScorePerGame float64 `json:"scorePerGame,omitempty"`
+
+		// score per minute
+		ScorePerMinute float64 `json:"scorePerMinute,omitempty"`
+
+		// suicides
+		Suicides float64 `json:"suicides,omitempty"`
+
+		// ties
+		Ties float64 `json:"ties,omitempty"`
+
+		// time played total
+		TimePlayedTotal float64 `json:"timePlayedTotal,omitempty"`
+
+		// total games played
+		TotalGamesPlayed float64 `json:"totalGamesPlayed,omitempty"`
+
+		// total shots
+		TotalShots float64 `json:"totalShots,omitempty"`
+
+		// win loss ratio
+		WinLossRatio float64 `json:"winLossRatio,omitempty"`
+
+		// wins
+		Wins float64 `json:"wins,omitempty"`
+
+		// wl ratio
+		WlRatio float64 `json:"wlRatio,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeAllProperties
+
+	rcv.Accuracy = stage1.Accuracy
+	rcv.Assists = stage1.Assists
+	rcv.BestAssists = stage1.BestAssists
+	rcv.BestCaptures = stage1.BestCaptures
+	rcv.BestConfirmed = stage1.BestConfirmed
+	rcv.BestDamage = stage1.BestDamage
+	rcv.BestDeaths = stage1.BestDeaths
+	rcv.BestDefends = stage1.BestDefends
+	rcv.BestDefuses = stage1.BestDefuses
+	rcv.BestDenied = stage1.BestDenied
+	rcv.BestDestructions = stage1.BestDestructions
+	rcv.BestFieldgoals = stage1.BestFieldgoals
+	rcv.BestKD = stage1.BestKD
+	rcv.BestKillChains = stage1.BestKillChains
+	rcv.BestKillStreak = stage1.BestKillStreak
+	rcv.BestKills = stage1.BestKills
+	rcv.BestKillsAsInfected = stage1.BestKillsAsInfected
+	rcv.BestKillsAsSurvivor = stage1.BestKillsAsSurvivor
+	rcv.BestMatchBonusXp = stage1.BestMatchBonusXp
+	rcv.BestMatchXp = stage1.BestMatchXp
+	rcv.BestMedalXp = stage1.BestMedalXp
+	rcv.BestPlants = stage1.BestPlants
+	rcv.BestRescues = stage1.BestRescues
+	rcv.BestReturns = stage1.BestReturns
+	rcv.BestSPM = stage1.BestSPM
+	rcv.BestScore = stage1.BestScore
+	rcv.BestScoreXp = stage1.BestScoreXp
+	rcv.BestSetbacks = stage1.BestSetbacks
+	rcv.BestSguardWave = stage1.BestSguardWave
+	rcv.BestSguardWeaponLevel = stage1.BestSguardWeaponLevel
+	rcv.BestSquardCrates = stage1.BestSquardCrates
+	rcv.BestSquardKills = stage1.BestSquardKills
+	rcv.BestSquardRevives = stage1.BestSquardRevives
+	rcv.BestStabs = stage1.BestStabs
+	rcv.BestTouchdowns = stage1.BestTouchdowns
+	rcv.CurrentWinStreak = stage1.CurrentWinStreak
+	rcv.Deaths = stage1.Deaths
+	rcv.GamesPlayed = stage1.GamesPlayed
+	rcv.Headshots = stage1.Headshots
+	rcv.Hits = stage1.Hits
+	rcv.KdRatio = stage1.KdRatio
+	rcv.Kills = stage1.Kills
+	rcv.Losses = stage1.Losses
+	rcv.Misses = stage1.Misses
+	rcv.RecordDeathsInAMatch = stage1.RecordDeathsInAMatch
+	rcv.RecordKillStreak = stage1.RecordKillStreak
+	rcv.RecordKillsInAMatch = stage1.RecordKillsInAMatch
+	rcv.RecordLongestWinStreak = stage1.RecordLongestWinStreak
+	rcv.RecordXpInAMatch = stage1.RecordXpInAMatch
+	rcv.Score = stage1.Score
+	rcv.ScorePerGame = stage1.ScorePerGame
+	rcv.ScorePerMinute = stage1.ScorePerMinute
+	rcv.Suicides = stage1.Suicides
+	rcv.Ties = stage1.Ties
+	rcv.TimePlayedTotal = stage1.TimePlayedTotal
+	rcv.TotalGamesPlayed = stage1.TotalGamesPlayed
+	rcv.TotalShots = stage1.TotalShots
+	rcv.WinLossRatio = stage1.WinLossRatio
+	rcv.Wins = stage1.Wins
+	rcv.WlRatio = stage1.WlRatio
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "accuracy")
+	delete(stage2, "assists")
+	delete(stage2, "bestAssists")
+	delete(stage2, "bestCaptures")
+	delete(stage2, "bestConfirmed")
+	delete(stage2, "bestDamage")
+	delete(stage2, "bestDeaths")
+	delete(stage2, "bestDefends")
+	delete(stage2, "bestDefuses")
+	delete(stage2, "bestDenied")
+	delete(stage2, "bestDestructions")
+	delete(stage2, "bestFieldgoals")
+	delete(stage2, "bestKD")
+	delete(stage2, "bestKillChains")
+	delete(stage2, "bestKillStreak")
+	delete(stage2, "bestKills")
+	delete(stage2, "bestKillsAsInfected")
+	delete(stage2, "bestKillsAsSurvivor")
+	delete(stage2, "bestMatchBonusXp")
+	delete(stage2, "bestMatchXp")
+	delete(stage2, "bestMedalXp")
+	delete(stage2, "bestPlants")
+	delete(stage2, "bestRescues")
+	delete(stage2, "bestReturns")
+	delete(stage2, "bestSPM")
+	delete(stage2, "bestScore")
+	delete(stage2, "bestScoreXp")
+	delete(stage2, "bestSetbacks")
+	delete(stage2, "bestSguardWave")
+	delete(stage2, "bestSguardWeaponLevel")
+	delete(stage2, "bestSquardCrates")
+	delete(stage2, "bestSquardKills")
+	delete(stage2, "bestSquardRevives")
+	delete(stage2, "bestStabs")
+	delete(stage2, "bestTouchdowns")
+	delete(stage2, "currentWinStreak")
+	delete(stage2, "deaths")
+	delete(stage2, "gamesPlayed")
+	delete(stage2, "headshots")
+	delete(stage2, "hits")
+	delete(stage2, "kdRatio")
+	delete(stage2, "kills")
+	delete(stage2, "losses")
+	delete(stage2, "misses")
+	delete(stage2, "recordDeathsInAMatch")
+	delete(stage2, "recordKillStreak")
+	delete(stage2, "recordKillsInAMatch")
+	delete(stage2, "recordLongestWinStreak")
+	delete(stage2, "recordXpInAMatch")
+	delete(stage2, "score")
+	delete(stage2, "scorePerGame")
+	delete(stage2, "scorePerMinute")
+	delete(stage2, "suicides")
+	delete(stage2, "ties")
+	delete(stage2, "timePlayedTotal")
+	delete(stage2, "totalGamesPlayed")
+	delete(stage2, "totalShots")
+	delete(stage2, "winLossRatio")
+	delete(stage2, "wins")
+	delete(stage2, "wlRatio")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeAllPropertiesAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeAllProperties) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// accuracy
+		Accuracy float64 `json:"accuracy,omitempty"`
+
+		// assists
+		Assists float64 `json:"assists,omitempty"`
+
+		// best assists
+		BestAssists float64 `json:"bestAssists,omitempty"`
+
+		// best captures
+		BestCaptures float64 `json:"bestCaptures,omitempty"`
+
+		// best confirmed
+		BestConfirmed float64 `json:"bestConfirmed,omitempty"`
+
+		// best damage
+		BestDamage float64 `json:"bestDamage,omitempty"`
+
+		// best deaths
+		BestDeaths float64 `json:"bestDeaths,omitempty"`
+
+		// best defends
+		BestDefends float64 `json:"bestDefends,omitempty"`
+
+		// best defuses
+		BestDefuses float64 `json:"bestDefuses,omitempty"`
+
+		// best denied
+		BestDenied float64 `json:"bestDenied,omitempty"`
+
+		// best destructions
+		BestDestructions float64 `json:"bestDestructions,omitempty"`
+
+		// best fieldgoals
+		BestFieldgoals float64 `json:"bestFieldgoals,omitempty"`
+
+		// best k d
+		BestKD float64 `json:"bestKD,omitempty"`
+
+		// best kill chains
+		BestKillChains float64 `json:"bestKillChains,omitempty"`
+
+		// best kill streak
+		BestKillStreak float64 `json:"bestKillStreak,omitempty"`
+
+		// best kills
+		BestKills float64 `json:"bestKills,omitempty"`
+
+		// best kills as infected
+		BestKillsAsInfected float64 `json:"bestKillsAsInfected,omitempty"`
+
+		// best kills as survivor
+		BestKillsAsSurvivor float64 `json:"bestKillsAsSurvivor,omitempty"`
+
+		// best match bonus xp
+		BestMatchBonusXp float64 `json:"bestMatchBonusXp,omitempty"`
+
+		// best match xp
+		BestMatchXp float64 `json:"bestMatchXp,omitempty"`
+
+		// best medal xp
+		BestMedalXp float64 `json:"bestMedalXp,omitempty"`
+
+		// best plants
+		BestPlants float64 `json:"bestPlants,omitempty"`
+
+		// best rescues
+		BestRescues float64 `json:"bestRescues,omitempty"`
+
+		// best returns
+		BestReturns float64 `json:"bestReturns,omitempty"`
+
+		// best s p m
+		BestSPM float64 `json:"bestSPM,omitempty"`
+
+		// best score
+		BestScore float64 `json:"bestScore,omitempty"`
+
+		// best score xp
+		BestScoreXp float64 `json:"bestScoreXp,omitempty"`
+
+		// best setbacks
+		BestSetbacks float64 `json:"bestSetbacks,omitempty"`
+
+		// best sguard wave
+		BestSguardWave float64 `json:"bestSguardWave,omitempty"`
+
+		// best sguard weapon level
+		BestSguardWeaponLevel float64 `json:"bestSguardWeaponLevel,omitempty"`
+
+		// best squard crates
+		BestSquardCrates float64 `json:"bestSquardCrates,omitempty"`
+
+		// best squard kills
+		BestSquardKills float64 `json:"bestSquardKills,omitempty"`
+
+		// best squard revives
+		BestSquardRevives float64 `json:"bestSquardRevives,omitempty"`
+
+		// best stabs
+		BestStabs float64 `json:"bestStabs,omitempty"`
+
+		// best touchdowns
+		BestTouchdowns float64 `json:"bestTouchdowns,omitempty"`
+
+		// current win streak
+		CurrentWinStreak float64 `json:"currentWinStreak,omitempty"`
+
+		// deaths
+		Deaths float64 `json:"deaths,omitempty"`
+
+		// games played
+		GamesPlayed float64 `json:"gamesPlayed,omitempty"`
+
+		// headshots
+		Headshots float64 `json:"headshots,omitempty"`
+
+		// hits
+		Hits float64 `json:"hits,omitempty"`
+
+		// kd ratio
+		KdRatio float64 `json:"kdRatio,omitempty"`
+
+		// kills
+		Kills float64 `json:"kills,omitempty"`
+
+		// losses
+		Losses float64 `json:"losses,omitempty"`
+
+		// misses
+		Misses float64 `json:"misses,omitempty"`
+
+		// record deaths in a match
+		RecordDeathsInAMatch float64 `json:"recordDeathsInAMatch,omitempty"`
+
+		// record kill streak
+		RecordKillStreak float64 `json:"recordKillStreak,omitempty"`
+
+		// record kills in a match
+		RecordKillsInAMatch float64 `json:"recordKillsInAMatch,omitempty"`
+
+		// record longest win streak
+		RecordLongestWinStreak float64 `json:"recordLongestWinStreak,omitempty"`
+
+		// record xp in a match
+		RecordXpInAMatch float64 `json:"recordXpInAMatch,omitempty"`
+
+		// score
+		Score float64 `json:"score,omitempty"`
+
+		// score per game
+		ScorePerGame float64 `json:"scorePerGame,omitempty"`
+
+		// score per minute
+		ScorePerMinute float64 `json:"scorePerMinute,omitempty"`
+
+		// suicides
+		Suicides float64 `json:"suicides,omitempty"`
+
+		// ties
+		Ties float64 `json:"ties,omitempty"`
+
+		// time played total
+		TimePlayedTotal float64 `json:"timePlayedTotal,omitempty"`
+
+		// total games played
+		TotalGamesPlayed float64 `json:"totalGamesPlayed,omitempty"`
+
+		// total shots
+		TotalShots float64 `json:"totalShots,omitempty"`
+
+		// win loss ratio
+		WinLossRatio float64 `json:"winLossRatio,omitempty"`
+
+		// wins
+		Wins float64 `json:"wins,omitempty"`
+
+		// wl ratio
+		WlRatio float64 `json:"wlRatio,omitempty"`
+	}
+
+	stage1.Accuracy = m.Accuracy
+	stage1.Assists = m.Assists
+	stage1.BestAssists = m.BestAssists
+	stage1.BestCaptures = m.BestCaptures
+	stage1.BestConfirmed = m.BestConfirmed
+	stage1.BestDamage = m.BestDamage
+	stage1.BestDeaths = m.BestDeaths
+	stage1.BestDefends = m.BestDefends
+	stage1.BestDefuses = m.BestDefuses
+	stage1.BestDenied = m.BestDenied
+	stage1.BestDestructions = m.BestDestructions
+	stage1.BestFieldgoals = m.BestFieldgoals
+	stage1.BestKD = m.BestKD
+	stage1.BestKillChains = m.BestKillChains
+	stage1.BestKillStreak = m.BestKillStreak
+	stage1.BestKills = m.BestKills
+	stage1.BestKillsAsInfected = m.BestKillsAsInfected
+	stage1.BestKillsAsSurvivor = m.BestKillsAsSurvivor
+	stage1.BestMatchBonusXp = m.BestMatchBonusXp
+	stage1.BestMatchXp = m.BestMatchXp
+	stage1.BestMedalXp = m.BestMedalXp
+	stage1.BestPlants = m.BestPlants
+	stage1.BestRescues = m.BestRescues
+	stage1.BestReturns = m.BestReturns
+	stage1.BestSPM = m.BestSPM
+	stage1.BestScore = m.BestScore
+	stage1.BestScoreXp = m.BestScoreXp
+	stage1.BestSetbacks = m.BestSetbacks
+	stage1.BestSguardWave = m.BestSguardWave
+	stage1.BestSguardWeaponLevel = m.BestSguardWeaponLevel
+	stage1.BestSquardCrates = m.BestSquardCrates
+	stage1.BestSquardKills = m.BestSquardKills
+	stage1.BestSquardRevives = m.BestSquardRevives
+	stage1.BestStabs = m.BestStabs
+	stage1.BestTouchdowns = m.BestTouchdowns
+	stage1.CurrentWinStreak = m.CurrentWinStreak
+	stage1.Deaths = m.Deaths
+	stage1.GamesPlayed = m.GamesPlayed
+	stage1.Headshots = m.Headshots
+	stage1.Hits = m.Hits
+	stage1.KdRatio = m.KdRatio
+	stage1.Kills = m.Kills
+	stage1.Losses = m.Losses
+	stage1.Misses = m.Misses
+	stage1.RecordDeathsInAMatch = m.RecordDeathsInAMatch
+	stage1.RecordKillStreak = m.RecordKillStreak
+	stage1.RecordKillsInAMatch = m.RecordKillsInAMatch
+	stage1.RecordLongestWinStreak = m.RecordLongestWinStreak
+	stage1.RecordXpInAMatch = m.RecordXpInAMatch
+	stage1.Score = m.Score
+	stage1.ScorePerGame = m.ScorePerGame
+	stage1.ScorePerMinute = m.ScorePerMinute
+	stage1.Suicides = m.Suicides
+	stage1.Ties = m.Ties
+	stage1.TimePlayedTotal = m.TimePlayedTotal
+	stage1.TotalGamesPlayed = m.TotalGamesPlayed
+	stage1.TotalShots = m.TotalShots
+	stage1.WinLossRatio = m.WinLossRatio
+	stage1.Wins = m.Wins
+	stage1.WlRatio = m.WlRatio
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeAllPropertiesAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeAllPropertiesAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime all properties
+func (m *GamerStatsResponseDataLifetimeAllProperties) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAllProperties) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeAllProperties) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeAllProperties
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeItemDataAnon gamer stats response data lifetime item data anon
+//
+// swagger:model GamerStatsResponseDataLifetimeItemDataAnon
+type GamerStatsResponseDataLifetimeItemDataAnon struct {
+
+	// accuracy
+	Accuracy float64 `json:"accuracy,omitempty"`
+
+	// deaths
+	Deaths float64 `json:"deaths,omitempty"`
+
+	// headshots
+	Headshots float64 `json:"headshots,omitempty"`
+
+	// hits
+	Hits float64 `json:"hits,omitempty"`
+
+	// kd ratio
+	KdRatio float64 `json:"kdRatio,omitempty"`
+
+	// kills
+	Kills float64 `json:"kills,omitempty"`
+
+	// shots
+	Shots float64 `json:"shots,omitempty"`
+}
+
+// Validate validates this gamer stats response data lifetime item data anon
+func (m *GamerStatsResponseDataLifetimeItemDataAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeItemDataAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeItemDataAnon) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeItemDataAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeModeAnon gamer stats response data lifetime mode anon
+//
+// swagger:model GamerStatsResponseDataLifetimeModeAnon
+type GamerStatsResponseDataLifetimeModeAnon struct {
+
+	// deaths
+	Deaths float64 `json:"deaths,omitempty"`
+
+	// kd ratio
+	KdRatio float64 `json:"kdRatio,omitempty"`
+
+	// kills
+	Kills float64 `json:"kills,omitempty"`
+
+	// score
+	Score float64 `json:"score,omitempty"`
+
+	// score per minute
+	ScorePerMinute float64 `json:"scorePerMinute,omitempty"`
+
+	// set backs
+	SetBacks float64 `json:"setBacks,omitempty"`
+
+	// stabs
+	Stabs float64 `json:"stabs,omitempty"`
+
+	// time played
+	TimePlayed float64 `json:"timePlayed,omitempty"`
+}
+
+// Validate validates this gamer stats response data lifetime mode anon
+func (m *GamerStatsResponseDataLifetimeModeAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeModeAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeModeAnon) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeModeAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeScorestreakData gamer stats response data lifetime scorestreak data
+//
+// swagger:model GamerStatsResponseDataLifetimeScorestreakData
+type GamerStatsResponseDataLifetimeScorestreakData struct {
+
+	// lethal scorestreak data
+	LethalScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon `json:"lethalScorestreakData,omitempty"`
+
+	// support scorestreak data
+	SupportScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon `json:"supportScorestreakData,omitempty"`
+
+	// gamer stats response data lifetime scorestreak data additional properties
+	GamerStatsResponseDataLifetimeScorestreakDataAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeScorestreakData) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// lethal scorestreak data
+		LethalScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon `json:"lethalScorestreakData,omitempty"`
+
+		// support scorestreak data
+		SupportScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon `json:"supportScorestreakData,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeScorestreakData
+
+	rcv.LethalScorestreakData = stage1.LethalScorestreakData
+	rcv.SupportScorestreakData = stage1.SupportScorestreakData
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "lethalScorestreakData")
+	delete(stage2, "supportScorestreakData")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeScorestreakDataAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeScorestreakData) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// lethal scorestreak data
+		LethalScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon `json:"lethalScorestreakData,omitempty"`
+
+		// support scorestreak data
+		SupportScorestreakData map[string]GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon `json:"supportScorestreakData,omitempty"`
+	}
+
+	stage1.LethalScorestreakData = m.LethalScorestreakData
+	stage1.SupportScorestreakData = m.SupportScorestreakData
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeScorestreakDataAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeScorestreakDataAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime scorestreak data
+func (m *GamerStatsResponseDataLifetimeScorestreakData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLethalScorestreakData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSupportScorestreakData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetimeScorestreakData) validateLethalScorestreakData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.LethalScorestreakData) { // not required
+		return nil
+	}
+
+	for k := range m.LethalScorestreakData {
+
+		if swag.IsZero(m.LethalScorestreakData[k]) { // not required
+			continue
+		}
+		if val, ok := m.LethalScorestreakData[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *GamerStatsResponseDataLifetimeScorestreakData) validateSupportScorestreakData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SupportScorestreakData) { // not required
+		return nil
+	}
+
+	for k := range m.SupportScorestreakData {
+
+		if swag.IsZero(m.SupportScorestreakData[k]) { // not required
+			continue
+		}
+		if val, ok := m.SupportScorestreakData[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakData) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakData) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeScorestreakData
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon gamer stats response data lifetime scorestreak data lethal scorestreak data anon
+//
+// swagger:model GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon
+type GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon struct {
+
+	// awarded count
+	AwardedCount float64 `json:"awardedCount,omitempty"`
+
+	// extra stat1
+	ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+	// uses
+	Uses float64 `json:"uses,omitempty"`
+
+	// gamer stats response data lifetime scorestreak data lethal scorestreak data anon additional properties
+	GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnonAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// awarded count
+		AwardedCount float64 `json:"awardedCount,omitempty"`
+
+		// extra stat1
+		ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+		// uses
+		Uses float64 `json:"uses,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon
+
+	rcv.AwardedCount = stage1.AwardedCount
+	rcv.ExtraStat1 = stage1.ExtraStat1
+	rcv.Uses = stage1.Uses
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "awardedCount")
+	delete(stage2, "extraStat1")
+	delete(stage2, "uses")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnonAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// awarded count
+		AwardedCount float64 `json:"awardedCount,omitempty"`
+
+		// extra stat1
+		ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+		// uses
+		Uses float64 `json:"uses,omitempty"`
+	}
+
+	stage1.AwardedCount = m.AwardedCount
+	stage1.ExtraStat1 = m.ExtraStat1
+	stage1.Uses = m.Uses
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnonAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnonAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime scorestreak data lethal scorestreak data anon
+func (m *GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeScorestreakDataLethalScorestreakDataAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon gamer stats response data lifetime scorestreak data support scorestreak data anon
+//
+// swagger:model GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon
+type GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon struct {
+
+	// awarded count
+	AwardedCount float64 `json:"awardedCount,omitempty"`
+
+	// extra stat1
+	ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+	// uses
+	Uses float64 `json:"uses,omitempty"`
+
+	// gamer stats response data lifetime scorestreak data support scorestreak data anon additional properties
+	GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnonAdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UnmarshalJSON unmarshals this object with additional properties from JSON
+func (m *GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon) UnmarshalJSON(data []byte) error {
+	// stage 1, bind the properties
+	var stage1 struct {
+
+		// awarded count
+		AwardedCount float64 `json:"awardedCount,omitempty"`
+
+		// extra stat1
+		ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+		// uses
+		Uses float64 `json:"uses,omitempty"`
+	}
+	if err := json.Unmarshal(data, &stage1); err != nil {
+		return err
+	}
+	var rcv GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon
+
+	rcv.AwardedCount = stage1.AwardedCount
+	rcv.ExtraStat1 = stage1.ExtraStat1
+	rcv.Uses = stage1.Uses
+	*m = rcv
+
+	// stage 2, remove properties and add to map
+	stage2 := make(map[string]json.RawMessage)
+	if err := json.Unmarshal(data, &stage2); err != nil {
+		return err
+	}
+
+	delete(stage2, "awardedCount")
+	delete(stage2, "extraStat1")
+	delete(stage2, "uses")
+	// stage 3, add additional properties values
+	if len(stage2) > 0 {
+		result := make(map[string]interface{})
+		for k, v := range stage2 {
+			var toadd interface{}
+			if err := json.Unmarshal(v, &toadd); err != nil {
+				return err
+			}
+			result[k] = toadd
+		}
+		m.GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnonAdditionalProperties = result
+	}
+
+	return nil
+}
+
+// MarshalJSON marshals this object with additional properties into a JSON object
+func (m GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon) MarshalJSON() ([]byte, error) {
+	var stage1 struct {
+
+		// awarded count
+		AwardedCount float64 `json:"awardedCount,omitempty"`
+
+		// extra stat1
+		ExtraStat1 float64 `json:"extraStat1,omitempty"`
+
+		// uses
+		Uses float64 `json:"uses,omitempty"`
+	}
+
+	stage1.AwardedCount = m.AwardedCount
+	stage1.ExtraStat1 = m.ExtraStat1
+	stage1.Uses = m.Uses
+
+	// make JSON object for known properties
+	props, err := json.Marshal(stage1)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m.GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnonAdditionalProperties) == 0 {
+		return props, nil
+	}
+
+	// make JSON object for the additional properties
+	additional, err := json.Marshal(m.GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnonAdditionalProperties)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(props) < 3 {
+		return additional, nil
+	}
+
+	// concatenate the 2 objects
+	props[len(props)-1] = ','
+	return append(props, additional[1:]...), nil
+}
+
+// Validate validates this gamer stats response data lifetime scorestreak data support scorestreak data anon
+func (m *GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon) UnmarshalBinary(b []byte) error {
+	var res GamerStatsResponseDataLifetimeScorestreakDataSupportScorestreakDataAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -362,13 +362,13 @@ type FullMatchInfoResponseDataAllPlayersItems0 struct {
 	PlayerStats *FullMatchInfoResponseDataAllPlayersItems0PlayerStats `json:"playerStats,omitempty"`
 
 	// playlist name
-	PlaylistName interface{} `json:"playlistName,omitempty"`
+	PlaylistName string `json:"playlistName,omitempty"`
 
 	// private match
 	PrivateMatch bool `json:"privateMatch,omitempty"`
 
 	// ranked teams
-	RankedTeams interface{} `json:"rankedTeams,omitempty"`
+	RankedTeams string `json:"rankedTeams,omitempty"`
 
 	// team count
 	TeamCount int64 `json:"teamCount,omitempty"`
@@ -419,13 +419,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0) UnmarshalJSON(data []byte) e
 		PlayerStats *FullMatchInfoResponseDataAllPlayersItems0PlayerStats `json:"playerStats,omitempty"`
 
 		// playlist name
-		PlaylistName interface{} `json:"playlistName,omitempty"`
+		PlaylistName string `json:"playlistName,omitempty"`
 
 		// private match
 		PrivateMatch bool `json:"privateMatch,omitempty"`
 
 		// ranked teams
-		RankedTeams interface{} `json:"rankedTeams,omitempty"`
+		RankedTeams string `json:"rankedTeams,omitempty"`
 
 		// team count
 		TeamCount int64 `json:"teamCount,omitempty"`
@@ -532,13 +532,13 @@ func (m FullMatchInfoResponseDataAllPlayersItems0) MarshalJSON() ([]byte, error)
 		PlayerStats *FullMatchInfoResponseDataAllPlayersItems0PlayerStats `json:"playerStats,omitempty"`
 
 		// playlist name
-		PlaylistName interface{} `json:"playlistName,omitempty"`
+		PlaylistName string `json:"playlistName,omitempty"`
 
 		// private match
 		PrivateMatch bool `json:"privateMatch,omitempty"`
 
 		// ranked teams
-		RankedTeams interface{} `json:"rankedTeams,omitempty"`
+		RankedTeams string `json:"rankedTeams,omitempty"`
 
 		// team count
 		TeamCount int64 `json:"teamCount,omitempty"`
@@ -1428,16 +1428,16 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0) Unmarshal
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0ExtraPerksItems0 struct {
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// image main Ui
-	ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+	ImageMainUI string `json:"imageMainUi,omitempty"`
 
 	// image progression
-	ImageProgression interface{} `json:"imageProgression,omitempty"`
+	ImageProgression string `json:"imageProgression,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -1452,16 +1452,16 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0ExtraPerksI
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image main Ui
-		ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+		ImageMainUI string `json:"imageMainUi,omitempty"`
 
 		// image progression
-		ImageProgression interface{} `json:"imageProgression,omitempty"`
+		ImageProgression string `json:"imageProgression,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -1510,16 +1510,16 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0ExtraPerksIt
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image main Ui
-		ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+		ImageMainUI string `json:"imageMainUi,omitempty"`
 
 		// image progression
-		ImageProgression interface{} `json:"imageProgression,omitempty"`
+		ImageProgression string `json:"imageProgression,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -1585,7 +1585,7 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0ExtraPerksI
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0KillstreaksItems0 struct {
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -1600,7 +1600,7 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Killstreaks
 	var stage1 struct {
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -1643,7 +1643,7 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0KillstreaksI
 	var stage1 struct {
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -1706,19 +1706,19 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Killstreaks
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Lethal struct {
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// image large
-	ImageLarge interface{} `json:"imageLarge,omitempty"`
+	ImageLarge string `json:"imageLarge,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
 	// progression image
-	ProgressionImage interface{} `json:"progressionImage,omitempty"`
+	ProgressionImage string `json:"progressionImage,omitempty"`
 
 	// full match info response data all players items0 player loadout items0 lethal additional properties
 	FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0LethalAdditionalProperties map[string]interface{} `json:"-"`
@@ -1730,19 +1730,19 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Lethal) Unm
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image large
-		ImageLarge interface{} `json:"imageLarge,omitempty"`
+		ImageLarge string `json:"imageLarge,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
 
 		// progression image
-		ProgressionImage interface{} `json:"progressionImage,omitempty"`
+		ProgressionImage string `json:"progressionImage,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
@@ -1788,19 +1788,19 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Lethal) Mars
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image large
-		ImageLarge interface{} `json:"imageLarge,omitempty"`
+		ImageLarge string `json:"imageLarge,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
 
 		// progression image
-		ProgressionImage interface{} `json:"progressionImage,omitempty"`
+		ProgressionImage string `json:"progressionImage,omitempty"`
 	}
 
 	stage1.Image = m.Image
@@ -1863,16 +1863,16 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Lethal) Unm
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PerksItems0 struct {
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// image main Ui
-	ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+	ImageMainUI string `json:"imageMainUi,omitempty"`
 
 	// image progression
-	ImageProgression interface{} `json:"imageProgression,omitempty"`
+	ImageProgression string `json:"imageProgression,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -1887,16 +1887,16 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PerksItems0
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image main Ui
-		ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+		ImageMainUI string `json:"imageMainUi,omitempty"`
 
 		// image progression
-		ImageProgression interface{} `json:"imageProgression,omitempty"`
+		ImageProgression string `json:"imageProgression,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -1945,16 +1945,16 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PerksItems0)
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image main Ui
-		ImageMainUI interface{} `json:"imageMainUi,omitempty"`
+		ImageMainUI string `json:"imageMainUi,omitempty"`
 
 		// image progression
-		ImageProgression interface{} `json:"imageProgression,omitempty"`
+		ImageProgression string `json:"imageProgression,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2023,13 +2023,13 @@ type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeapon s
 	Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeaponAttachmentsItems0 `json:"attachments"`
 
 	// image icon
-	ImageIcon interface{} `json:"imageIcon,omitempty"`
+	ImageIcon string `json:"imageIcon,omitempty"`
 
 	// image loot
-	ImageLoot interface{} `json:"imageLoot,omitempty"`
+	ImageLoot string `json:"imageLoot,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -2050,13 +2050,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeap
 		Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeaponAttachmentsItems0 `json:"attachments"`
 
 		// image icon
-		ImageIcon interface{} `json:"imageIcon,omitempty"`
+		ImageIcon string `json:"imageIcon,omitempty"`
 
 		// image loot
-		ImageLoot interface{} `json:"imageLoot,omitempty"`
+		ImageLoot string `json:"imageLoot,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2113,13 +2113,13 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeapo
 		Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeaponAttachmentsItems0 `json:"attachments"`
 
 		// image icon
-		ImageIcon interface{} `json:"imageIcon,omitempty"`
+		ImageIcon string `json:"imageIcon,omitempty"`
 
 		// image loot
-		ImageLoot interface{} `json:"imageLoot,omitempty"`
+		ImageLoot string `json:"imageLoot,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2223,13 +2223,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeap
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeaponAttachmentsItems0 struct {
 
 	// category
-	Category interface{} `json:"category,omitempty"`
+	Category string `json:"category,omitempty"`
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -2244,13 +2244,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeap
 	var stage1 struct {
 
 		// category
-		Category interface{} `json:"category,omitempty"`
+		Category string `json:"category,omitempty"`
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2297,13 +2297,13 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0PrimaryWeapo
 	var stage1 struct {
 
 		// category
-		Category interface{} `json:"category,omitempty"`
+		Category string `json:"category,omitempty"`
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2371,13 +2371,13 @@ type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWeapon
 	Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWeaponAttachmentsItems0 `json:"attachments"`
 
 	// image icon
-	ImageIcon interface{} `json:"imageIcon,omitempty"`
+	ImageIcon string `json:"imageIcon,omitempty"`
 
 	// image loot
-	ImageLoot interface{} `json:"imageLoot,omitempty"`
+	ImageLoot string `json:"imageLoot,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -2398,13 +2398,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWe
 		Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWeaponAttachmentsItems0 `json:"attachments"`
 
 		// image icon
-		ImageIcon interface{} `json:"imageIcon,omitempty"`
+		ImageIcon string `json:"imageIcon,omitempty"`
 
 		// image loot
-		ImageLoot interface{} `json:"imageLoot,omitempty"`
+		ImageLoot string `json:"imageLoot,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2461,13 +2461,13 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWea
 		Attachments []*FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWeaponAttachmentsItems0 `json:"attachments"`
 
 		// image icon
-		ImageIcon interface{} `json:"imageIcon,omitempty"`
+		ImageIcon string `json:"imageIcon,omitempty"`
 
 		// image loot
-		ImageLoot interface{} `json:"imageLoot,omitempty"`
+		ImageLoot string `json:"imageLoot,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2571,13 +2571,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWe
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWeaponAttachmentsItems0 struct {
 
 	// category
-	Category interface{} `json:"category,omitempty"`
+	Category string `json:"category,omitempty"`
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -2592,13 +2592,13 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWe
 	var stage1 struct {
 
 		// category
-		Category interface{} `json:"category,omitempty"`
+		Category string `json:"category,omitempty"`
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2645,13 +2645,13 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWea
 	var stage1 struct {
 
 		// category
-		Category interface{} `json:"category,omitempty"`
+		Category string `json:"category,omitempty"`
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
@@ -2716,19 +2716,19 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0SecondaryWe
 type FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Tactical struct {
 
 	// image
-	Image interface{} `json:"image,omitempty"`
+	Image string `json:"image,omitempty"`
 
 	// image large
-	ImageLarge interface{} `json:"imageLarge,omitempty"`
+	ImageLarge string `json:"imageLarge,omitempty"`
 
 	// label
-	Label interface{} `json:"label,omitempty"`
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
 	// progression image
-	ProgressionImage interface{} `json:"progressionImage,omitempty"`
+	ProgressionImage string `json:"progressionImage,omitempty"`
 
 	// full match info response data all players items0 player loadout items0 tactical additional properties
 	FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0TacticalAdditionalProperties map[string]interface{} `json:"-"`
@@ -2740,19 +2740,19 @@ func (m *FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Tactical) U
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image large
-		ImageLarge interface{} `json:"imageLarge,omitempty"`
+		ImageLarge string `json:"imageLarge,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
 
 		// progression image
-		ProgressionImage interface{} `json:"progressionImage,omitempty"`
+		ProgressionImage string `json:"progressionImage,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
@@ -2798,19 +2798,19 @@ func (m FullMatchInfoResponseDataAllPlayersItems0PlayerLoadoutItems0Tactical) Ma
 	var stage1 struct {
 
 		// image
-		Image interface{} `json:"image,omitempty"`
+		Image string `json:"image,omitempty"`
 
 		// image large
-		ImageLarge interface{} `json:"imageLarge,omitempty"`
+		ImageLarge string `json:"imageLarge,omitempty"`
 
 		// label
-		Label interface{} `json:"label,omitempty"`
+		Label string `json:"label,omitempty"`
 
 		// name
 		Name string `json:"name,omitempty"`
 
 		// progression image
-		ProgressionImage interface{} `json:"progressionImage,omitempty"`
+		ProgressionImage string `json:"progressionImage,omitempty"`
 	}
 
 	stage1.Image = m.Image

@@ -68,7 +68,7 @@ func (c *Client) MapList(ctx context.Context, title GameTitle, platform Platform
 	}
 
 	param := service.MapListParams{
-		Context:  context.Background(),
+		Context:  ctx,
 		Title:    string(title),
 		Platform: string(platform),
 		GameType: string(gameType),
@@ -93,7 +93,7 @@ func (c *Client) FullMatchInfo(ctx context.Context, title GameTitle, platform Pl
 	}
 
 	param := service.FullMatchInfoParams{
-		Context:  context.Background(),
+		Context:  ctx,
 		Title:    string(title),
 		Platform: string(platform),
 		GameType: string(gameType),
@@ -118,7 +118,7 @@ func (c *Client) BattlePassLoot(ctx context.Context, title GameTitle, platform P
 	}
 
 	param := service.BattlePassLootParams{
-		Context:  context.Background(),
+		Context:  ctx,
 		Title:    string(title),
 		Platform: string(platform),
 		Season:   season,
@@ -142,7 +142,7 @@ func (c *Client) Purchasable(ctx context.Context, title GameTitle, platform Plat
 	}
 
 	param := service.PurchasableParams{
-		Context:  context.Background(),
+		Context:  ctx,
 		Title:    string(title),
 		Platform: string(platform),
 	}
@@ -165,7 +165,7 @@ func (c *Client) Loadout(ctx context.Context, title GameTitle, gameType GameType
 	}
 
 	param := service.LoadoutParams{
-		Context:  context.Background(),
+		Context:  ctx,
 		Title:    string(title),
 		GameType: string(gameType),
 	}

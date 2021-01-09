@@ -7,10 +7,12 @@ package models
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // LoadoutResponse loadout response
@@ -166,11 +168,50 @@ func (m *LoadoutResponse) UnmarshalBinary(b []byte) error {
 // swagger:model LoadoutResponseData
 type LoadoutResponseData struct {
 
+	// attachments
+	Attachments map[string]LoadoutResponseDataAttachmentsAnon `json:"attachments,omitempty"`
+
+	// attachments by base ref
+	AttachmentsByBaseRef map[string][]string `json:"attachmentsByBaseRef,omitempty"`
+
+	// attachments by category
+	AttachmentsByCategory map[string][]string `json:"attachmentsByCategory,omitempty"`
+
+	// base weapons
+	BaseWeapons map[string]LoadoutResponseDataBaseWeaponsAnon `json:"baseWeapons,omitempty"`
+
+	// base weapons by category
+	BaseWeaponsByCategory map[string][]string `json:"baseWeaponsByCategory,omitempty"`
+
+	// equipment
+	Equipment map[string][]LoadoutResponseDataEquipmentItems0 `json:"equipment,omitempty"`
+
+	// killstreaks
+	Killstreaks map[string]LoadoutResponseDataKillstreaksAnon `json:"killstreaks,omitempty"`
+
 	// message
 	Message string `json:"message,omitempty"`
 
+	// perks
+	Perks map[string]map[string]LoadoutResponseDataPerksAnon `json:"perks,omitempty"`
+
 	// type
 	Type string `json:"type,omitempty"`
+
+	// weapon categories by slot
+	WeaponCategoriesBySlot map[string][]string `json:"weaponCategoriesBySlot,omitempty"`
+
+	// weapon levels
+	WeaponLevels map[string]map[string]LoadoutResponseDataWeaponLevelsAnon `json:"weaponLevels,omitempty"`
+
+	// weapons
+	Weapons map[string]LoadoutResponseDataWeaponsAnon `json:"weapons,omitempty"`
+
+	// weapons by base weapon
+	WeaponsByBaseWeapon map[string][]string `json:"weaponsByBaseWeapon,omitempty"`
+
+	// weapons by category
+	WeaponsByCategory map[string][]string `json:"weaponsByCategory,omitempty"`
 
 	// loadout response data additional properties
 	LoadoutResponseDataAdditionalProperties map[string]interface{} `json:"-"`
@@ -181,19 +222,71 @@ func (m *LoadoutResponseData) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
+		// attachments
+		Attachments map[string]LoadoutResponseDataAttachmentsAnon `json:"attachments,omitempty"`
+
+		// attachments by base ref
+		AttachmentsByBaseRef map[string][]string `json:"attachmentsByBaseRef,omitempty"`
+
+		// attachments by category
+		AttachmentsByCategory map[string][]string `json:"attachmentsByCategory,omitempty"`
+
+		// base weapons
+		BaseWeapons map[string]LoadoutResponseDataBaseWeaponsAnon `json:"baseWeapons,omitempty"`
+
+		// base weapons by category
+		BaseWeaponsByCategory map[string][]string `json:"baseWeaponsByCategory,omitempty"`
+
+		// equipment
+		Equipment map[string][]LoadoutResponseDataEquipmentItems0 `json:"equipment,omitempty"`
+
+		// killstreaks
+		Killstreaks map[string]LoadoutResponseDataKillstreaksAnon `json:"killstreaks,omitempty"`
+
 		// message
 		Message string `json:"message,omitempty"`
 
+		// perks
+		Perks map[string]map[string]LoadoutResponseDataPerksAnon `json:"perks,omitempty"`
+
 		// type
 		Type string `json:"type,omitempty"`
+
+		// weapon categories by slot
+		WeaponCategoriesBySlot map[string][]string `json:"weaponCategoriesBySlot,omitempty"`
+
+		// weapon levels
+		WeaponLevels map[string]map[string]LoadoutResponseDataWeaponLevelsAnon `json:"weaponLevels,omitempty"`
+
+		// weapons
+		Weapons map[string]LoadoutResponseDataWeaponsAnon `json:"weapons,omitempty"`
+
+		// weapons by base weapon
+		WeaponsByBaseWeapon map[string][]string `json:"weaponsByBaseWeapon,omitempty"`
+
+		// weapons by category
+		WeaponsByCategory map[string][]string `json:"weaponsByCategory,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
 	}
 	var rcv LoadoutResponseData
 
+	rcv.Attachments = stage1.Attachments
+	rcv.AttachmentsByBaseRef = stage1.AttachmentsByBaseRef
+	rcv.AttachmentsByCategory = stage1.AttachmentsByCategory
+	rcv.BaseWeapons = stage1.BaseWeapons
+	rcv.BaseWeaponsByCategory = stage1.BaseWeaponsByCategory
+	rcv.Equipment = stage1.Equipment
+	rcv.Killstreaks = stage1.Killstreaks
 	rcv.Message = stage1.Message
+	rcv.Perks = stage1.Perks
 	rcv.Type = stage1.Type
+	rcv.WeaponCategoriesBySlot = stage1.WeaponCategoriesBySlot
+	rcv.WeaponLevels = stage1.WeaponLevels
+	rcv.Weapons = stage1.Weapons
+	rcv.WeaponsByBaseWeapon = stage1.WeaponsByBaseWeapon
+	rcv.WeaponsByCategory = stage1.WeaponsByCategory
 	*m = rcv
 
 	// stage 2, remove properties and add to map
@@ -202,8 +295,21 @@ func (m *LoadoutResponseData) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	delete(stage2, "attachments")
+	delete(stage2, "attachmentsByBaseRef")
+	delete(stage2, "attachmentsByCategory")
+	delete(stage2, "baseWeapons")
+	delete(stage2, "baseWeaponsByCategory")
+	delete(stage2, "equipment")
+	delete(stage2, "killstreaks")
 	delete(stage2, "message")
+	delete(stage2, "perks")
 	delete(stage2, "type")
+	delete(stage2, "weaponCategoriesBySlot")
+	delete(stage2, "weaponLevels")
+	delete(stage2, "weapons")
+	delete(stage2, "weaponsByBaseWeapon")
+	delete(stage2, "weaponsByCategory")
 	// stage 3, add additional properties values
 	if len(stage2) > 0 {
 		result := make(map[string]interface{})
@@ -224,15 +330,67 @@ func (m *LoadoutResponseData) UnmarshalJSON(data []byte) error {
 func (m LoadoutResponseData) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
+		// attachments
+		Attachments map[string]LoadoutResponseDataAttachmentsAnon `json:"attachments,omitempty"`
+
+		// attachments by base ref
+		AttachmentsByBaseRef map[string][]string `json:"attachmentsByBaseRef,omitempty"`
+
+		// attachments by category
+		AttachmentsByCategory map[string][]string `json:"attachmentsByCategory,omitempty"`
+
+		// base weapons
+		BaseWeapons map[string]LoadoutResponseDataBaseWeaponsAnon `json:"baseWeapons,omitempty"`
+
+		// base weapons by category
+		BaseWeaponsByCategory map[string][]string `json:"baseWeaponsByCategory,omitempty"`
+
+		// equipment
+		Equipment map[string][]LoadoutResponseDataEquipmentItems0 `json:"equipment,omitempty"`
+
+		// killstreaks
+		Killstreaks map[string]LoadoutResponseDataKillstreaksAnon `json:"killstreaks,omitempty"`
+
 		// message
 		Message string `json:"message,omitempty"`
 
+		// perks
+		Perks map[string]map[string]LoadoutResponseDataPerksAnon `json:"perks,omitempty"`
+
 		// type
 		Type string `json:"type,omitempty"`
+
+		// weapon categories by slot
+		WeaponCategoriesBySlot map[string][]string `json:"weaponCategoriesBySlot,omitempty"`
+
+		// weapon levels
+		WeaponLevels map[string]map[string]LoadoutResponseDataWeaponLevelsAnon `json:"weaponLevels,omitempty"`
+
+		// weapons
+		Weapons map[string]LoadoutResponseDataWeaponsAnon `json:"weapons,omitempty"`
+
+		// weapons by base weapon
+		WeaponsByBaseWeapon map[string][]string `json:"weaponsByBaseWeapon,omitempty"`
+
+		// weapons by category
+		WeaponsByCategory map[string][]string `json:"weaponsByCategory,omitempty"`
 	}
 
+	stage1.Attachments = m.Attachments
+	stage1.AttachmentsByBaseRef = m.AttachmentsByBaseRef
+	stage1.AttachmentsByCategory = m.AttachmentsByCategory
+	stage1.BaseWeapons = m.BaseWeapons
+	stage1.BaseWeaponsByCategory = m.BaseWeaponsByCategory
+	stage1.Equipment = m.Equipment
+	stage1.Killstreaks = m.Killstreaks
 	stage1.Message = m.Message
+	stage1.Perks = m.Perks
 	stage1.Type = m.Type
+	stage1.WeaponCategoriesBySlot = m.WeaponCategoriesBySlot
+	stage1.WeaponLevels = m.WeaponLevels
+	stage1.Weapons = m.Weapons
+	stage1.WeaponsByBaseWeapon = m.WeaponsByBaseWeapon
+	stage1.WeaponsByCategory = m.WeaponsByCategory
 
 	// make JSON object for known properties
 	props, err := json.Marshal(stage1)
@@ -261,6 +419,207 @@ func (m LoadoutResponseData) MarshalJSON() ([]byte, error) {
 
 // Validate validates this loadout response data
 func (m *LoadoutResponseData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAttachments(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBaseWeapons(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEquipment(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKillstreaks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePerks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWeaponLevels(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWeapons(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *LoadoutResponseData) validateAttachments(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Attachments) { // not required
+		return nil
+	}
+
+	for k := range m.Attachments {
+
+		if swag.IsZero(m.Attachments[k]) { // not required
+			continue
+		}
+		if val, ok := m.Attachments[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validateBaseWeapons(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BaseWeapons) { // not required
+		return nil
+	}
+
+	for k := range m.BaseWeapons {
+
+		if swag.IsZero(m.BaseWeapons[k]) { // not required
+			continue
+		}
+		if val, ok := m.BaseWeapons[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validateEquipment(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Equipment) { // not required
+		return nil
+	}
+
+	for k := range m.Equipment {
+
+		if err := validate.Required("data"+"."+"equipment"+"."+k, "body", m.Equipment[k]); err != nil {
+			return err
+		}
+
+		for i := 0; i < len(m.Equipment[k]); i++ {
+
+			if err := m.Equipment[k][i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("data" + "." + "equipment" + "." + k + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validateKillstreaks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Killstreaks) { // not required
+		return nil
+	}
+
+	for k := range m.Killstreaks {
+
+		if swag.IsZero(m.Killstreaks[k]) { // not required
+			continue
+		}
+		if val, ok := m.Killstreaks[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validatePerks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Perks) { // not required
+		return nil
+	}
+
+	for k := range m.Perks {
+
+		for kk := range m.Perks[k] {
+
+			if swag.IsZero(m.Perks[k][kk]) { // not required
+				continue
+			}
+			if val, ok := m.Perks[k][kk]; ok {
+				if err := val.Validate(formats); err != nil {
+					return err
+				}
+			}
+
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validateWeaponLevels(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.WeaponLevels) { // not required
+		return nil
+	}
+
+	for k := range m.WeaponLevels {
+
+		for kk := range m.WeaponLevels[k] {
+
+			if swag.IsZero(m.WeaponLevels[k][kk]) { // not required
+				continue
+			}
+			if val, ok := m.WeaponLevels[k][kk]; ok {
+				if err := val.Validate(formats); err != nil {
+					return err
+				}
+			}
+
+		}
+
+	}
+
+	return nil
+}
+
+func (m *LoadoutResponseData) validateWeapons(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Weapons) { // not required
+		return nil
+	}
+
+	for k := range m.Weapons {
+
+		if swag.IsZero(m.Weapons[k]) { // not required
+			continue
+		}
+		if val, ok := m.Weapons[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -275,6 +634,518 @@ func (m *LoadoutResponseData) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *LoadoutResponseData) UnmarshalBinary(b []byte) error {
 	var res LoadoutResponseData
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataAttachmentsAnon loadout response data attachments anon
+//
+// swagger:model LoadoutResponseDataAttachmentsAnon
+type LoadoutResponseDataAttachmentsAnon struct {
+
+	// accuracy
+	Accuracy float64 `json:"accuracy,omitempty"`
+
+	// base ref
+	BaseRef string `json:"baseRef,omitempty"`
+
+	// blocks category
+	BlocksCategory string `json:"blocksCategory,omitempty"`
+
+	// category
+	Category string `json:"category,omitempty"`
+
+	// control
+	Control float64 `json:"control,omitempty"`
+
+	// damage
+	Damage float64 `json:"damage,omitempty"`
+
+	// description key
+	DescriptionKey string `json:"descriptionKey,omitempty"`
+
+	// description label
+	DescriptionLabel string `json:"descriptionLabel,omitempty"`
+
+	// firerate
+	Firerate float64 `json:"firerate,omitempty"`
+
+	// image
+	Image string `json:"image,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
+
+	// label key
+	LabelKey string `json:"labelKey,omitempty"`
+
+	// mobility
+	Mobility float64 `json:"mobility,omitempty"`
+
+	// mod1
+	Mod1 string `json:"mod1,omitempty"`
+
+	// mod2
+	Mod2 string `json:"mod2,omitempty"`
+
+	// mod3
+	Mod3 string `json:"mod3,omitempty"`
+
+	// mod4
+	Mod4 string `json:"mod4,omitempty"`
+
+	// mod5
+	Mod5 string `json:"mod5,omitempty"`
+
+	// mod6
+	Mod6 string `json:"mod6,omitempty"`
+
+	// mod7
+	Mod7 string `json:"mod7,omitempty"`
+
+	// mod8
+	Mod8 string `json:"mod8,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// perk
+	Perk string `json:"perk,omitempty"`
+
+	// range
+	Range float64 `json:"range,omitempty"`
+}
+
+// Validate validates this loadout response data attachments anon
+func (m *LoadoutResponseDataAttachmentsAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataAttachmentsAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataAttachmentsAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataAttachmentsAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataBaseWeaponsAnon loadout response data base weapons anon
+//
+// swagger:model LoadoutResponseDataBaseWeaponsAnon
+type LoadoutResponseDataBaseWeaponsAnon struct {
+
+	// accuracy
+	Accuracy float64 `json:"accuracy,omitempty"`
+
+	// attachment categories
+	AttachmentCategories string `json:"attachmentCategories,omitempty"`
+
+	// category
+	Category string `json:"category,omitempty"`
+
+	// control
+	Control float64 `json:"control,omitempty"`
+
+	// customization disabled
+	CustomizationDisabled int64 `json:"customizationDisabled,omitempty"`
+
+	// damage
+	Damage float64 `json:"damage,omitempty"`
+
+	// decal slots
+	DecalSlots int64 `json:"decalSlots,omitempty"`
+
+	// description key
+	DescriptionKey string `json:"descriptionKey,omitempty"`
+
+	// description label
+	DescriptionLabel string `json:"descriptionLabel,omitempty"`
+
+	// firerate
+	Firerate float64 `json:"firerate,omitempty"`
+
+	// gunsmith disabled
+	GunsmithDisabled int64 `json:"gunsmithDisabled,omitempty"`
+
+	// mobility
+	Mobility float64 `json:"mobility,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// progression image
+	ProgressionImage string `json:"progressionImage,omitempty"`
+
+	// range
+	Range float64 `json:"range,omitempty"`
+
+	// rank unlocked
+	RankUnlocked int64 `json:"rankUnlocked,omitempty"`
+
+	// ui display order
+	UIDisplayOrder int64 `json:"uiDisplayOrder,omitempty"`
+
+	// weapon slot
+	WeaponSlot string `json:"weaponSlot,omitempty"`
+}
+
+// Validate validates this loadout response data base weapons anon
+func (m *LoadoutResponseDataBaseWeaponsAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataBaseWeaponsAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataBaseWeaponsAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataBaseWeaponsAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataEquipmentItems0 loadout response data equipment items0
+//
+// swagger:model LoadoutResponseDataEquipmentItems0
+type LoadoutResponseDataEquipmentItems0 struct {
+
+	// description
+	Description string `json:"description,omitempty"`
+
+	// description label
+	DescriptionLabel string `json:"descriptionLabel,omitempty"`
+
+	// image
+	Image string `json:"image,omitempty"`
+
+	// image large
+	ImageLarge string `json:"imageLarge,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// progression image
+	ProgressionImage string `json:"progressionImage,omitempty"`
+
+	// rank unlocked
+	RankUnlocked int64 `json:"rankUnlocked,omitempty"`
+
+	// type
+	Type string `json:"type,omitempty"`
+
+	// ui order
+	UIOrder int64 `json:"uiOrder,omitempty"`
+}
+
+// Validate validates this loadout response data equipment items0
+func (m *LoadoutResponseDataEquipmentItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataEquipmentItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataEquipmentItems0) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataEquipmentItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataKillstreaksAnon loadout response data killstreaks anon
+//
+// swagger:model LoadoutResponseDataKillstreaksAnon
+type LoadoutResponseDataKillstreaksAnon struct {
+
+	// description
+	Description string `json:"description,omitempty"`
+
+	// description label
+	DescriptionLabel string `json:"descriptionLabel,omitempty"`
+
+	// dpad icon
+	DpadIcon string `json:"dpadIcon,omitempty"`
+
+	// dwid
+	Dwid string `json:"dwid,omitempty"`
+
+	// full image
+	FullImage string `json:"fullImage,omitempty"`
+
+	// icon
+	Icon string `json:"icon,omitempty"`
+
+	// kills
+	Kills int64 `json:"kills,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
+
+	// label key
+	LabelKey string `json:"labelKey,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// overhead icon
+	OverheadIcon string `json:"overheadIcon,omitempty"`
+
+	// progression image
+	ProgressionImage string `json:"progressionImage,omitempty"`
+
+	// score cost
+	ScoreCost int64 `json:"scoreCost,omitempty"`
+
+	// small image
+	SmallImage string `json:"smallImage,omitempty"`
+
+	// streak type
+	StreakType string `json:"streakType,omitempty"`
+
+	// support cost
+	SupportCost int64 `json:"supportCost,omitempty"`
+
+	// unearned icon
+	UnearnedIcon string `json:"unearnedIcon,omitempty"`
+}
+
+// Validate validates this loadout response data killstreaks anon
+func (m *LoadoutResponseDataKillstreaksAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataKillstreaksAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataKillstreaksAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataKillstreaksAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataPerksAnon loadout response data perks anon
+//
+// swagger:model LoadoutResponseDataPerksAnon
+type LoadoutResponseDataPerksAnon struct {
+
+	// br description key
+	BrDescriptionKey string `json:"brDescriptionKey,omitempty"`
+
+	// br description label
+	BrDescriptionLabel string `json:"brDescriptionLabel,omitempty"`
+
+	// cost
+	Cost int64 `json:"cost,omitempty"`
+
+	// description key
+	DescriptionKey string `json:"descriptionKey,omitempty"`
+
+	// description label
+	DescriptionLabel string `json:"descriptionLabel,omitempty"`
+
+	// extra info key
+	ExtraInfoKey string `json:"extraInfoKey,omitempty"`
+
+	// extra info label
+	ExtraInfoLabel string `json:"extraInfoLabel,omitempty"`
+
+	// image main Ui
+	ImageMainUI string `json:"imageMainUi,omitempty"`
+
+	// image progression
+	ImageProgression string `json:"imageProgression,omitempty"`
+
+	// index Id
+	IndexID int64 `json:"indexId,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
+
+	// label key
+	LabelKey string `json:"labelKey,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// patch notes
+	PatchNotes string `json:"patchNotes,omitempty"`
+
+	// patch notes key
+	PatchNotesKey string `json:"patchNotesKey,omitempty"`
+
+	// rank unlocked
+	RankUnlocked int64 `json:"rankUnlocked,omitempty"`
+
+	// slot
+	Slot int64 `json:"slot,omitempty"`
+}
+
+// Validate validates this loadout response data perks anon
+func (m *LoadoutResponseDataPerksAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataPerksAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataPerksAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataPerksAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataWeaponLevelsAnon loadout response data weapon levels anon
+//
+// swagger:model LoadoutResponseDataWeaponLevelsAnon
+type LoadoutResponseDataWeaponLevelsAnon struct {
+
+	// rank
+	Rank int64 `json:"rank,omitempty"`
+
+	// unlock category
+	UnlockCategory string `json:"unlockCategory,omitempty"`
+
+	// unlock name
+	UnlockName string `json:"unlockName,omitempty"`
+
+	// unlock override name
+	UnlockOverrideName string `json:"unlockOverrideName,omitempty"`
+}
+
+// Validate validates this loadout response data weapon levels anon
+func (m *LoadoutResponseDataWeaponLevelsAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataWeaponLevelsAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataWeaponLevelsAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataWeaponLevelsAnon
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// LoadoutResponseDataWeaponsAnon loadout response data weapons anon
+//
+// swagger:model LoadoutResponseDataWeaponsAnon
+type LoadoutResponseDataWeaponsAnon struct {
+
+	// attachments
+	Attachments string `json:"attachments,omitempty"`
+
+	// attachments equipped
+	AttachmentsEquipped string `json:"attachmentsEquipped,omitempty"`
+
+	// category
+	Category string `json:"category,omitempty"`
+
+	// dwid
+	Dwid string `json:"dwid,omitempty"`
+
+	// image icon
+	ImageIcon string `json:"imageIcon,omitempty"`
+
+	// image loot
+	ImageLoot string `json:"imageLoot,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// perk
+	Perk string `json:"perk,omitempty"`
+
+	// rarity
+	Rarity string `json:"rarity,omitempty"`
+
+	// root name
+	RootName string `json:"rootName,omitempty"`
+
+	// string key
+	StringKey string `json:"stringKey,omitempty"`
+
+	// variant Id
+	VariantID int64 `json:"variantId,omitempty"`
+}
+
+// Validate validates this loadout response data weapons anon
+func (m *LoadoutResponseDataWeaponsAnon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *LoadoutResponseDataWeaponsAnon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *LoadoutResponseDataWeaponsAnon) UnmarshalBinary(b []byte) error {
+	var res LoadoutResponseDataWeaponsAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -36,7 +36,7 @@
           "type": "integer"
         },
         "sort": {
-          "type": "null"
+          "type": "string"
         },
         "columns": {
           "type": "array",

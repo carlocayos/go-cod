@@ -15,10 +15,10 @@
           "type": "string"
         },
         "title": {
-          "type": "null"
+          "type": "string"
         },
         "platform": {
-          "type": "null"
+          "type": "string"
         },
         "username": {
           "type": "string"
@@ -69,16 +69,767 @@
               "type": "object",
               "properties": {
                 "properties": {
-                  "type": "null"
+                  "type": "object",
+                  "properties": {
+                    "recordLongestWinStreak": {
+                      "type": "number"
+                    },
+                    "recordXpInAMatch": {
+                      "type": "number"
+                    },
+                    "accuracy": {
+                      "type": "number"
+                    },
+                    "losses": {
+                      "type": "number"
+                    },
+                    "totalGamesPlayed": {
+                      "type": "number"
+                    },
+                    "score": {
+                      "type": "number"
+                    },
+                    "winLossRatio": {
+                      "type": "number"
+                    },
+                    "totalShots": {
+                      "type": "number"
+                    },
+                    "bestScoreXp": {
+                      "type": "number"
+                    },
+                    "gamesPlayed": {
+                      "type": "number"
+                    },
+                    "bestSquardKills": {
+                      "type": "number"
+                    },
+                    "bestSguardWave": {
+                      "type": "number"
+                    },
+                    "bestConfirmed": {
+                      "type": "number"
+                    },
+                    "deaths": {
+                      "type": "number"
+                    },
+                    "wins": {
+                      "type": "number"
+                    },
+                    "bestSquardCrates": {
+                      "type": "number"
+                    },
+                    "kdRatio": {
+                      "type": "number"
+                    },
+                    "bestAssists": {
+                      "type": "number"
+                    },
+                    "bestFieldgoals": {
+                      "type": "number"
+                    },
+                    "bestScore": {
+                      "type": "number"
+                    },
+                    "recordDeathsInAMatch": {
+                      "type": "number"
+                    },
+                    "scorePerGame": {
+                      "type": "number"
+                    },
+                    "bestSPM": {
+                      "type": "number"
+                    },
+                    "bestKillChains": {
+                      "type": "number"
+                    },
+                    "recordKillsInAMatch": {
+                      "type": "number"
+                    },
+                    "suicides": {
+                      "type": "number"
+                    },
+                    "wlRatio": {
+                      "type": "number"
+                    },
+                    "currentWinStreak": {
+                      "type": "number"
+                    },
+                    "bestMatchBonusXp": {
+                      "type": "number"
+                    },
+                    "bestMatchXp": {
+                      "type": "number"
+                    },
+                    "bestSguardWeaponLevel": {
+                      "type": "number"
+                    },
+                    "bestKD": {
+                      "type": "number"
+                    },
+                    "kills": {
+                      "type": "number"
+                    },
+                    "bestKillsAsInfected": {
+                      "type": "number"
+                    },
+                    "bestReturns": {
+                      "type": "number"
+                    },
+                    "bestStabs": {
+                      "type": "number"
+                    },
+                    "bestKillsAsSurvivor": {
+                      "type": "number"
+                    },
+                    "timePlayedTotal": {
+                      "type": "number"
+                    },
+                    "bestDestructions": {
+                      "type": "number"
+                    },
+                    "headshots": {
+                      "type": "number"
+                    },
+                    "bestRescues": {
+                      "type": "number"
+                    },
+                    "assists": {
+                      "type": "number"
+                    },
+                    "ties": {
+                      "type": "number"
+                    },
+                    "recordKillStreak": {
+                      "type": "number"
+                    },
+                    "bestPlants": {
+                      "type": "number"
+                    },
+                    "misses": {
+                      "type": "number"
+                    },
+                    "bestDamage": {
+                      "type": "number"
+                    },
+                    "bestSetbacks": {
+                      "type": "number"
+                    },
+                    "bestTouchdowns": {
+                      "type": "number"
+                    },
+                    "scorePerMinute": {
+                      "type": "number"
+                    },
+                    "bestDeaths": {
+                      "type": "number"
+                    },
+                    "bestMedalXp": {
+                      "type": "number"
+                    },
+                    "bestDefends": {
+                      "type": "number"
+                    },
+                    "bestSquardRevives": {
+                      "type": "number"
+                    },
+                    "bestKills": {
+                      "type": "number"
+                    },
+                    "bestDefuses": {
+                      "type": "number"
+                    },
+                    "bestCaptures": {
+                      "type": "number"
+                    },
+                    "hits": {
+                      "type": "number"
+                    },
+                    "bestKillStreak": {
+                      "type": "number"
+                    },
+                    "bestDenied": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": true
                 }
               },
               "additionalProperties": true
             },
             "mode": {
-              "type": "object"
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "kills": {
+                    "type": "number"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "timePlayed": {
+                    "type": "number"
+                  },
+                  "kdRatio": {
+                    "type": "number"
+                  },
+                  "setBacks": {
+                    "type": "number"
+                  },
+                  "scorePerMinute": {
+                    "type": "number"
+                  },
+                  "stabs": {
+                    "type": "number"
+                  },
+                  "deaths": {
+                    "type": "number"
+                  }
+                }
+              }
             },
             "map": {
               "type": "object"
+            },
+            "itemData": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "hits": {
+                      "type": "number"
+                    },
+                    "kills": {
+                      "type": "number"
+                    },
+                    "kdRatio": {
+                      "type": "number"
+                    },
+                    "headshots": {
+                      "type": "number"
+                    },
+                    "accuracy": {
+                      "type": "number"
+                    },
+                    "shots": {
+                      "type": "number"
+                    },
+                    "deaths": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "scorestreakData": {
+              "type": "object",
+              "properties": {
+                "lethalScorestreakData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "extraStat1": {
+                        "type": "number"
+                      },
+                      "uses": {
+                        "type": "number"
+                      },
+                      "awardedCount": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "supportScorestreakData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "extraStat1": {
+                        "type": "number"
+                      },
+                      "uses": {
+                        "type": "number"
+                      },
+                      "awardedCount": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "additionalProperties": true
+            },
+            "accoladeData": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "classChanges": {
+                      "type": "number"
+                    },
+                    "highestAvgAltitude": {
+                      "type": "number"
+                    },
+                    "killsFromBehind": {
+                      "type": "number"
+                    },
+                    "lmgDeaths": {
+                      "type": "number"
+                    },
+                    "riotShieldDamageAbsorbed": {
+                      "type": "number"
+                    },
+                    "flashbangHits": {
+                      "type": "number"
+                    },
+                    "meleeKills": {
+                      "type": "number"
+                    },
+                    "tagsLargestBank": {
+                      "type": "number"
+                    },
+                    "shotgunKills": {
+                      "type": "number"
+                    },
+                    "sniperDeaths": {
+                      "type": "number"
+                    },
+                    "timeProne": {
+                      "type": "number"
+                    },
+                    "killstreakWhitePhosphorousKillsAssists": {
+                      "type": "number"
+                    },
+                    "shortestLife": {
+                      "type": "number"
+                    },
+                    "deathsFromBehind": {
+                      "type": "number"
+                    },
+                    "higherRankedKills": {
+                      "type": "number"
+                    },
+                    "mostAssists": {
+                      "type": "number"
+                    },
+                    "leastKills": {
+                      "type": "number"
+                    },
+                    "tagsDenied": {
+                      "type": "number"
+                    },
+                    "killstreakWheelsonKills": {
+                      "type": "number"
+                    },
+                    "sniperHeadshots": {
+                      "type": "number"
+                    },
+                    "killstreakJuggernautKills": {
+                      "type": "number"
+                    },
+                    "smokesUsed": {
+                      "type": "number"
+                    },
+                    "avengerKills": {
+                      "type": "number"
+                    },
+                    "decoyHits": {
+                      "type": "number"
+                    },
+                    "killstreakCarePackageUsed": {
+                      "type": "number"
+                    },
+                    "molotovKills": {
+                      "type": "number"
+                    },
+                    "gasHits": {
+                      "type": "number"
+                    },
+                    "comebackKills": {
+                      "type": "number"
+                    },
+                    "lmgHeadshots": {
+                      "type": "number"
+                    },
+                    "smgDeaths": {
+                      "type": "number"
+                    },
+                    "carrierKills": {
+                      "type": "number"
+                    },
+                    "deployableCoverUsed": {
+                      "type": "number"
+                    },
+                    "thermiteKills": {
+                      "type": "number"
+                    },
+                    "arKills": {
+                      "type": "number"
+                    },
+                    "c4Kills": {
+                      "type": "number"
+                    },
+                    "suicides": {
+                      "type": "number"
+                    },
+                    "clutch": {
+                      "type": "number"
+                    },
+                    "survivorKills": {
+                      "type": "number"
+                    },
+                    "killstreakGunshipKills": {
+                      "type": "number"
+                    },
+                    "timeSpentAsPassenger": {
+                      "type": "number"
+                    },
+                    "returns": {
+                      "type": "number"
+                    },
+                    "smgHeadshots": {
+                      "type": "number"
+                    },
+                    "launcherDeaths": {
+                      "type": "number"
+                    },
+                    "oneShotOneKills": {
+                      "type": "number"
+                    },
+                    "ammoBoxUsed": {
+                      "type": "number"
+                    },
+                    "spawnSelectSquad": {
+                      "type": "number"
+                    },
+                    "weaponPickups": {
+                      "type": "number"
+                    },
+                    "pointBlankKills": {
+                      "type": "number"
+                    },
+                    "tagsCaptured": {
+                      "type": "number"
+                    },
+                    "killstreakGroundKills": {
+                      "type": "number"
+                    },
+                    "distanceTraveledInVehicle": {
+                      "type": "number"
+                    },
+                    "longestLife": {
+                      "type": "number"
+                    },
+                    "stunHits": {
+                      "type": "number"
+                    },
+                    "spawnSelectFlag": {
+                      "type": "number"
+                    },
+                    "shotgunHeadshots": {
+                      "type": "number"
+                    },
+                    "bombDefused": {
+                      "type": "number"
+                    },
+                    "snapshotHits": {
+                      "type": "number"
+                    },
+                    "noKillsWithDeath": {
+                      "type": "number"
+                    },
+                    "killstreakAUAVAssists": {
+                      "type": "number"
+                    },
+                    "killstreakPersonalUAVKills": {
+                      "type": "number"
+                    },
+                    "tacticalInsertionSpawns": {
+                      "type": "number"
+                    },
+                    "launcherKills": {
+                      "type": "number"
+                    },
+                    "spawnSelectVehicle": {
+                      "type": "number"
+                    },
+                    "mostKillsLeastDeaths": {
+                      "type": "number"
+                    },
+                    "mostKills": {
+                      "type": "number"
+                    },
+                    "defends": {
+                      "type": "number"
+                    },
+                    "timeSpentAsDriver": {
+                      "type": "number"
+                    },
+                    "bombDetonated": {
+                      "type": "number"
+                    },
+                    "arHeadshots": {
+                      "type": "number"
+                    },
+                    "timeOnPoint": {
+                      "type": "number"
+                    },
+                    "lmgKills": {
+                      "type": "number"
+                    },
+                    "killstreakUAVAssists": {
+                      "type": "number"
+                    },
+                    "carepackagesCaptured": {
+                      "type": "number"
+                    },
+                    "mostKillsLongestStreak": {
+                      "type": "number"
+                    },
+                    "killstreakCruiseMissileKills": {
+                      "type": "number"
+                    },
+                    "longestStreak": {
+                      "type": "number"
+                    },
+                    "destroyedKillstreaks": {
+                      "type": "number"
+                    },
+                    "hipfireKills": {
+                      "type": "number"
+                    },
+                    "stimDamageHealed": {
+                      "type": "number"
+                    },
+                    "skippedKillcams": {
+                      "type": "number"
+                    },
+                    "leastAssists": {
+                      "type": "number"
+                    },
+                    "mostMultikills": {
+                      "type": "number"
+                    },
+                    "highestRankedKills": {
+                      "type": "number"
+                    },
+                    "killstreakAirstrikeKills": {
+                      "type": "number"
+                    },
+                    "distanceTravelled": {
+                      "type": "number"
+                    },
+                    "killstreakKills": {
+                      "type": "number"
+                    },
+                    "semtexKills": {
+                      "type": "number"
+                    },
+                    "penetrationKills": {
+                      "type": "number"
+                    },
+                    "explosionsSurvived": {
+                      "type": "number"
+                    },
+                    "highestMultikill": {
+                      "type": "number"
+                    },
+                    "arDeaths": {
+                      "type": "number"
+                    },
+                    "longshotKills": {
+                      "type": "number"
+                    },
+                    "proximityMineKills": {
+                      "type": "number"
+                    },
+                    "tagsMegaBanked": {
+                      "type": "number"
+                    },
+                    "mostKillsMostHeadshots": {
+                      "type": "number"
+                    },
+                    "firstInfected": {
+                      "type": "number"
+                    },
+                    "killstreakCUAVAssists": {
+                      "type": "number"
+                    },
+                    "throwingKnifeKills": {
+                      "type": "number"
+                    },
+                    "executionKills": {
+                      "type": "number"
+                    },
+                    "lastSurvivor": {
+                      "type": "number"
+                    },
+                    "reconDroneMarks": {
+                      "type": "number"
+                    },
+                    "deadSilenceKills": {
+                      "type": "number"
+                    },
+                    "revengeKills": {
+                      "type": "number"
+                    },
+                    "infectedKills": {
+                      "type": "number"
+                    },
+                    "killEnemyTeam": {
+                      "type": "number"
+                    },
+                    "sniperKills": {
+                      "type": "number"
+                    },
+                    "killstreakCluserStrikeKills": {
+                      "type": "number"
+                    },
+                    "meleeDeaths": {
+                      "type": "number"
+                    },
+                    "timeWatchingKillcams": {
+                      "type": "number"
+                    },
+                    "killstreakTankKills": {
+                      "type": "number"
+                    },
+                    "noKillNoDeath": {
+                      "type": "number"
+                    },
+                    "shotgunDeaths": {
+                      "type": "number"
+                    },
+                    "killstreakChopperGunnerKills": {
+                      "type": "number"
+                    },
+                    "shotsFired": {
+                      "type": "number"
+                    },
+                    "stoppingPowerKills": {
+                      "type": "number"
+                    },
+                    "pistolPeaths": {
+                      "type": "number"
+                    },
+                    "killstreakShieldTurretKills": {
+                      "type": "number"
+                    },
+                    "timeCrouched": {
+                      "type": "number"
+                    },
+                    "noDeathsFromBehind": {
+                      "type": "number"
+                    },
+                    "bombPlanted": {
+                      "type": "number"
+                    },
+                    "setbacks": {
+                      "type": "number"
+                    },
+                    "smgKills": {
+                      "type": "number"
+                    },
+                    "claymoreKills": {
+                      "type": "number"
+                    },
+                    "kills10NoDeaths": {
+                      "type": "number"
+                    },
+                    "pistolHeadshots": {
+                      "type": "number"
+                    },
+                    "killstreakVTOLJetKills": {
+                      "type": "number"
+                    },
+                    "headshots": {
+                      "type": "number"
+                    },
+                    "mostDeaths": {
+                      "type": "number"
+                    },
+                    "adsKills": {
+                      "type": "number"
+                    },
+                    "empDroneHits": {
+                      "type": "number"
+                    },
+                    "defenderKills": {
+                      "type": "number"
+                    },
+                    "launcherHeadshots": {
+                      "type": "number"
+                    },
+                    "timesSelectedAsSquadLeader": {
+                      "type": "number"
+                    },
+                    "killstreakAirKills": {
+                      "type": "number"
+                    },
+                    "assaults": {
+                      "type": "number"
+                    },
+                    "fragKills": {
+                      "type": "number"
+                    },
+                    "killstreakEmergencyAirdropUsed": {
+                      "type": "number"
+                    },
+                    "captures": {
+                      "type": "number"
+                    },
+                    "killstreakChopperSupportKills": {
+                      "type": "number"
+                    },
+                    "spawnSelectBase": {
+                      "type": "number"
+                    },
+                    "noKill10Deaths": {
+                      "type": "number"
+                    },
+                    "leastDeaths": {
+                      "type": "number"
+                    },
+                    "killstreakSentryGunKills": {
+                      "type": "number"
+                    },
+                    "longestTimeSpentOnWeapon": {
+                      "type": "number"
+                    },
+                    "lowerRankedKills": {
+                      "type": "number"
+                    },
+                    "trophySystemHits": {
+                      "type": "number"
+                    },
+                    "clutchRevives": {
+                      "type": "number"
+                    },
+                    "lowestAvgAltitude": {
+                      "type": "number"
+                    },
+                    "pickups": {
+                      "type": "number"
+                    },
+                    "pistolKills": {
+                      "type": "number"
+                    },
+                    "reloads": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": true
             }
           },
           "additionalProperties": true
@@ -105,7 +856,7 @@
           "additionalProperties": true
         },
         "engagement": {
-          "type": "null"
+          "type": "object"
         }
       },
       "additionalProperties": true

@@ -192,7 +192,7 @@ type LeaderBoardResponseData struct {
 	ResultsRequested int64 `json:"resultsRequested,omitempty"`
 
 	// sort
-	Sort interface{} `json:"sort,omitempty"`
+	Sort string `json:"sort,omitempty"`
 
 	// title
 	Title string `json:"title,omitempty"`
@@ -237,7 +237,7 @@ func (m *LeaderBoardResponseData) UnmarshalJSON(data []byte) error {
 		ResultsRequested int64 `json:"resultsRequested,omitempty"`
 
 		// sort
-		Sort interface{} `json:"sort,omitempty"`
+		Sort string `json:"sort,omitempty"`
 
 		// title
 		Title string `json:"title,omitempty"`
@@ -330,7 +330,7 @@ func (m LeaderBoardResponseData) MarshalJSON() ([]byte, error) {
 		ResultsRequested int64 `json:"resultsRequested,omitempty"`
 
 		// sort
-		Sort interface{} `json:"sort,omitempty"`
+		Sort string `json:"sort,omitempty"`
 
 		// title
 		Title string `json:"title,omitempty"`

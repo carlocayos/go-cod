@@ -80,9 +80,21 @@ func main() {
 	fmt.Printf("\nBattlePassLoot Status = %v\n", battlePassLootResp.Status)
 	fmt.Printf("CategoryName = %v\n", battlePassLootResp.Data.CategoryName)
 	fmt.Printf("CategoryTitle = %v\n", battlePassLootResp.Data.CategoryTitle)
-	fmt.Printf("Tier No: = %v\n", battlePassLootResp.Data.Tiers.Nr103.Tier)
-	fmt.Printf("\tName = %v\n", battlePassLootResp.Data.Tiers.Nr103.Name)
-	fmt.Printf("\tRarity = %v\n", battlePassLootResp.Data.Tiers.Nr103.Rarity)
+
+	for k, v := range battlePassLootResp.Data.Tiers {
+		fmt.Printf("Tier#%v:\n", k)
+		fmt.Printf("\tName = %v\n", v.Name)
+		fmt.Printf("\tRarity = %v\n", v.Rarity)
+		fmt.Printf("\tLabel = %v\n", v.Label)
+		fmt.Printf("\tTier = %v\n", v.Tier)
+		fmt.Printf("\tType = %v\n", v.Type)
+		fmt.Printf("\tDescriptionBody = %v\n", v.DescriptionBody)
+		fmt.Printf("\tDescriptionTitle = %v\n", v.DescriptionTitle)
+		fmt.Printf("\tFree = %v\n", v.Free)
+		fmt.Printf("\tExclusiveTitle = %v\n", v.ExclusiveTitle)
+		fmt.Printf("\tImage = %v\n", v.Image)
+		fmt.Printf("\tImageDetail = %v\n", v.ImageDetail)
+	}
 
 	// =======================================================
 	// 5) Purchasable request
@@ -92,58 +104,28 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("\nPurchasable Status = %v\n", purchasableResp.Status)
-	fmt.Printf("Battle Pass Bundle Description = %v\n", purchasableResp.Data.LootStream.LootSeason6.BattlePassUpgradeBundle6.Description)
-	fmt.Printf("\tLabel = %v\n", purchasableResp.Data.LootStream.LootSeason6.BattlePassUpgrade6.Label)
-	fmt.Printf("\tCOD Points Cost = %v\n", purchasableResp.Data.LootStream.LootSeason6.BattlePassUpgrade6.Costs.CODPoints)
+
+	// LootStream is of type map[string]map[string]PurchasableItem
+	lootStream := purchasableResp.Data.LootStream
+
+	for k, v := range lootStream {
+		fmt.Printf("Loot Stream Name (Key) %v:\n", k)
+
+		for k2, v2 := range v {
+			fmt.Printf("\tPurchasable Item Name (Key) = %v:\n", k2)
+
+			fmt.Printf("\t\tName = %v\n", v2.Name)
+			fmt.Printf("\t\tLabel = %v\n", v2.Label)
+			fmt.Printf("\t\tDescription = %v\n", v2.Description)
+			fmt.Printf("\t\tBackgroundImage = %v\n", v2.BackgroundImage)
+			fmt.Printf("\t\tLogoImage = %v\n", v2.LogoImage)
+			fmt.Printf("\t\tItems = %v\n", v2.Items)
+			fmt.Printf("\t\tCosts.CODPoints = %v\n", v2.Costs.CODPoints)
+		}
+	}
 
 	// =======================================================
 	// 6) Loadout request
+	//    See example_loadout.go
 	// =======================================================
-	loadoutResp, err := c.Loadout(context.Background(), myGameTitleMw, myGameTypeWz)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("\nLoadout Status = %v\n", loadoutResp.Status)
-
-	// Example Loadout Response Payload
-	// {
-	//  "status": "success",
-	//  "data": {
-	//    "weapons": {
-	//      "iw8_sn_romeo700_variant_0": {
-	//        "dwid": "985",
-	//        "name": "iw8_sn_romeo700_variant_0",
-	//        "variantId": 0,
-	//        "rootName": "iw8_sn_romeo700",
-	//        "category": "weapon_dmr",
-	//        "imageLoot": "ui_loot_weapon_sn_mike14",
-	//        "imageIcon": "icon_weapon_sn_romeo700",
-	//        "attachmentsEquipped": "",
-	//        "attachments": "",
-	//        "perk": "",
-	//        "stringKey": "WEAPON/SN_ROMEO700",
-	//        "label": "SP-R 208",
-	//        "rarity": "base"
-	//      },
-	//		...
-	//	}
-	// }
-
-	// This is an example how to retrieve unmapped fields using *additionalProperties
-	weapons := loadoutResp.Data.LoadoutResponseDataAdditionalProperties["weapons"].(map[string]interface{})
-	romeo := weapons["iw8_sn_romeo700_variant_0"].(map[string]interface{})
-	fmt.Printf("iw8_sn_romeo700_variant_0\n")
-	fmt.Printf("\tdwid = %v\n", romeo["dwid"])
-	fmt.Printf("\tname = %v\n", romeo["name"])
-	fmt.Printf("\tvariantId = %v\n", romeo["variantId"])
-	fmt.Printf("\trootName = %v\n", romeo["rootName"])
-	fmt.Printf("\tcategory = %v\n", romeo["category"])
-	fmt.Printf("\timageLoot = %v\n", romeo["imageLoot"])
-	fmt.Printf("\timageIcon = %v\n", romeo["imageIcon"])
-	fmt.Printf("\tattachmentsEquipped = %v\n", romeo["attachmentsEquipped"])
-	fmt.Printf("\tattachments = %v\n", romeo["attachments"])
-	fmt.Printf("\tperk = %v\n", romeo["perk"])
-	fmt.Printf("\tstringKey = %v\n", romeo["stringKey"])
-	fmt.Printf("\tlabel = %v\n", romeo["label"])
-	fmt.Printf("\trarity = %v\n", romeo["rarity"])
 }
