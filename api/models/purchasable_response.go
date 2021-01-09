@@ -167,7 +167,7 @@ func (m *PurchasableResponse) UnmarshalBinary(b []byte) error {
 type PurchasableResponseData struct {
 
 	// loot stream
-	LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
+	LootStream map[string]map[string]PurchasableResponseDataLootStreamAnon `json:"lootStream,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
@@ -188,7 +188,7 @@ func (m *PurchasableResponseData) UnmarshalJSON(data []byte) error {
 	var stage1 struct {
 
 		// loot stream
-		LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
+		LootStream map[string]map[string]PurchasableResponseDataLootStreamAnon `json:"lootStream,omitempty"`
 
 		// message
 		Message string `json:"message,omitempty"`
@@ -241,7 +241,7 @@ func (m PurchasableResponseData) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// loot stream
-		LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
+		LootStream map[string]map[string]PurchasableResponseDataLootStreamAnon `json:"lootStream,omitempty"`
 
 		// message
 		Message string `json:"message,omitempty"`
@@ -341,10 +341,10 @@ func (m *PurchasableResponseData) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// PurchasableItem purchasable item
+// PurchasableResponseDataLootStreamAnon purchasable response data loot stream anon
 //
-// swagger:model PurchasableItem
-type PurchasableItem struct {
+// swagger:model PurchasableResponseDataLootStreamAnon
+type PurchasableResponseDataLootStreamAnon struct {
 
 	// background image
 	BackgroundImage string `json:"backgroundImage,omitempty"`
@@ -368,8 +368,8 @@ type PurchasableItem struct {
 	Name string `json:"name,omitempty"`
 }
 
-// Validate validates this purchasable item
-func (m *PurchasableItem) Validate(formats strfmt.Registry) error {
+// Validate validates this purchasable response data loot stream anon
+func (m *PurchasableResponseDataLootStreamAnon) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCosts(formats); err != nil {
@@ -382,7 +382,7 @@ func (m *PurchasableItem) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PurchasableItem) validateCosts(formats strfmt.Registry) error {
+func (m *PurchasableResponseDataLootStreamAnon) validateCosts(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Costs) { // not required
 		return nil
@@ -401,7 +401,7 @@ func (m *PurchasableItem) validateCosts(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *PurchasableItem) MarshalBinary() ([]byte, error) {
+func (m *PurchasableResponseDataLootStreamAnon) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -409,8 +409,8 @@ func (m *PurchasableItem) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *PurchasableItem) UnmarshalBinary(b []byte) error {
-	var res PurchasableItem
+func (m *PurchasableResponseDataLootStreamAnon) UnmarshalBinary(b []byte) error {
+	var res PurchasableResponseDataLootStreamAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -170,7 +170,7 @@ type GamerLootResponseData struct {
 	Message string `json:"message,omitempty"`
 
 	// streams
-	Streams map[string]Stream `json:"streams,omitempty"`
+	Streams map[string]GamerLootResponseDataStreamsAnon `json:"streams,omitempty"`
 
 	// type
 	Type string `json:"type,omitempty"`
@@ -188,7 +188,7 @@ func (m *GamerLootResponseData) UnmarshalJSON(data []byte) error {
 		Message string `json:"message,omitempty"`
 
 		// streams
-		Streams map[string]Stream `json:"streams,omitempty"`
+		Streams map[string]GamerLootResponseDataStreamsAnon `json:"streams,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -236,7 +236,7 @@ func (m GamerLootResponseData) MarshalJSON() ([]byte, error) {
 		Message string `json:"message,omitempty"`
 
 		// streams
-		Streams map[string]Stream `json:"streams,omitempty"`
+		Streams map[string]GamerLootResponseDataStreamsAnon `json:"streams,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -325,10 +325,10 @@ func (m *GamerLootResponseData) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// Stream stream
+// GamerLootResponseDataStreamsAnon gamer loot response data streams anon
 //
-// swagger:model Stream
-type Stream struct {
+// swagger:model GamerLootResponseDataStreamsAnon
+type GamerLootResponseDataStreamsAnon struct {
 
 	// category name label
 	CategoryNameLabel string `json:"categoryNameLabel,omitempty"`
@@ -367,13 +367,13 @@ type Stream struct {
 	TierSkipTokensUnredeemed string `json:"tierSkipTokensUnredeemed,omitempty"`
 }
 
-// Validate validates this stream
-func (m *Stream) Validate(formats strfmt.Registry) error {
+// Validate validates this gamer loot response data streams anon
+func (m *GamerLootResponseDataStreamsAnon) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *Stream) MarshalBinary() ([]byte, error) {
+func (m *GamerLootResponseDataStreamsAnon) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -381,8 +381,8 @@ func (m *Stream) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Stream) UnmarshalBinary(b []byte) error {
-	var res Stream
+func (m *GamerLootResponseDataStreamsAnon) UnmarshalBinary(b []byte) error {
+	var res GamerLootResponseDataStreamsAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

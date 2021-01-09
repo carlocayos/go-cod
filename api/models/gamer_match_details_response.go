@@ -174,7 +174,7 @@ type GamerMatchDetailsResponseData struct {
 	Message string `json:"message,omitempty"`
 
 	// summary
-	Summary map[string]GameMode `json:"summary,omitempty"`
+	Summary map[string]GamerMatchDetailsResponseDataSummaryAnon `json:"summary,omitempty"`
 
 	// type
 	Type string `json:"type,omitempty"`
@@ -195,7 +195,7 @@ func (m *GamerMatchDetailsResponseData) UnmarshalJSON(data []byte) error {
 		Message string `json:"message,omitempty"`
 
 		// summary
-		Summary map[string]GameMode `json:"summary,omitempty"`
+		Summary map[string]GamerMatchDetailsResponseDataSummaryAnon `json:"summary,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -248,7 +248,7 @@ func (m GamerMatchDetailsResponseData) MarshalJSON() ([]byte, error) {
 		Message string `json:"message,omitempty"`
 
 		// summary
-		Summary map[string]GameMode `json:"summary,omitempty"`
+		Summary map[string]GamerMatchDetailsResponseDataSummaryAnon `json:"summary,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -1331,10 +1331,10 @@ func (m *GamerMatchDetailsResponseDataMatchesItems0PlayerStats) UnmarshalBinary(
 	return nil
 }
 
-// GameMode game mode
+// GamerMatchDetailsResponseDataSummaryAnon gamer match details response data summary anon
 //
-// swagger:model GameMode
-type GameMode struct {
+// swagger:model GamerMatchDetailsResponseDataSummaryAnon
+type GamerMatchDetailsResponseDataSummaryAnon struct {
 
 	// accuracy
 	Accuracy float64 `json:"accuracy,omitempty"`
@@ -1433,13 +1433,13 @@ type GameMode struct {
 	WlRatio float64 `json:"wlRatio,omitempty"`
 }
 
-// Validate validates this game mode
-func (m *GameMode) Validate(formats strfmt.Registry) error {
+// Validate validates this gamer match details response data summary anon
+func (m *GamerMatchDetailsResponseDataSummaryAnon) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *GameMode) MarshalBinary() ([]byte, error) {
+func (m *GamerMatchDetailsResponseDataSummaryAnon) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1447,8 +1447,8 @@ func (m *GameMode) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *GameMode) UnmarshalBinary(b []byte) error {
-	var res GameMode
+func (m *GamerMatchDetailsResponseDataSummaryAnon) UnmarshalBinary(b []byte) error {
+	var res GamerMatchDetailsResponseDataSummaryAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

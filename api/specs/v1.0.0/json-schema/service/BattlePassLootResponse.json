@@ -23,7 +23,6 @@
         "tiers": {
           "type": "object",
           "additionalProperties": {
-            "x-go-name": "Tier",
             "type": "object",
             "properties": {
               "image": {

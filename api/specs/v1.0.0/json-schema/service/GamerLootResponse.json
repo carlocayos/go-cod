@@ -17,7 +17,6 @@
         "streams": {
           "type": "object",
           "additionalProperties": {
-            "x-go-name": "Stream",
             "type": "object",
             "properties": {
               "name": {

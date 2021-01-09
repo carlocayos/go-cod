@@ -22,7 +22,6 @@
           "additionalProperties": {
             "type": "object",
             "additionalProperties": {
-              "x-go-name": "PurchasableItem",
               "type": "object",
               "properties": {
                 "name": {
@@ -35,8 +34,7 @@
                   "type": "object",
                   "properties": {
                     "CODPoints": {
-                      "type": "integer",
-                      "x-go-name": "CODPoints"
+                      "type": "integer"
                     }
                   },
                   "additionalProperties": true

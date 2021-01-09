@@ -179,7 +179,7 @@ type BattlePassLootResponseData struct {
 	Message string `json:"message,omitempty"`
 
 	// tiers
-	Tiers map[string]Tier `json:"tiers,omitempty"`
+	Tiers map[string]BattlePassLootResponseDataTiersAnon `json:"tiers,omitempty"`
 
 	// type
 	Type string `json:"type,omitempty"`
@@ -206,7 +206,7 @@ func (m *BattlePassLootResponseData) UnmarshalJSON(data []byte) error {
 		Message string `json:"message,omitempty"`
 
 		// tiers
-		Tiers map[string]Tier `json:"tiers,omitempty"`
+		Tiers map[string]BattlePassLootResponseDataTiersAnon `json:"tiers,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -269,7 +269,7 @@ func (m BattlePassLootResponseData) MarshalJSON() ([]byte, error) {
 		Message string `json:"message,omitempty"`
 
 		// tiers
-		Tiers map[string]Tier `json:"tiers,omitempty"`
+		Tiers map[string]BattlePassLootResponseDataTiersAnon `json:"tiers,omitempty"`
 
 		// type
 		Type string `json:"type,omitempty"`
@@ -361,10 +361,10 @@ func (m *BattlePassLootResponseData) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// Tier tier
+// BattlePassLootResponseDataTiersAnon battle pass loot response data tiers anon
 //
-// swagger:model Tier
-type Tier struct {
+// swagger:model BattlePassLootResponseDataTiersAnon
+type BattlePassLootResponseDataTiersAnon struct {
 
 	// description body
 	DescriptionBody string `json:"descriptionBody,omitempty"`
@@ -400,13 +400,13 @@ type Tier struct {
 	Type string `json:"type,omitempty"`
 }
 
-// Validate validates this tier
-func (m *Tier) Validate(formats strfmt.Registry) error {
+// Validate validates this battle pass loot response data tiers anon
+func (m *BattlePassLootResponseDataTiersAnon) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *Tier) MarshalBinary() ([]byte, error) {
+func (m *BattlePassLootResponseDataTiersAnon) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -414,8 +414,8 @@ func (m *Tier) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Tier) UnmarshalBinary(b []byte) error {
-	var res Tier
+func (m *BattlePassLootResponseDataTiersAnon) UnmarshalBinary(b []byte) error {
+	var res BattlePassLootResponseDataTiersAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
