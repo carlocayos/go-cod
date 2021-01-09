@@ -1241,7 +1241,7 @@ type MatchAnalysisResponseDataItems0WsResponseData struct {
 	Content string `json:"content,omitempty"`
 
 	// errors
-	Errors interface{} `json:"errors,omitempty"`
+	Errors string `json:"errors,omitempty"`
 
 	// match analysis response data items0 ws response data additional properties
 	MatchAnalysisResponseDataItems0WsResponseDataAdditionalProperties map[string]interface{} `json:"-"`
@@ -1256,7 +1256,7 @@ func (m *MatchAnalysisResponseDataItems0WsResponseData) UnmarshalJSON(data []byt
 		Content string `json:"content,omitempty"`
 
 		// errors
-		Errors interface{} `json:"errors,omitempty"`
+		Errors string `json:"errors,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
@@ -1299,7 +1299,7 @@ func (m MatchAnalysisResponseDataItems0WsResponseData) MarshalJSON() ([]byte, er
 		Content string `json:"content,omitempty"`
 
 		// errors
-		Errors interface{} `json:"errors,omitempty"`
+		Errors string `json:"errors,omitempty"`
 	}
 
 	stage1.Content = m.Content

@@ -175,7 +175,7 @@ func (m *FriendStatsResponse) UnmarshalBinary(b []byte) error {
 type FriendStatsResponseDataItems0 struct {
 
 	// engagement
-	Engagement interface{} `json:"engagement,omitempty"`
+	Engagement string `json:"engagement,omitempty"`
 
 	// level
 	Level float64 `json:"level,omitempty"`
@@ -241,7 +241,7 @@ func (m *FriendStatsResponseDataItems0) UnmarshalJSON(data []byte) error {
 	var stage1 struct {
 
 		// engagement
-		Engagement interface{} `json:"engagement,omitempty"`
+		Engagement string `json:"engagement,omitempty"`
 
 		// level
 		Level float64 `json:"level,omitempty"`
@@ -369,7 +369,7 @@ func (m FriendStatsResponseDataItems0) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// engagement
-		Engagement interface{} `json:"engagement,omitempty"`
+		Engagement string `json:"engagement,omitempty"`
 
 		// level
 		Level float64 `json:"level,omitempty"`
@@ -50095,7 +50095,7 @@ func (m *FriendStatsResponseDataItems0Weekly) UnmarshalBinary(b []byte) error {
 type FriendStatsResponseDataItems0WeeklyAll struct {
 
 	// properties
-	Properties interface{} `json:"properties,omitempty"`
+	Properties string `json:"properties,omitempty"`
 
 	// friend stats response data items0 weekly all additional properties
 	FriendStatsResponseDataItems0WeeklyAllAdditionalProperties map[string]interface{} `json:"-"`
@@ -50107,7 +50107,7 @@ func (m *FriendStatsResponseDataItems0WeeklyAll) UnmarshalJSON(data []byte) erro
 	var stage1 struct {
 
 		// properties
-		Properties interface{} `json:"properties,omitempty"`
+		Properties string `json:"properties,omitempty"`
 	}
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
@@ -50145,7 +50145,7 @@ func (m FriendStatsResponseDataItems0WeeklyAll) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// properties
-		Properties interface{} `json:"properties,omitempty"`
+		Properties string `json:"properties,omitempty"`
 	}
 
 	stage1.Properties = m.Properties

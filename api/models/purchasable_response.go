@@ -167,7 +167,7 @@ func (m *PurchasableResponse) UnmarshalBinary(b []byte) error {
 type PurchasableResponseData struct {
 
 	// loot stream
-	LootStream *PurchasableResponseDataLootStream `json:"lootStream,omitempty"`
+	LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
@@ -188,7 +188,7 @@ func (m *PurchasableResponseData) UnmarshalJSON(data []byte) error {
 	var stage1 struct {
 
 		// loot stream
-		LootStream *PurchasableResponseDataLootStream `json:"lootStream,omitempty"`
+		LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
 
 		// message
 		Message string `json:"message,omitempty"`
@@ -241,7 +241,7 @@ func (m PurchasableResponseData) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// loot stream
-		LootStream *PurchasableResponseDataLootStream `json:"lootStream,omitempty"`
+		LootStream map[string]map[string]PurchasableItem `json:"lootStream,omitempty"`
 
 		// message
 		Message string `json:"message,omitempty"`
@@ -303,13 +303,21 @@ func (m *PurchasableResponseData) validateLootStream(formats strfmt.Registry) er
 		return nil
 	}
 
-	if m.LootStream != nil {
-		if err := m.LootStream.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream")
+	for k := range m.LootStream {
+
+		for kk := range m.LootStream[k] {
+
+			if swag.IsZero(m.LootStream[k][kk]) { // not required
+				continue
 			}
-			return err
+			if val, ok := m.LootStream[k][kk]; ok {
+				if err := val.Validate(formats); err != nil {
+					return err
+				}
+			}
+
 		}
+
 	}
 
 	return nil
@@ -333,823 +341,35 @@ func (m *PurchasableResponseData) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// PurchasableResponseDataLootStream purchasable response data loot stream
+// PurchasableItem purchasable item
 //
-// swagger:model PurchasableResponseDataLootStream
-type PurchasableResponseDataLootStream struct {
-
-	// loot season 6
-	LootSeason6 *PurchasableResponseDataLootStreamLootSeason6 `json:"loot_season_6,omitempty"`
-
-	// tier skips
-	TierSkips *PurchasableResponseDataLootStreamTierSkips `json:"tierSkips,omitempty"`
-
-	// purchasable response data loot stream additional properties
-	PurchasableResponseDataLootStreamAdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStream) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// loot season 6
-		LootSeason6 *PurchasableResponseDataLootStreamLootSeason6 `json:"loot_season_6,omitempty"`
-
-		// tier skips
-		TierSkips *PurchasableResponseDataLootStreamTierSkips `json:"tierSkips,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStream
-
-	rcv.LootSeason6 = stage1.LootSeason6
-	rcv.TierSkips = stage1.TierSkips
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "loot_season_6")
-	delete(stage2, "tierSkips")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamAdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStream) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// loot season 6
-		LootSeason6 *PurchasableResponseDataLootStreamLootSeason6 `json:"loot_season_6,omitempty"`
-
-		// tier skips
-		TierSkips *PurchasableResponseDataLootStreamTierSkips `json:"tierSkips,omitempty"`
-	}
-
-	stage1.LootSeason6 = m.LootSeason6
-	stage1.TierSkips = m.TierSkips
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamAdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamAdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream
-func (m *PurchasableResponseDataLootStream) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateLootSeason6(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTierSkips(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStream) validateLootSeason6(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.LootSeason6) { // not required
-		return nil
-	}
-
-	if m.LootSeason6 != nil {
-		if err := m.LootSeason6.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "loot_season_6")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStream) validateTierSkips(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.TierSkips) { // not required
-		return nil
-	}
-
-	if m.TierSkips != nil {
-		if err := m.TierSkips.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "tierSkips")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStream) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStream) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStream
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamLootSeason6 purchasable response data loot stream loot season6
-//
-// swagger:model PurchasableResponseDataLootStreamLootSeason6
-type PurchasableResponseDataLootStreamLootSeason6 struct {
-
-	// battle pass upgrade 6
-	BattlePassUpgrade6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6 `json:"battle_pass_upgrade_6,omitempty"`
-
-	// battle pass upgrade bundle 6
-	BattlePassUpgradeBundle6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6 `json:"battle_pass_upgrade_bundle_6,omitempty"`
-
-	// purchasable response data loot stream loot season6 additional properties
-	PurchasableResponseDataLootStreamLootSeason6AdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamLootSeason6) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// battle pass upgrade 6
-		BattlePassUpgrade6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6 `json:"battle_pass_upgrade_6,omitempty"`
-
-		// battle pass upgrade bundle 6
-		BattlePassUpgradeBundle6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6 `json:"battle_pass_upgrade_bundle_6,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamLootSeason6
-
-	rcv.BattlePassUpgrade6 = stage1.BattlePassUpgrade6
-	rcv.BattlePassUpgradeBundle6 = stage1.BattlePassUpgradeBundle6
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "battle_pass_upgrade_6")
-	delete(stage2, "battle_pass_upgrade_bundle_6")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamLootSeason6AdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamLootSeason6) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// battle pass upgrade 6
-		BattlePassUpgrade6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6 `json:"battle_pass_upgrade_6,omitempty"`
-
-		// battle pass upgrade bundle 6
-		BattlePassUpgradeBundle6 *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6 `json:"battle_pass_upgrade_bundle_6,omitempty"`
-	}
-
-	stage1.BattlePassUpgrade6 = m.BattlePassUpgrade6
-	stage1.BattlePassUpgradeBundle6 = m.BattlePassUpgradeBundle6
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamLootSeason6AdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamLootSeason6AdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream loot season6
-func (m *PurchasableResponseDataLootStreamLootSeason6) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateBattlePassUpgrade6(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateBattlePassUpgradeBundle6(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStreamLootSeason6) validateBattlePassUpgrade6(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BattlePassUpgrade6) { // not required
-		return nil
-	}
-
-	if m.BattlePassUpgrade6 != nil {
-		if err := m.BattlePassUpgrade6.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "loot_season_6" + "." + "battle_pass_upgrade_6")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStreamLootSeason6) validateBattlePassUpgradeBundle6(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BattlePassUpgradeBundle6) { // not required
-		return nil
-	}
-
-	if m.BattlePassUpgradeBundle6 != nil {
-		if err := m.BattlePassUpgradeBundle6.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "loot_season_6" + "." + "battle_pass_upgrade_bundle_6")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamLootSeason6
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6 purchasable response data loot stream loot season6 battle pass upgrade6
-//
-// swagger:model PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6
-type PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6 struct {
+// swagger:model PurchasableItem
+type PurchasableItem struct {
 
 	// background image
-	BackgroundImage interface{} `json:"backgroundImage,omitempty"`
+	BackgroundImage string `json:"backgroundImage,omitempty"`
 
 	// costs
-	Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs `json:"costs,omitempty"`
-
-	// description
-	Description interface{} `json:"description,omitempty"`
-
-	// items
-	Items interface{} `json:"items,omitempty"`
-
-	// label
-	Label string `json:"label,omitempty"`
-
-	// logo image
-	LogoImage interface{} `json:"logoImage,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-
-	// purchasable response data loot stream loot season6 battle pass upgrade6 additional properties
-	PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6AdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs `json:"costs,omitempty"`
-
-		// description
-		Description interface{} `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6
-
-	rcv.BackgroundImage = stage1.BackgroundImage
-	rcv.Costs = stage1.Costs
-	rcv.Description = stage1.Description
-	rcv.Items = stage1.Items
-	rcv.Label = stage1.Label
-	rcv.LogoImage = stage1.LogoImage
-	rcv.Name = stage1.Name
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "backgroundImage")
-	delete(stage2, "costs")
-	delete(stage2, "description")
-	delete(stage2, "items")
-	delete(stage2, "label")
-	delete(stage2, "logoImage")
-	delete(stage2, "name")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6AdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs `json:"costs,omitempty"`
-
-		// description
-		Description interface{} `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-
-	stage1.BackgroundImage = m.BackgroundImage
-	stage1.Costs = m.Costs
-	stage1.Description = m.Description
-	stage1.Items = m.Items
-	stage1.Label = m.Label
-	stage1.LogoImage = m.LogoImage
-	stage1.Name = m.Name
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6AdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6AdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream loot season6 battle pass upgrade6
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateCosts(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) validateCosts(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Costs) { // not required
-		return nil
-	}
-
-	if m.Costs != nil {
-		if err := m.Costs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "loot_season_6" + "." + "battle_pass_upgrade_6" + "." + "costs")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs purchasable response data loot stream loot season6 battle pass upgrade6 costs
-//
-// swagger:model PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs
-type PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs struct {
-
-	// c o d points
-	CODPoints int64 `json:"CODPoints,omitempty"`
-
-	// purchasable response data loot stream loot season6 battle pass upgrade6 costs additional properties
-	PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6CostsAdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// c o d points
-		CODPoints int64 `json:"CODPoints,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs
-
-	rcv.CODPoints = stage1.CODPoints
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "CODPoints")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6CostsAdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// c o d points
-		CODPoints int64 `json:"CODPoints,omitempty"`
-	}
-
-	stage1.CODPoints = m.CODPoints
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6CostsAdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6CostsAdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream loot season6 battle pass upgrade6 costs
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamLootSeason6BattlePassUpgrade6Costs
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6 purchasable response data loot stream loot season6 battle pass upgrade bundle6
-//
-// swagger:model PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6
-type PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6 struct {
-
-	// background image
-	BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-	// costs
-	Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs `json:"costs,omitempty"`
+	Costs *PurchasableResponseDataLootStreamAnonCosts `json:"costs,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
 
 	// items
-	Items interface{} `json:"items,omitempty"`
+	Items string `json:"items,omitempty"`
 
 	// label
 	Label string `json:"label,omitempty"`
 
 	// logo image
-	LogoImage interface{} `json:"logoImage,omitempty"`
+	LogoImage string `json:"logoImage,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
-
-	// purchasable response data loot stream loot season6 battle pass upgrade bundle6 additional properties
-	PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6AdditionalProperties map[string]interface{} `json:"-"`
 }
 
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs `json:"costs,omitempty"`
-
-		// description
-		Description string `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6
-
-	rcv.BackgroundImage = stage1.BackgroundImage
-	rcv.Costs = stage1.Costs
-	rcv.Description = stage1.Description
-	rcv.Items = stage1.Items
-	rcv.Label = stage1.Label
-	rcv.LogoImage = stage1.LogoImage
-	rcv.Name = stage1.Name
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "backgroundImage")
-	delete(stage2, "costs")
-	delete(stage2, "description")
-	delete(stage2, "items")
-	delete(stage2, "label")
-	delete(stage2, "logoImage")
-	delete(stage2, "name")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6AdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs `json:"costs,omitempty"`
-
-		// description
-		Description string `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-
-	stage1.BackgroundImage = m.BackgroundImage
-	stage1.Costs = m.Costs
-	stage1.Description = m.Description
-	stage1.Items = m.Items
-	stage1.Label = m.Label
-	stage1.LogoImage = m.LogoImage
-	stage1.Name = m.Name
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6AdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6AdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream loot season6 battle pass upgrade bundle6
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) Validate(formats strfmt.Registry) error {
+// Validate validates this purchasable item
+func (m *PurchasableItem) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCosts(formats); err != nil {
@@ -1162,7 +382,7 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) V
 	return nil
 }
 
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) validateCosts(formats strfmt.Registry) error {
+func (m *PurchasableItem) validateCosts(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Costs) { // not required
 		return nil
@@ -1171,7 +391,7 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) v
 	if m.Costs != nil {
 		if err := m.Costs.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "loot_season_6" + "." + "battle_pass_upgrade_bundle_6" + "." + "costs")
+				return ve.ValidateName("costs")
 			}
 			return err
 		}
@@ -1181,7 +401,7 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) v
 }
 
 // MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) MarshalBinary() ([]byte, error) {
+func (m *PurchasableItem) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1189,8 +409,8 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) M
 }
 
 // UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6
+func (m *PurchasableItem) UnmarshalBinary(b []byte) error {
+	var res PurchasableItem
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -1198,20 +418,20 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6) U
 	return nil
 }
 
-// PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs purchasable response data loot stream loot season6 battle pass upgrade bundle6 costs
+// PurchasableResponseDataLootStreamAnonCosts purchasable response data loot stream anon costs
 //
-// swagger:model PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs
-type PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs struct {
+// swagger:model PurchasableResponseDataLootStreamAnonCosts
+type PurchasableResponseDataLootStreamAnonCosts struct {
 
 	// c o d points
 	CODPoints int64 `json:"CODPoints,omitempty"`
 
-	// purchasable response data loot stream loot season6 battle pass upgrade bundle6 costs additional properties
-	PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6CostsAdditionalProperties map[string]interface{} `json:"-"`
+	// purchasable response data loot stream anon costs additional properties
+	PurchasableResponseDataLootStreamAnonCostsAdditionalProperties map[string]interface{} `json:"-"`
 }
 
 // UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs) UnmarshalJSON(data []byte) error {
+func (m *PurchasableResponseDataLootStreamAnonCosts) UnmarshalJSON(data []byte) error {
 	// stage 1, bind the properties
 	var stage1 struct {
 
@@ -1221,7 +441,7 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Cos
 	if err := json.Unmarshal(data, &stage1); err != nil {
 		return err
 	}
-	var rcv PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs
+	var rcv PurchasableResponseDataLootStreamAnonCosts
 
 	rcv.CODPoints = stage1.CODPoints
 	*m = rcv
@@ -1243,14 +463,14 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Cos
 			}
 			result[k] = toadd
 		}
-		m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6CostsAdditionalProperties = result
+		m.PurchasableResponseDataLootStreamAnonCostsAdditionalProperties = result
 	}
 
 	return nil
 }
 
 // MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs) MarshalJSON() ([]byte, error) {
+func (m PurchasableResponseDataLootStreamAnonCosts) MarshalJSON() ([]byte, error) {
 	var stage1 struct {
 
 		// c o d points
@@ -1265,12 +485,12 @@ func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Cost
 		return nil, err
 	}
 
-	if len(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6CostsAdditionalProperties) == 0 {
+	if len(m.PurchasableResponseDataLootStreamAnonCostsAdditionalProperties) == 0 {
 		return props, nil
 	}
 
 	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6CostsAdditionalProperties)
+	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamAnonCostsAdditionalProperties)
 	if err != nil {
 		return nil, err
 	}
@@ -1284,13 +504,13 @@ func (m PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Cost
 	return append(props, additional[1:]...), nil
 }
 
-// Validate validates this purchasable response data loot stream loot season6 battle pass upgrade bundle6 costs
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs) Validate(formats strfmt.Registry) error {
+// Validate validates this purchasable response data loot stream anon costs
+func (m *PurchasableResponseDataLootStreamAnonCosts) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs) MarshalBinary() ([]byte, error) {
+func (m *PurchasableResponseDataLootStreamAnonCosts) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -1298,461 +518,8 @@ func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Cos
 }
 
 // UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamLootSeason6BattlePassUpgradeBundle6Costs
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamTierSkips purchasable response data loot stream tier skips
-//
-// swagger:model PurchasableResponseDataLootStreamTierSkips
-type PurchasableResponseDataLootStreamTierSkips struct {
-
-	// single
-	Single *PurchasableResponseDataLootStreamTierSkipsSingle `json:"single,omitempty"`
-
-	// purchasable response data loot stream tier skips additional properties
-	PurchasableResponseDataLootStreamTierSkipsAdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamTierSkips) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// single
-		Single *PurchasableResponseDataLootStreamTierSkipsSingle `json:"single,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamTierSkips
-
-	rcv.Single = stage1.Single
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "single")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamTierSkipsAdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamTierSkips) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// single
-		Single *PurchasableResponseDataLootStreamTierSkipsSingle `json:"single,omitempty"`
-	}
-
-	stage1.Single = m.Single
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamTierSkipsAdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamTierSkipsAdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream tier skips
-func (m *PurchasableResponseDataLootStreamTierSkips) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateSingle(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStreamTierSkips) validateSingle(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Single) { // not required
-		return nil
-	}
-
-	if m.Single != nil {
-		if err := m.Single.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "tierSkips" + "." + "single")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkips) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkips) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamTierSkips
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamTierSkipsSingle purchasable response data loot stream tier skips single
-//
-// swagger:model PurchasableResponseDataLootStreamTierSkipsSingle
-type PurchasableResponseDataLootStreamTierSkipsSingle struct {
-
-	// background image
-	BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-	// costs
-	Costs *PurchasableResponseDataLootStreamTierSkipsSingleCosts `json:"costs,omitempty"`
-
-	// description
-	Description string `json:"description,omitempty"`
-
-	// items
-	Items interface{} `json:"items,omitempty"`
-
-	// label
-	Label string `json:"label,omitempty"`
-
-	// logo image
-	LogoImage interface{} `json:"logoImage,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-
-	// purchasable response data loot stream tier skips single additional properties
-	PurchasableResponseDataLootStreamTierSkipsSingleAdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamTierSkipsSingle) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamTierSkipsSingleCosts `json:"costs,omitempty"`
-
-		// description
-		Description string `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamTierSkipsSingle
-
-	rcv.BackgroundImage = stage1.BackgroundImage
-	rcv.Costs = stage1.Costs
-	rcv.Description = stage1.Description
-	rcv.Items = stage1.Items
-	rcv.Label = stage1.Label
-	rcv.LogoImage = stage1.LogoImage
-	rcv.Name = stage1.Name
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "backgroundImage")
-	delete(stage2, "costs")
-	delete(stage2, "description")
-	delete(stage2, "items")
-	delete(stage2, "label")
-	delete(stage2, "logoImage")
-	delete(stage2, "name")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamTierSkipsSingleAdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamTierSkipsSingle) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// background image
-		BackgroundImage interface{} `json:"backgroundImage,omitempty"`
-
-		// costs
-		Costs *PurchasableResponseDataLootStreamTierSkipsSingleCosts `json:"costs,omitempty"`
-
-		// description
-		Description string `json:"description,omitempty"`
-
-		// items
-		Items interface{} `json:"items,omitempty"`
-
-		// label
-		Label string `json:"label,omitempty"`
-
-		// logo image
-		LogoImage interface{} `json:"logoImage,omitempty"`
-
-		// name
-		Name string `json:"name,omitempty"`
-	}
-
-	stage1.BackgroundImage = m.BackgroundImage
-	stage1.Costs = m.Costs
-	stage1.Description = m.Description
-	stage1.Items = m.Items
-	stage1.Label = m.Label
-	stage1.LogoImage = m.LogoImage
-	stage1.Name = m.Name
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamTierSkipsSingleAdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamTierSkipsSingleAdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream tier skips single
-func (m *PurchasableResponseDataLootStreamTierSkipsSingle) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateCosts(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PurchasableResponseDataLootStreamTierSkipsSingle) validateCosts(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Costs) { // not required
-		return nil
-	}
-
-	if m.Costs != nil {
-		if err := m.Costs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("data" + "." + "lootStream" + "." + "tierSkips" + "." + "single" + "." + "costs")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkipsSingle) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkipsSingle) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamTierSkipsSingle
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PurchasableResponseDataLootStreamTierSkipsSingleCosts purchasable response data loot stream tier skips single costs
-//
-// swagger:model PurchasableResponseDataLootStreamTierSkipsSingleCosts
-type PurchasableResponseDataLootStreamTierSkipsSingleCosts struct {
-
-	// c o d points
-	CODPoints int64 `json:"CODPoints,omitempty"`
-
-	// purchasable response data loot stream tier skips single costs additional properties
-	PurchasableResponseDataLootStreamTierSkipsSingleCostsAdditionalProperties map[string]interface{} `json:"-"`
-}
-
-// UnmarshalJSON unmarshals this object with additional properties from JSON
-func (m *PurchasableResponseDataLootStreamTierSkipsSingleCosts) UnmarshalJSON(data []byte) error {
-	// stage 1, bind the properties
-	var stage1 struct {
-
-		// c o d points
-		CODPoints int64 `json:"CODPoints,omitempty"`
-	}
-	if err := json.Unmarshal(data, &stage1); err != nil {
-		return err
-	}
-	var rcv PurchasableResponseDataLootStreamTierSkipsSingleCosts
-
-	rcv.CODPoints = stage1.CODPoints
-	*m = rcv
-
-	// stage 2, remove properties and add to map
-	stage2 := make(map[string]json.RawMessage)
-	if err := json.Unmarshal(data, &stage2); err != nil {
-		return err
-	}
-
-	delete(stage2, "CODPoints")
-	// stage 3, add additional properties values
-	if len(stage2) > 0 {
-		result := make(map[string]interface{})
-		for k, v := range stage2 {
-			var toadd interface{}
-			if err := json.Unmarshal(v, &toadd); err != nil {
-				return err
-			}
-			result[k] = toadd
-		}
-		m.PurchasableResponseDataLootStreamTierSkipsSingleCostsAdditionalProperties = result
-	}
-
-	return nil
-}
-
-// MarshalJSON marshals this object with additional properties into a JSON object
-func (m PurchasableResponseDataLootStreamTierSkipsSingleCosts) MarshalJSON() ([]byte, error) {
-	var stage1 struct {
-
-		// c o d points
-		CODPoints int64 `json:"CODPoints,omitempty"`
-	}
-
-	stage1.CODPoints = m.CODPoints
-
-	// make JSON object for known properties
-	props, err := json.Marshal(stage1)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(m.PurchasableResponseDataLootStreamTierSkipsSingleCostsAdditionalProperties) == 0 {
-		return props, nil
-	}
-
-	// make JSON object for the additional properties
-	additional, err := json.Marshal(m.PurchasableResponseDataLootStreamTierSkipsSingleCostsAdditionalProperties)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(props) < 3 {
-		return additional, nil
-	}
-
-	// concatenate the 2 objects
-	props[len(props)-1] = ','
-	return append(props, additional[1:]...), nil
-}
-
-// Validate validates this purchasable response data loot stream tier skips single costs
-func (m *PurchasableResponseDataLootStreamTierSkipsSingleCosts) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkipsSingleCosts) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PurchasableResponseDataLootStreamTierSkipsSingleCosts) UnmarshalBinary(b []byte) error {
-	var res PurchasableResponseDataLootStreamTierSkipsSingleCosts
+func (m *PurchasableResponseDataLootStreamAnonCosts) UnmarshalBinary(b []byte) error {
+	var res PurchasableResponseDataLootStreamAnonCosts
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

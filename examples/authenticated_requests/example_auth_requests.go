@@ -72,6 +72,23 @@ func main() {
 	}
 
 	fmt.Printf("\nGamerMatchDetails Status = %v\n", gamerMatchDetailsResp.Status)
+
+	// get match summary for each game mode
+	for k, v := range gamerMatchDetailsResp.Data.Summary {
+		fmt.Printf("Game Mode = %v:\n", k)
+		fmt.Printf("\tKills = %v\n", v.Kills)
+		fmt.Printf("\tAccuracy = %v\n", v.Accuracy)
+		fmt.Printf("\tHeadshots = %v\n", v.Headshots)
+		fmt.Printf("\tHeadshotPercentage = %v\n", v.HeadshotPercentage)
+		fmt.Printf("\tAssists = %v\n", v.Assists)
+		fmt.Printf("\tScore = %v\n", v.Score)
+		fmt.Printf("\tKdRatio = %v\n", v.KdRatio)
+		fmt.Printf("\tDamageDealt = %v\n", v.DamageDealt)
+		fmt.Printf("\tHighestMultikill = %v\n", v.HighestMultikill)
+		fmt.Printf("\tAssists = %v\n", v.Assists)
+	}
+
+	// list the match details
 	for _, v := range gamerMatchDetailsResp.Data.Matches {
 		fmt.Printf("MatchId = %v\n", v.MatchID)
 		fmt.Printf("Map = %v\n", v.Map)
@@ -151,10 +168,19 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("\nGamerLoot Status = %v\n", gamerLootResp.Status)
-	// TODO: Review swagger spec and change the object definitions. Streams must be type map[string]SomeStruct
-	// 	See https://github.com/carlocayos/go-cod/issues/3
-	fmt.Printf("Loot Season 0 Name = %v\n", gamerLootResp.Data.Streams.LootSeason0.Name)
-	fmt.Printf("\tRarity = %v\n", gamerLootResp.Data.Streams.LootSeason0.Rarity)
+
+	for k, v := range gamerLootResp.Data.Streams {
+		fmt.Printf("Stream = %v:\n", k)
+		fmt.Printf("\tName = %v:\n", v.Name)
+		fmt.Printf("\tTier = %v:\n", v.Tier)
+		fmt.Printf("\tRarity = %v:\n", v.Rarity)
+		fmt.Printf("\tCategoryNameLabel = %v:\n", v.CategoryNameLabel)
+		fmt.Printf("\tCategoryTitleLabel = %v:\n", v.CategoryTitleLabel)
+		fmt.Printf("\tItemsObtained = %v:\n", v.ItemsObtained)
+		fmt.Printf("\tLootType = %v:\n", v.LootType)
+		fmt.Printf("\tPremium = %v:\n", v.Premium)
+		fmt.Printf("\tPremiumTokenOwnedNotRedeemed = %v:\n", v.PremiumTokenOwnedNotRedeemed)
+	}
 
 	// =======================================================
 	// 7) Match Analysis

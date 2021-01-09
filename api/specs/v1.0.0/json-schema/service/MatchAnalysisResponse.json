@@ -192,7 +192,7 @@
                     "type": "string"
                   },
                   "errors": {
-                    "type": "null"
+                    "type": "string"
                   }
                 },
                 "additionalProperties": true

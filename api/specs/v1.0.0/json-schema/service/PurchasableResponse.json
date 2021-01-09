@@ -19,120 +19,43 @@
         },
         "lootStream": {
           "type": "object",
-          "properties": {
-            "tierSkips": {
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "x-go-name": "PurchasableItem",
               "type": "object",
               "properties": {
-                "single": {
+                "name": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "costs": {
                   "type": "object",
                   "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "label": {
-                      "type": "string"
-                    },
-                    "costs": {
-                      "type": "object",
-                      "properties": {
-                        "CODPoints": {
-                          "type": "integer"
-                        }
-                      },
-                      "additionalProperties": true
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "backgroundImage": {
-                      "type": "null"
-                    },
-                    "logoImage": {
-                      "type": "null"
-                    },
-                    "items": {
-                      "type": "null"
-                    }
-                  },
-                  "additionalProperties": true
-                }
-              },
-              "additionalProperties": true
-            },
-            "loot_season_6": {
-              "type": "object",
-              "properties": {
-                "battle_pass_upgrade_bundle_6": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "label": {
-                      "type": "string"
-                    },
-                    "costs": {
-                      "type": "object",
-                      "properties": {
-                        "CODPoints": {
-                          "type": "integer"
-                        }
-                      },
-                      "additionalProperties": true
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "backgroundImage": {
-                      "type": "null"
-                    },
-                    "logoImage": {
-                      "type": "null"
-                    },
-                    "items": {
-                      "type": "null"
+                    "CODPoints": {
+                      "type": "integer",
+                      "x-go-name": "CODPoints"
                     }
                   },
                   "additionalProperties": true
                 },
-                "battle_pass_upgrade_6": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "label": {
-                      "type": "string"
-                    },
-                    "costs": {
-                      "type": "object",
-                      "properties": {
-                        "CODPoints": {
-                          "type": "integer"
-                        }
-                      },
-                      "additionalProperties": true
-                    },
-                    "description": {
-                      "type": "null"
-                    },
-                    "backgroundImage": {
-                      "type": "null"
-                    },
-                    "logoImage": {
-                      "type": "null"
-                    },
-                    "items": {
-                      "type": "null"
-                    }
-                  },
-                  "additionalProperties": true
+                "description": {
+                  "type": "string"
+                },
+                "backgroundImage": {
+                  "type": "string"
+                },
+                "logoImage": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "string"
                 }
-              },
-              "additionalProperties": true
+              }
             }
-          },
-          "additionalProperties": true
+          }
         }
       },
       "additionalProperties": true

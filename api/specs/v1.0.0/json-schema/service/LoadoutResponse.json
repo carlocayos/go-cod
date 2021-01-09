@@ -13,6 +13,447 @@
         },
         "message": {
           "type": "string"
+        },
+        "weapons": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-go-name": "Weapon",
+            "properties": {
+              "dwid": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "variantId": {
+                "type": "integer"
+              },
+              "rootName": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "imageLoot": {
+                "type": "string"
+              },
+              "imageIcon": {
+                "type": "string"
+              },
+              "attachmentsEquipped": {
+                "type": "string"
+              },
+              "attachments": {
+                "type": "string"
+              },
+              "perk": {
+                "type": "string"
+              },
+              "stringKey": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "rarity": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "baseWeapons": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-go-name": "BaseWeapon",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "attachmentCategories": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "accuracy": {
+                "type": "number"
+              },
+              "damage": {
+                "type": "number"
+              },
+              "range": {
+                "type": "number"
+              },
+              "firerate": {
+                "type": "number"
+              },
+              "mobility": {
+                "type": "number"
+              },
+              "control": {
+                "type": "number"
+              },
+              "customizationDisabled": {
+                "type": "integer"
+              },
+              "gunsmithDisabled": {
+                "type": "integer"
+              },
+              "uiDisplayOrder": {
+                "type": "integer"
+              },
+              "decalSlots": {
+                "type": "integer"
+              },
+              "rankUnlocked": {
+                "type": "integer"
+              },
+              "weaponSlot": {
+                "type": "string"
+              },
+              "descriptionKey": {
+                "type": "string"
+              },
+              "descriptionLabel": {
+                "type": "string"
+              },
+              "progressionImage": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "weaponLevels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "x-go-name": "Level",
+              "type": "object",
+              "properties": {
+                "rank": {
+                  "type": "integer"
+                },
+                "unlockName": {
+                  "type": "string"
+                },
+                "unlockCategory": {
+                  "type": "string"
+                },
+                "unlockOverrideName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "attachments": {
+          "type": "object",
+          "additionalProperties": {
+            "x-go-name": "Attachment",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "baseRef": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "labelKey": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "descriptionKey": {
+                "type": "string"
+              },
+              "descriptionLabel": {
+                "type": "string"
+              },
+              "perk": {
+                "type": "string"
+              },
+              "blocksCategory": {
+                "type": "string"
+              },
+              "accuracy": {
+                "type": "number"
+              },
+              "damage": {
+                "type": "number"
+              },
+              "range": {
+                "type": "number"
+              },
+              "firerate": {
+                "type": "number"
+              },
+              "mobility": {
+                "type": "number"
+              },
+              "control": {
+                "type": "number"
+              },
+              "mod1": {
+                "type": "string"
+              },
+              "mod2": {
+                "type": "string"
+              },
+              "mod3": {
+                "type": "string"
+              },
+              "mod4": {
+                "type": "string"
+              },
+              "mod5": {
+                "type": "string"
+              },
+              "mod6": {
+                "type": "string"
+              },
+              "mod7": {
+                "type": "string"
+              },
+              "mod8": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "perks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "x-go-name": "Perk",
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "labelKey": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "descriptionKey": {
+                  "type": "string"
+                },
+                "descriptionLabel": {
+                  "type": "string"
+                },
+                "extraInfoKey": {
+                  "type": "string"
+                },
+                "extraInfoLabel": {
+                  "type": "string"
+                },
+                "patchNotesKey": {
+                  "type": "string"
+                },
+                "patchNotes": {
+                  "type": "string"
+                },
+                "imageMainUi": {
+                  "type": "string"
+                },
+                "imageProgression": {
+                  "type": "string"
+                },
+                "cost": {
+                  "type": "integer"
+                },
+                "indexId": {
+                  "type": "integer"
+                },
+                "slot": {
+                  "type": "integer"
+                },
+                "brDescriptionKey": {
+                  "type": "string"
+                },
+                "brDescriptionLabel": {
+                  "type": "string"
+                },
+                "rankUnlocked": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "equipment": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "x-go-name": "EquipmentItem",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "descriptionLabel": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "imageLarge": {
+                  "type": "string"
+                },
+                "uiOrder": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "progressionImage": {
+                  "type": "string"
+                },
+                "rankUnlocked": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "killstreaks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-go-name": "Killstreak",
+            "properties": {
+              "dwid": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "dpadIcon": {
+                "type": "string"
+              },
+              "fullImage": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              },
+              "kills": {
+                "type": "integer"
+              },
+              "overheadIcon": {
+                "type": "string"
+              },
+              "progressionImage": {
+                "type": "string"
+              },
+              "scoreCost": {
+                "type": "integer"
+              },
+              "smallImage": {
+                "type": "string"
+              },
+              "streakType": {
+                "type": "string"
+              },
+              "labelKey": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "supportCost": {
+                "type": "integer"
+              },
+              "unearnedIcon": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "descriptionLabel": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "weaponCategoriesBySlot": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "WeaponName"
+            }
+          }
+        },
+        "weaponsByCategory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "WeaponName"
+            }
+          }
+        },
+        "weaponsByBaseWeapon": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "WeaponName"
+            }
+          }
+        },
+        "baseWeaponsByCategory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "BaseWeaponName"
+            }
+          }
+        },
+        "attachmentsByBaseRef": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "AttachmentName"
+            }
+          }
+        },
+        "attachmentsByCategory": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "x-go-name": "AttachmentName"
+            }
+          }
         }
       },
       "additionalProperties": true

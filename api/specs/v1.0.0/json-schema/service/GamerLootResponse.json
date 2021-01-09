@@ -14,96 +14,50 @@
         "message": {
           "type": "string"
         },
-
         "streams": {
           "type": "object",
-          "properties": {
-            "loot_season_1": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "categoryNameLabel": {
-                  "type": "string"
-                },
-                "categoryTitleLabel": {
-                  "type": "string"
-                },
-                "tier": {
-                  "type": "integer"
-                },
-                "streamType": {
-                  "type": "string"
-                },
-                "rarity": {
-                  "type": "null"
-                },
-                "lootType": {
-                  "type": "null"
-                },
-                "seasonInfoUrlKey": {
-                  "type": "string"
-                },
-                "itemsObtained": {
-                  "type": "null"
-                },
-                "premiumTokenOwnedNotRedeemed": {
-                  "type": "boolean"
-                },
-                "tierSkipTokensUnredeemed": {
-                  "type": "null"
-                },
-                "premium": {
-                  "type": "boolean"
-                }
+          "additionalProperties": {
+            "x-go-name": "Stream",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
               },
-              "additionalProperties": true
-            },
-            "loot_season_0": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "categoryNameLabel": {
-                  "type": "string"
-                },
-                "categoryTitleLabel": {
-                  "type": "string"
-                },
-                "tier": {
-                  "type": "integer"
-                },
-                "streamType": {
-                  "type": "string"
-                },
-                "rarity": {
-                  "type": "null"
-                },
-                "lootType": {
-                  "type": "null"
-                },
-                "seasonInfoUrlKey": {
-                  "type": "string"
-                },
-                "itemsObtained": {
-                  "type": "null"
-                },
-                "premiumTokenOwnedNotRedeemed": {
-                  "type": "boolean"
-                },
-                "tierSkipTokensUnredeemed": {
-                  "type": "null"
-                },
-                "premium": {
-                  "type": "boolean"
-                }
+              "categoryNameLabel": {
+                "type": "string"
               },
-              "additionalProperties": true
+              "categoryTitleLabel": {
+                "type": "string"
+              },
+              "tier": {
+                "type": "integer"
+              },
+              "streamType": {
+                "type": "string"
+              },
+              "rarity": {
+                "type": "string"
+              },
+              "lootType": {
+                "type": "string"
+              },
+              "seasonInfoUrlKey": {
+                "type": "string"
+              },
+              "itemsObtained": {
+                "type": "string"
+              },
+              "premiumTokenOwnedNotRedeemed": {
+                "type": "boolean"
+              },
+              "tierSkipTokensUnredeemed": {
+                "type": "string"
+              },
+              "premium": {
+                "type": "boolean"
+              }
             }
-          },
-          "additionalProperties": true
+          }
         }
       },
       "additionalProperties": true

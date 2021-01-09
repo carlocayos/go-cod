@@ -38,7 +38,7 @@
                 "type": "integer"
               },
               "playlistName": {
-                "type": "null"
+                "type": "string"
               },
               "version": {
                 "type": "integer"
@@ -205,13 +205,13 @@
                               "type": "string"
                             },
                             "label": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageLoot": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageIcon": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "variant": {
                               "type": "string"
@@ -225,13 +225,13 @@
                                     "type": "string"
                                   },
                                   "label": {
-                                    "type": "null"
+                                    "type": "string"
                                   },
                                   "image": {
-                                    "type": "null"
+                                    "type": "string"
                                   },
                                   "category": {
-                                    "type": "null"
+                                    "type": "string"
                                   }
                                 },
                                 "additionalProperties": true
@@ -247,13 +247,13 @@
                               "type": "string"
                             },
                             "label": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageLoot": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageIcon": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "variant": {
                               "type": "string"
@@ -267,13 +267,13 @@
                                     "type": "string"
                                   },
                                   "label": {
-                                    "type": "null"
+                                    "type": "string"
                                   },
                                   "image": {
-                                    "type": "null"
+                                    "type": "string"
                                   },
                                   "category": {
-                                    "type": "null"
+                                    "type": "string"
                                   }
                                 },
                                 "additionalProperties": true
@@ -291,16 +291,16 @@
                                 "type": "string"
                               },
                               "label": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "image": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "imageMainUi": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "imageProgression": {
-                                "type": "null"
+                                "type": "string"
                               }
                             },
                             "additionalProperties": true
@@ -315,16 +315,16 @@
                                 "type": "string"
                               },
                               "label": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "image": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "imageMainUi": {
-                                "type": "null"
+                                "type": "string"
                               },
                               "imageProgression": {
-                                "type": "null"
+                                "type": "string"
                               }
                             },
                             "additionalProperties": true
@@ -339,7 +339,7 @@
                                 "type": "string"
                               },
                               "label": {
-                                "type": "null"
+                                "type": "string"
                               }
                             },
                             "additionalProperties": true
@@ -352,16 +352,16 @@
                               "type": "string"
                             },
                             "label": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "image": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageLarge": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "progressionImage": {
-                              "type": "null"
+                              "type": "string"
                             }
                           },
                           "additionalProperties": true
@@ -373,16 +373,16 @@
                               "type": "string"
                             },
                             "label": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "image": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "imageLarge": {
-                              "type": "null"
+                              "type": "string"
                             },
                             "progressionImage": {
-                              "type": "null"
+                              "type": "string"
                             }
                           },
                           "additionalProperties": true
@@ -398,7 +398,7 @@
                 "type": "integer"
               },
               "rankedTeams": {
-                "type": "null"
+                "type": "string"
               },
               "draw": {
                 "type": "boolean"

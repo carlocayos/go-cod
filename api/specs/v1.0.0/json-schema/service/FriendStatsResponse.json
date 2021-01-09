@@ -4661,7 +4661,7 @@
                 "type": "object",
                 "properties": {
                   "properties": {
-                    "type": "null"
+                    "type": "string"
                   }
                 },
                 "additionalProperties": true
@@ -4676,7 +4676,7 @@
             "additionalProperties": true
           },
           "engagement": {
-            "type": "null"
+            "type": "string"
           }
         },
         "additionalProperties": true
