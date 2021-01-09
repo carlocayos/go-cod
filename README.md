@@ -103,7 +103,7 @@ anotherMissingField := missingField["another_missing_field"]
 fmt.Printf("anotherMissingField")
 ```
 
-See [Missing APIs and Fields](#missing-apis-and-fields)
+See [How to request missing APIs and fields](#request-for-missing-apis-and-fields)
 
 ## Sample codes and Payload
 
