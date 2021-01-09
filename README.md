@@ -42,7 +42,7 @@ registerDeviceRes, _ := c.RegisterDevice(context.Background(), deviceId)
 
 // =======================================================
 // 2) Next is the Login request. Replace it with your email and password
-//      and pass the returned AuthHeader and Device ID
+//    and pass the returned AuthHeader and Device ID
 // =======================================================
 email := "<< CHANGE ME >>"
 password := "<< CHANGE ME >>"
@@ -53,7 +53,7 @@ fmt.Println(loginRes.ACTSSOCOOKIE)
 // =======================================================
 // 3) Final step is to send a Get Gamer Match List.
 //    You need to call Login() before using this authenticated request.
-//	  The token is stored in the client and will be implicitly sent along 
+//    The token is stored in the client and will be implicitly sent along 
 //    each Authenticated request.
 // =======================================================
 // create Gamer struct - MUST CHANGE this to your own account
@@ -79,16 +79,24 @@ for _, v := range gamerMatchListResp.Data {
 
 ### Unmapped fields
 
-Fields that are not mapped to a struct field can be accessed from the `*AdditionalProperties` field of type `map[string]interface{}` 
+As there is no official API documentation, the swagger spec and JSON schema mapping is inferred through the 
+actual JSON response payload.
 
-For example, the weapons values from the loadout request can be found under `Data.LoadoutResponseDataAdditionalProperties["weapons"]`
-Refer to the sample code in [example_unmapped.go](examples/unmapped_fields_loadout/example_unmapped.go) on how to get these field values
+Fields that are not mapped to a struct field can be accessed from the `*AdditionalProperties` field of type `map[string]interface{}`
 
-NOTE: These is an open [issue#3](https://github.com/carlocayos/go-cod/issues/3) on how to map these fields.
+```go
+missingField := response.Data.SampleResponseDataAdditionalProperties["missing_field_name"].(map[string]interface{})
+anotherMissingField := missingField["another_missing_field"]
+fmt.Printf("anotherMissingField")
+```
 
-## More sample codes
+See [Missing APIs and Fields](#missing-apis-and-fields)
+
+## Sample codes and Payload
 
 Sample codes are in [examples](examples)
+
+Actual JSON response payload `*_sample.json` can be found in [json-schema](api/specs/v1.0.0/json-schema)
 
 ## Generate Models and Client from Swagger Spec
 
@@ -115,15 +123,23 @@ make swagger-docs
 
 Then open http://localhost:9000 to see the list of APIs.
 
-## 🚧 Work in Progress 🚧
+## Roadmap
 
-- [X] Populate response fields for Friend Stats Profile
-- [X] Populate response fields for COD Points
-- [X] Added facade to simplify API call process
+- [X] ~~Added facade to simplify API call process~~
+- [X] ~~Improve field mapping for Friend Stats API Response~~
+- [X] ~~Improve field mapping for Gamer Stats API Response~~
+- [X] ~~Improve field mapping for Battlepass Loot API Response~~
+- [X] ~~Improve field mapping for Match Details API Response~~
+- [X] ~~Improve field mapping for Loadout API Response~~
+- [X] ~~Improve field mapping for COD Points API Response~~
+- [X] ~~Improve field mapping for Purchasable API Response~~
+- [X] ~~Imoproved field mapping.~~ See [issue#3](https://github.com/carlocayos/go-cod/issues/3)
 - [ ] Add more example codes and helper functions (e.g. Get Uno ID...)
-- [ ] Some fields can be mapped better. See [issue#3](https://github.com/carlocayos/go-cod/issues/3)
 - [ ] Context handling
-- [ ] Other missing APIs
+
+## Missing APIs and Fields
+
+Report new or missing COD APIs and fields [here](https://github.com/carlocayos/go-cod/issues/new?assignees=&labels=enhancement&template=add-api-or-field.md&title=Reques+to+add+a+new+field+or+API)
 
 ## Contribution
 Code improvements, suggestions, and updates are most welcome. Please feel free to raise an issue or create a pull
@@ -142,5 +158,6 @@ Thanks to [Lierrmm](https://github.com/Lierrmm) for his work on the [NodeJS Call
 
 <a href="https://www.buymeacoffee.com/ccayos" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+**BTC address:** 32zunH725N7PjBYj2TfbVoC3jVCyhqyn5h
 **ETH address:** 0x2A17e4031FFeF64C638Dd9B190e05a150b2B8FBc
 
