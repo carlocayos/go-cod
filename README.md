@@ -167,7 +167,7 @@ Thanks to [Lierrmm](https://github.com/Lierrmm) for his work on the [NodeJS Call
 
 ## Developer
 
-**Personal Site:** [carlocayos.dev](https://carlocayos.dev)
+**Personal Site:** [carlocayos.com](https://carlocayos.com)
 
 <a href="https://www.buymeacoffee.com/ccayos" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
