@@ -17,7 +17,7 @@ go-cod is the _unofficial_ Go SDK of the Call of Duty API used in the callofduty
 
 ## Getting Started
 ```
-import "github.com/carlocayos/go-cod"
+import "github.com/carlocayos/go-cod/v2"
 ```
 
 Create a new go-cod client then use the services to access the COD APIs.
