@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	gocod "github.com/carlocayos/go-cod"
+	gocod "github.com/carlocayos/go-cod/v2"
 	"log"
 )
 

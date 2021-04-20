@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	go_cod "github.com/carlocayos/go-cod"
+	go_cod "github.com/carlocayos/go-cod/v2"
 	"github.com/segmentio/ksuid"
 )
 
