@@ -1,7 +1,7 @@
 .PHONY: swagger-gen
 swagger-gen:
 	docker run --rm -v $(PWD):/go/src/github.com/carlocayos/go-cod \
-		-w /go/src/github.com/carlocayos/go-cod/api \
+		-w /go/src/github.com/carlocayos/go-cod/v2/api \
 		--entrypoint scripts/generate-swagger-client.sh \
 		quay.io/goswagger/swagger:v0.25.0
 

@@ -3,8 +3,8 @@ package go_cod
 import (
 	"context"
 	"fmt"
-	"github.com/carlocayos/go-cod/api/client/service"
-	"github.com/carlocayos/go-cod/api/models"
+	"github.com/carlocayos/go-cod/v2/api/client/service"
+	"github.com/carlocayos/go-cod/v2/api/models"
 )
 
 //	This file contains the authenticated and unauthenticated COD API operations

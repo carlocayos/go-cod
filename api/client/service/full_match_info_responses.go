@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/carlocayos/go-cod/api/models"
+	"github.com/carlocayos/go-cod/v2/api/models"
 )
 
 // FullMatchInfoReader is a Reader for the FullMatchInfo structure.

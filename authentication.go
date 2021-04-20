@@ -3,8 +3,8 @@ package go_cod
 import (
 	"context"
 	"fmt"
-	"github.com/carlocayos/go-cod/api/client/authentication"
-	"github.com/carlocayos/go-cod/api/models"
+	"github.com/carlocayos/go-cod/v2/api/client/authentication"
+	"github.com/carlocayos/go-cod/v2/api/models"
 	"net/http"
 )
 

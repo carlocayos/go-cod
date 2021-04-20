@@ -1,8 +1,8 @@
 package go_cod
 
 import (
-	"github.com/carlocayos/go-cod/api/client/authentication"
-	"github.com/carlocayos/go-cod/api/client/service"
+	"github.com/carlocayos/go-cod/v2/api/client/authentication"
+	"github.com/carlocayos/go-cod/v2/api/client/service"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
